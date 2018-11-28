@@ -7,14 +7,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return new Scaffold(
-    //   appBar: new AppBar(
-    //     title: const Text('Startup Name Generator'),
-    //     // actions: <Widget>[
-    //     //   new IconButton(icon: const Icon(Icons.list) ),
-    //     // ],
-    //   ),
-    // );
     return new MaterialApp(
       // title: 'dooboolab flutter calendar',
       // theme: new ThemeData(
@@ -52,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime _currentDate = DateTime(2018, 8, 1);
+  DateTime _currentDate = DateTime(2018, 11, 1);
   // List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
   Map<DateTime, int> _markedDateMap = {
     DateTime(2018, 9, 20) : 4,
@@ -64,6 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
+        actions: <Widget>[
+          new IconButton(icon: const Icon(Icons.today), onPressed: _goToday ),
+        ],
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.0),
@@ -89,5 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+  void _goToday(){
+    this.setState(() => _currentDate = DateTime(2018, 11, 10));
   }
 }
