@@ -7,20 +7,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // return new Scaffold(
+    //   appBar: new AppBar(
+    //     title: const Text('Startup Name Generator'),
+    //     // actions: <Widget>[
+    //     //   new IconButton(icon: const Icon(Icons.list) ),
+    //     // ],
+    //   ),
+    // );
     return new MaterialApp(
-      title: 'dooboolab flutter calendar',
-      theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: new MyHomePage(title: 'Flutter Calendar Carousel Exmaple'),
+      // title: 'dooboolab flutter calendar',
+      // theme: new ThemeData(
+      //   // This is the theme of your application.
+      //   //
+      //   // Try running your application with "flutter run". You'll see the
+      //   // application has a blue toolbar. Then, without quitting the app, try
+      //   // changing the primarySwatch below to Colors.green and then invoke
+      //   // "hot reload" (press "r" in the console where you ran "flutter run",
+      //   // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
+      //   // counter didn't reset back to zero; the application is not restarted.
+      //   primarySwatch: Colors.blue,
+      // ),
+      home: new MyHomePage(title: "Select today's workout"),
     );
   }
 }
@@ -45,7 +53,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime _currentDate = DateTime(2018, 8, 1);
-  List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
+  // List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
   Map<DateTime, int> _markedDateMap = {
     DateTime(2018, 9, 20) : 4,
     DateTime(2018, 10, 11) : 1,
@@ -77,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
           markedDatesMap: _markedDateMap,
           height: 420.0,
           selectedDateTime: _currentDate,
-          daysHaveCircularBorder: false, /// null for not rendering any border, true for circular border, false for rectangular border
+          daysHaveCircularBorder: null, /// null for not rendering any border, true for circular border, false for rectangular border
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
