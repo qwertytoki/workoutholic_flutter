@@ -44,9 +44,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime _currentDate = DateTime(2018, 11, 1);
+  DateTime _currentDate = DateTime(2018, 9, 18);
   // List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
   Map<DateTime, int> _markedDateMap = {
+    // ここでワークアウトの数だけマークつけたい
     DateTime(2018, 9, 20) : 4,
     DateTime(2018, 10, 11) : 1,
   };
@@ -86,6 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
   void _goToday(){
-    this.setState(() => _currentDate = DateTime(2018, 11, 10));
+    this.setState(() => _currentDate = new DateTime.now());
   }
 }
