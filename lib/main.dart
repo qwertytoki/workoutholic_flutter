@@ -83,10 +83,18 @@ class _MyHomePageState extends State<MyHomePage> {
           selectedDateTime: _currentDate,
           daysHaveCircularBorder: null, /// null for not rendering any border, true for circular border, false for rectangular border
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ), 
+      floatingActionButton: FloatingActionButton(
+        onPressed: _goInputPage,
+         tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
   void _goToday(){
     this.setState(() => _currentDate = new DateTime.now());
+  }
+  void _goInputPage(){
+    
   }
 }
