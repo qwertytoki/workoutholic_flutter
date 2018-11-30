@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // ここでワークアウトの数だけマークつけたい
     DateTime(2018, 9, 20) : 4,
     DateTime(2018, 10, 11) : 1,
+    DateTime(2018, 12, 10) : 2,
   };
 
   @override
@@ -91,12 +92,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
   void _goToday(){
     this.setState(() => _currentDate = new DateTime.now());
   }
+
   void _goInputPage(){
     Navigator.of(context).push(
-      // see https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2/#5
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return new Scaffold(
+            appBar: new AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+          );
+        }   
+      ),
     );
   }
 }
