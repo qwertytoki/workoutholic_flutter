@@ -95,6 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
     this.setState(() => _currentDate = new DateTime.now());
   }
   void _goInputPage(){
-    
+    Navigator.of(context).push(
+      // see https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2/#5
+    );
   }
 }
