@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _goInputPage(){
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => WorkoutSelection()),
+      MaterialPageRoute(builder: (context) => WorkoutSelection(selectedDate :_currentDate)),
     );
   }  
 }
