@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart' show CalendarCarousel, WeekDay;
 
-void main() => runApp(new MyApp());
+import 'workoutSelection.dart';
 
+
+void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -72,11 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.red,
           ),
           thisMonthDayBorderColor: Colors.grey,
-//          weekDays: null, /// for pass null when you do not want to render weekDays
-//          headerText: Container( /// Example for rendering custom header
-//            child: Text('Custom Header'),
-//          ),
-//          markedDates: _markedDate,
           weekFormat: false,
           weekends: [WeekDay.Sunday, WeekDay.Saturday],
           markedDatesMap: _markedDateMap,
@@ -98,16 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _goInputPage(){
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return new Scaffold(
-            appBar: new AppBar(
-              title: const Text('Saved Suggestions'),
-            ),
-          );
-        }   
-      ),
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WorkoutSelection()),
     );
-  }
+  }  
 }
