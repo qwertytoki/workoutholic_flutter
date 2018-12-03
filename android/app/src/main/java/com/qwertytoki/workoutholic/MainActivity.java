@@ -1,4 +1,4 @@
-package com.example.workoutholic;
+package com.qwertytoki.workoutholic;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
