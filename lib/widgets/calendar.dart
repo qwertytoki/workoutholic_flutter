@@ -1,0 +1,64 @@
+import 'package:workoutholic/screen/workoutSelection.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart' show CalendarCarousel, WeekDay;
+
+class Calendar extends StatefulWidget {
+  _MyHomePageState createState() => new _MyHomePageState();
+}
+
+class _MyHomePageState extends State<Calendar> {
+  DateTime _currentDate = DateTime(2018, 9, 18);
+  // List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
+  Map<DateTime, int> _markedDateMap = {
+    // ここでワークアウトの数だけマークつけたい
+    DateTime(2018, 9, 20) : 4,
+    DateTime(2018, 10, 11) : 1,
+    DateTime(2018, 12, 10) : 2,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Select today's workout"),
+        actions: <Widget>[
+          new IconButton(icon: const Icon(Icons.today), onPressed: _goToday ),
+        ],
+      ),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        child: CalendarCarousel(
+          onDayPressed: (DateTime date) {
+            this.setState(() => _currentDate = date);
+          },
+          weekendTextStyle: TextStyle(
+            color: Colors.red,
+          ),
+          thisMonthDayBorderColor: Colors.grey,
+          weekFormat: false,
+          weekends: [WeekDay.Sunday, WeekDay.Saturday],
+          markedDatesMap: _markedDateMap,
+          height: 420.0,
+          selectedDateTime: _currentDate,
+          daysHaveCircularBorder: null, /// null for not rendering any border, true for circular border, false for rectangular border
+        ),
+      ), 
+      floatingActionButton: FloatingActionButton(
+        onPressed: _goInputPage,
+         tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),// This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  void _goToday(){
+    this.setState(() => _currentDate = new DateTime.now());
+  }
+
+  void _goInputPage(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WorkoutSelection(selectedDate :_currentDate)),
+    );
+  }   
+}
