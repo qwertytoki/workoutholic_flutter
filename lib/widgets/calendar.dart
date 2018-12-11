@@ -7,8 +7,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<Calendar> {
-  DateTime _currentDate = DateTime(2018, 9, 18);
-  // List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
+  DateTime _currentDate = DateTime.now();
   Map<DateTime, int> _markedDateMap = {
     // ここでワークアウトの数だけマークつけたい
     DateTime(2018, 9, 20) : 4,
