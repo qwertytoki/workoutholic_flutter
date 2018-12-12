@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WorkoutSelection extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class WorkoutSelection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Menu"),
+        title: Text("Select Workout"),
       ),
       body: 
         Column(

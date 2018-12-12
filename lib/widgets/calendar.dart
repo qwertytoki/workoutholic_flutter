@@ -19,7 +19,7 @@ class _MyHomePageState extends State<Calendar> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Select today's workout"),
+        title: new Text("Your Workout Result"),
         actions: <Widget>[
           new IconButton(icon: const Icon(Icons.today), onPressed: _goToday ),
         ],
