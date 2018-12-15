@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workoutholic/screen/workoutMenuSelect.dart';
+import 'package:workoutholic/data/workoutSet.dart';
+
 
 class WorkoutSetSelect extends StatelessWidget {
   @override
-
   final DateTime selectedDate;
   WorkoutSetSelect({Key key, @required this.selectedDate}) : super(key: key);
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Workout"),
+        title: Text("Select Workout Set"),
       ),
       body: _buildBody(context),
     );
   }
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('workoutMenu').snapshots(),
+      stream: Firestore.instance.collection('workoutSet').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildList(context, snapshot.data.documents);
@@ -30,9 +32,9 @@ class WorkoutSetSelect extends StatelessWidget {
    );
   }
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
+    final workoutSet = WorkoutSet.fromSnapshot(data);
     return Padding(
-      key: ValueKey(record.workoutNameJa),
+      key: ValueKey(workoutSet.setName),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -40,34 +42,14 @@ class WorkoutSetSelect extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(record.workoutNameJa),
+          title: Text(workoutSet.setName),
           // trailing: Text(record.votes.toString()),
-          onTap: () => Firestore.instance.runTransaction((transaction) async {
-            final freshSnapshot = await transaction.get(record.reference);
-            final fresh = Record.fromSnapshot(freshSnapshot);
-
-            // await transaction
-            //     .update(record.reference, {'votes': fresh.votes + 1});
-          }),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
+          );
         ),
       ),
     );
   }
-}
-class Record {
-  final String workoutNameJa;
-  // final int votes;
-  final DocumentReference reference;
-
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['workoutNameJa'] != null),
-        // assert(map['votes'] != null),
-        workoutNameJa = map['workoutNameJa'];
-        // votes = map['votes'];
-
-  Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "Record<$workoutNameJa>";
 }
