@@ -1,4 +1,4 @@
-import 'package:workoutholic/screen/workoutSelection.dart';
+import 'package:workoutholic/screen/workoutSetSelect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart' show CalendarCarousel, WeekDay;
 
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<Calendar> {
   void _goInputPage(){
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => WorkoutSelection(selectedDate :_currentDate)),
+      MaterialPageRoute(builder: (context) => WorkoutSetSelect(selectedDate :_currentDate)),
     );
   }   
 }
