@@ -13,14 +13,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // }
 class WorkoutSet {
   final String setName;
-  // final int votes;
+  final List<String> workoutIds;
   final DocumentReference reference;
 
   WorkoutSet.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map['setName'] != null),
-        // assert(map['votes'] != null),
-        setName = map['setName'];
-        // votes = map['votes'];
+        assert(map['workoutIds'] != null),
+        setName = map['setName'],
+        workoutIds = map['workoutIds'];
 
   WorkoutSet.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
