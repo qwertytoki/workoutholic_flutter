@@ -16,13 +16,13 @@ class WorkoutMenuSelect extends StatelessWidget{
     );
   }
   Widget _buildBody(BuildContext context){
-    return StreamBuilder<QuerySnapshot>()
+    return StreamBuilder<QuerySnapshot>(
       stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
       builder:(context,snapshot){
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildList(context, snapshot.data.documents);
-      )
-    }
+      }
+    );
   }
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
    return ListView(
