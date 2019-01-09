@@ -9,10 +9,11 @@ class Calendar extends StatefulWidget {
 class _MyHomePageState extends State<Calendar> {
   DateTime _currentDate = DateTime.now();
   Map<DateTime, int> _markedDateMap = {
-    // ここでワークアウトの数だけマークつけたい
+    //TODO ここでワークアウトの数だけマークつけたい
     DateTime(2018, 9, 20) : 4,
     DateTime(2018, 10, 11) : 1,
     DateTime(2018, 12, 10) : 2,
+    DateTime(2019, 1, 10) : 3,
   };
 
   @override

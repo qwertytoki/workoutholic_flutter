@@ -20,7 +20,7 @@ class WorkoutSet {
       : assert(map['setName'] != null),
         assert(map['workoutIds'] != null),
         setName = map['setName'],
-        workoutIds = map['workoutIds'];
+        workoutIds = map['workoutIds'].cast<String>();
 
   WorkoutSet.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
