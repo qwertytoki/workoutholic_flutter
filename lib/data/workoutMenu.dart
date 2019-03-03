@@ -7,5 +7,6 @@ class WorkoutMenu{
         .collection("workoutMenu")
         .where('workoutId', arrayContains: workoutIds)
         .snapshots();
+        
   }
 }
