@@ -8,11 +8,18 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>{
 
+  final formKey = new GlobalKey<FormState>();
+
   String _email;
   String _password;
 
   validateAndSave(){
-
+    final form = formKey.currentState;
+    if (form.validate()){
+      print('Form is valid');
+    }else{
+      print('form is invalid');
+    }
   }
   
   @override
@@ -24,6 +31,7 @@ class _LoginPageState extends State<LoginPage>{
         body: new Container(
           padding: EdgeInsets.all(16.0),
           child: new Form(
+            key:formKey,
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
