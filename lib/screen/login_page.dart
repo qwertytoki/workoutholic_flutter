@@ -58,30 +58,37 @@ class _LoginPageState extends State<LoginPage>{
             key:formKey,
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Email'),
-                  validator: (value) => value.isEmpty ? 'Email can\'t be empty' :null,
-                  onSaved: (value)=> _email= value,
-                ),
-                new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Password'),
-                  obscureText: true,
-                  validator: (value) => value.isEmpty ? 'Password can\'t be empty' :null,
-                  onSaved: (value)=> _password= value,
-                ),
-                new RaisedButton(
-                  child: new Text('Login', style: new TextStyle(fontSize:20.0)),
-                  onPressed: validateAndSubmit,
-                ),
-                new FlatButton(
-                  child:new Text('Create an Account',style:new TextStyle(fontSize: 20.0)),
-                  onPressed: moveToRegister,
-                )
-              ],
+              children: buildInputs() + buildSubmitButtons(),
             )
           )
         )
       );
     }  
+    List<Widget> buildInputs(){
+      return[
+        new TextFormField(
+          decoration: new InputDecoration(labelText: 'Email'),
+          validator: (value) => value.isEmpty ? 'Email can\'t be empty' :null,
+          onSaved: (value)=> _email= value,
+        ),
+        new TextFormField(
+          decoration: new InputDecoration(labelText: 'Password'),
+          obscureText: true,
+          validator: (value) => value.isEmpty ? 'Password can\'t be empty' :null,
+          onSaved: (value)=> _password= value,
+        ),
+      ];
+    }
+    List<Widget>buildSubmitButtons(){
+      return[
+        new RaisedButton(
+          child: new Text('Login', style: new TextStyle(fontSize:20.0)),
+          onPressed: validateAndSubmit,
+        ),
+        new FlatButton(
+          child:new Text('Create an Account',style:new TextStyle(fontSize: 20.0)),
+          onPressed: moveToRegister,
+        ),
+      ];
+    }
 }
