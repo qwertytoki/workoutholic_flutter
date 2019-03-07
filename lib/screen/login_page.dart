@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => new _LoginPageState();
+}
+
+enum FormType {
+  login,
+  register
 }
 
 class _LoginPageState extends State<LoginPage>{
@@ -23,11 +28,20 @@ class _LoginPageState extends State<LoginPage>{
     }
     return false;
   }
+  void moveToRegister(){
+
+  }
 
   validateAndSubmit() async{
-    if (validateAndSave()){
-      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password );
+    try{
+        if (validateAndSave()){
+        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password );
+        print('Signed in:${user.uid}');
+      }
+    }catch(e){
+      print('error: $e ');
     }
+    
   }
   
   @override
@@ -57,6 +71,10 @@ class _LoginPageState extends State<LoginPage>{
                 new RaisedButton(
                   child: new Text('Login', style: new TextStyle(fontSize:20.0)),
                   onPressed: validateAndSubmit,
+                ),
+                new FlatButton(
+                  child:new Text('Create an Account',style:new TextStyle(fontSize: 20.0)),
+                  onPressed: moveToRegister,
                 )
               ],
             )
