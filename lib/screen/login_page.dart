@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage>{
 
   String _email;
   String _password;
-
+  FormType _formType= FormType.login;
   bool validateAndSave(){
     final form = formKey.currentState;
     if (form.validate()){
@@ -29,7 +29,9 @@ class _LoginPageState extends State<LoginPage>{
     return false;
   }
   void moveToRegister(){
-
+    setState(() {
+      _formType = FormType.register;
+    });
   }
 
   validateAndSubmit() async{
