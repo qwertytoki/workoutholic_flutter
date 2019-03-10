@@ -31,13 +31,13 @@ class _LoginPageState extends State<LoginPage>{
     return false;
   }
   void moveToRegister(){
-    formKey.currentState.reset();
+    // formKey.currentState.reset();
     setState(() {
       _formType = FormType.register;
     });
   }
   void moveToLogin(){
-    formKey.currentState.reset();
+    // formKey.currentState.reset();
     setState((){
       _formType = FormType.login;
     });
@@ -50,12 +50,12 @@ class _LoginPageState extends State<LoginPage>{
           String userId = await widget.auth.signInWithEmailAndPassword(_email, _password);
           print('Signed in:$userId');
         }else{
-          String userId = await widget.auth.signInWithEmailAndPassword(_email, _password);
+          String userId = await widget.auth.createUserWithEmailAndPassword(_email, _password);
           print('Registered user: $userId');
         }
       }
       catch(e){
-        print('error: $e ');
+        print('error: $e');
       }
     }
   }
