@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage>{
           FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password );
           print('Signed in:${user.uid}');
         }else{
-          FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email:_email,password:_password)
+          FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email:_email,password:_password);
           print('Registered user: ${user.uid}');
         }
       }catch(e){
@@ -98,14 +98,14 @@ class _LoginPageState extends State<LoginPage>{
             onPressed: validateAndSubmit,
           ),
           new FlatButton(
-            child:new Text('Create an Account',style:new TextStyle(fontSize: 20.0)),
+            child:new Text('Create an account',style:new TextStyle(fontSize: 20.0)),
             onPressed: moveToRegister,
           ),
         ];
       }else{
         return[
           new RaisedButton(
-            child: new Text('Login', style: new TextStyle(fontSize:20.0)),
+            child: new Text('Create an account', style: new TextStyle(fontSize:20.0)),
             onPressed: validateAndSubmit,
           ),
           new FlatButton(
