@@ -1,8 +1,7 @@
 # workoutholic
 
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+The simplest workout log app. 
+All you can log in this app is..
+* What kind of workout you did.
+* How much you lift.
+* How many you lift.
