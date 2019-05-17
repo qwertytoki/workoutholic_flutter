@@ -5,8 +5,8 @@ import 'package:date_utils/date_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'auth.dart';
-import 'root_page.dart';
+import 'package:workoutholic/auth.dart';
+import 'package:workoutholic/root_page.dart';
 
 // Example holidays
 final Map<DateTime, List> _holidays = {
