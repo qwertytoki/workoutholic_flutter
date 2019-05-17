@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.auth});
+  LoginPage({this.auth,this.onSignedIn});
   final BaseAuth auth;
-
+  final VoidCallback onSignedIn;
   @override
   State<StatefulWidget> createState() => new _LoginPageState();
 }
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  validateAndSubmit() async {
+  void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
         if (_formType == FormType.login) {
@@ -53,7 +53,9 @@ class _LoginPageState extends State<LoginPage> {
               .createUserWithEmailAndPassword(_email, _password);
           print('Registered user: $userId');
         }
-      } catch (e) {
+        widget.onSignedIn();
+      } 
+      catch (e) {
         print('error: $e');
       }
     }

@@ -5,7 +5,7 @@ abstract class BaseAuth{
   //ここに書かないとほかクラスからvisibleにならん
   Future<String> signInWithEmailAndPassword(String email, String password);
   Future<String> createUserWithEmailAndPassword(String email, String password);
-  Future<String> currentUser()
+  Future<String> currentUser();
 }
 
 class Auth implements BaseAuth{
