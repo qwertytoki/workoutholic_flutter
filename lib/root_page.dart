@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screen/login_page.dart';
-import 'auth.dart';
+import 'package:workoutholic/auth.dart';
 import 'screen/home_page.dart';
 
 class RootPage extends StatefulWidget {
