@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 MaterialButton(
-                  onPressed: () => null,
+                  onPressed: () => widget.auth.googleSignIn(),
                   color: Colors.white,
                   textColor: Colors.black,
                   child: Text('Login with Google'),
