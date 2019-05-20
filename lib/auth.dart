@@ -10,6 +10,7 @@ abstract class BaseAuth{
   Future<String> currentUser();
   Future<void> signOut();
   Future<FirebaseUser> googleSignIn();
+  // void uodateUserData(FirebaseUser user);
 }
 
 class Auth implements BaseAuth{
@@ -45,11 +46,18 @@ class Auth implements BaseAuth{
     print("signed in " + user.displayName);
 
     loading.add(false);
-    return user
+    return user;
 
   }
-  void uodateUserData(FirebaseUser user) async{
+  void updateUserData(FirebaseUser user) async{
     DocumentReference ref = _db.collection('users').document(user.uid);
+    return ref.setData({
+      'uid': user.uid,
+      'email':user.email,
+      'photoURL':user.photoUrl,
+      'displayName':DateTime.now()
+    });
+    
   }
 
   Future<String> signInWithEmailAndPassword(String email, String password) async{
