@@ -56,8 +56,8 @@ class Auth implements BaseAuth{
       'email':user.email,
       'photoURL':user.photoUrl,
       'displayName':DateTime.now()
-    });
-    
+    },merge:true);
+
   }
 
   Future<String> signInWithEmailAndPassword(String email, String password) async{
