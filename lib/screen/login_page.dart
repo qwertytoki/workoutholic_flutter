@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.auth,this.onSignedIn});
+  LoginPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
   final VoidCallback onSignedIn;
   @override
@@ -54,8 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           print('Registered user: $userId');
         }
         widget.onSignedIn();
-      } 
-      catch (e) {
+      } catch (e) {
         print('error: $e');
       }
     }
@@ -67,14 +66,27 @@ class _LoginPageState extends State<LoginPage> {
         appBar: new AppBar(
           title: new Text('Login'),
         ),
-        body: new Container(
-            padding: EdgeInsets.all(16.0),
-            child: new Form(
-                key: formKey,
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: buildInputs() + buildSubmitButtons(),
-                ))));
+        // body: new Container(
+        body: Center(
+            // padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                MaterialButton(
+                  onPressed: () => null,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  child: Text('Login with Google'),
+                )
+              ],
+            )
+            // child: new Form(
+            //     key: formKey,
+            //     child: new Column(
+            //       crossAxisAlignment: CrossAxisAlignment.stretch,
+            //       children: buildInputs() + buildSubmitButtons(),
+            //     ))
+            ));
   }
 
   List<Widget> buildInputs() {
