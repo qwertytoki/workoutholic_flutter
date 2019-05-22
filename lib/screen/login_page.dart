@@ -59,6 +59,11 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
+  
+  void signInWithGoogle() async{
+    widget.auth.googleSignIn();
+    widget.onSignedIn();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 MaterialButton(
-                  onPressed: () => widget.auth.googleSignIn(),
+                  onPressed: () => signInWithGoogle,
                   color: Colors.white,
                   textColor: Colors.black,
                   child: Text('Login with Google'),
@@ -88,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
             //     ))
             ));
   }
+
 
   List<Widget> buildInputs() {
     return [
