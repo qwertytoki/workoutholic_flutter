@@ -5,9 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class BaseAuth{
-  Future<String> signInWithEmailAndPassword(String email, String password);
-  Future<String> createUserWithEmailAndPassword(String email, String password);
-  Future<String> currentUser();
+  // Future<String> signInWithEmailAndPassword(String email, String password);
+  // Future<String> createUserWithEmailAndPassword(String email, String password);
+  Future<FirebaseUser> currentUser();
   Future<void> signOut();
   Future<FirebaseUser> googleSignIn();
   // void uodateUserData(FirebaseUser user);
@@ -33,6 +33,11 @@ class Auth implements BaseAuth{
       }
     });
   }
+  Future<FirebaseUser> currentUser() async{
+    FirebaseUser user = await _auth.currentUser();
+    return user;
+  }
+
   Future<FirebaseUser> googleSignIn() async{
     loading.add(true);
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -47,8 +52,9 @@ class Auth implements BaseAuth{
 
     loading.add(false);
     return user;
-
   }
+  
+
   void updateUserData(FirebaseUser user) async{
     DocumentReference ref = _db.collection('users').document(user.uid);
     return ref.setData({
@@ -60,23 +66,16 @@ class Auth implements BaseAuth{
 
   }
 
-  Future<String> signInWithEmailAndPassword(String email, String password) async{
-    FirebaseUser user = await _auth.signInWithEmailAndPassword(email:email, password:password );
-    return user.uid;
-  }
-
-  Future<String> createUserWithEmailAndPassword(String email,String password) async {
-    FirebaseUser user = await _auth.createUserWithEmailAndPassword(email:email, password:password);
-    return user.uid;
-  } 
-
-  Future<String> currentUser() async{
-    // ここでnull吐いとるぞ！おい！
-    FirebaseUser user = await _auth.currentUser();
-    return user.uid;
-  }
-
   Future<void> signOut() async{
     return _auth.signOut();
   }
+  // Future<String> signInWithEmailAndPassword(String email, String password) async{
+  //   FirebaseUser user = await _auth.signInWithEmailAndPassword(email:email, password:password );
+  //   return user.uid;
+  // }
+
+  // Future<String> createUserWithEmailAndPassword(String email,String password) async {
+  //   FirebaseUser user = await _auth.createUserWithEmailAndPassword(email:email, password:password);
+  //   return user.uid;
+  // } 
 } 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screen/login_page.dart';
 import 'package:workoutholic/auth.dart';
 import 'screen/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -11,45 +12,29 @@ class RootPage extends StatefulWidget {
   State<StatefulWidget> createState() => new _RootPageState();
 }
 
-enum AuthStatus { notSignedIn, signedIn }
-
 class _RootPageState extends State<RootPage> {
-  AuthStatus authStatus = AuthStatus.notSignedIn;
+  FirebaseUser _user;
 
+  //ビルドが呼ばれたときときいつも呼ばれる
   initState() {
-    //ビルドが呼ばれたときときいつも呼ばれる
     super.initState();
-    widget.auth.currentUser().then((userId){
+    widget.auth.currentUser().then((user) {
       setState(() {
-        authStatus = userId ==null ? AuthStatus.notSignedIn:AuthStatus.signedIn;
+        _user = user;
       });
-    });
-  }
-
-  void _signedIn(){
-    setState((){
-      authStatus = AuthStatus.signedIn;
-    });
-  }
-  void _signedOut(){
-    setState((){
-      authStatus = AuthStatus.notSignedIn;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    switch (authStatus) {
-      case AuthStatus.notSignedIn:
-        return new LoginPage(
-          auth: widget.auth,
-          onSignedIn:_signedIn,
-        );
-      case AuthStatus.signedIn:
-        return new HomePage(
-          auth: widget.auth,
-          onSignedOut: _signedOut,
-        );
+    if (_user == null) {
+      return new LoginPage(
+        auth: widget.auth,
+      );
+    } else {
+      return new HomePage(
+        auth: widget.auth,
+      );
     }
   }
 }
