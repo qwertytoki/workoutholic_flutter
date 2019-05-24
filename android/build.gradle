@@ -1,3 +1,4 @@
+
 buildscript {
     repositories {
         google()
@@ -28,3 +29,4 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
