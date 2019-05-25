@@ -28,6 +28,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
+    _getCurrentUser().then((user) {
+      setState(() {
+        _user = user;
+      });
+    });
     // _user = await _getCurrentUser();
   }
   
