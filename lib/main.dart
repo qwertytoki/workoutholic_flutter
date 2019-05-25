@@ -1,6 +1,5 @@
 //  Copyright (c) 2019 Aleksander Woźniak
 //  Licensed under Apache License v2.0
-
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,6 +25,15 @@ class _MyAppState extends State<MyApp> {
   final _googleSignIn = new GoogleSignIn();
   final _auth = FirebaseAuth.instance;
 
+  @override
+  void initState(){
+    super.initState();
+    // _user = await _getCurrentUser();
+  }
+  
+  Future<FirebaseUser> _getCurrentUser() async{
+    return  _auth.currentUser();
+  }
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'login',
