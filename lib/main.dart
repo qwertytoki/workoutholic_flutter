@@ -10,9 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:workoutholic/auth.dart';
 // import 'package:workoutholic/root_page.dart';
 
-
-
-
 void main() {
   runApp(new MyApp());
   //これ何してるんだろう
@@ -24,19 +21,23 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp>{
+class _MyAppState extends State<MyApp> {
   FirebaseUser _user;
   final _googleSignIn = new GoogleSignIn();
   final _auth = FirebaseAuth.instance;
 
-
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'login',
-      home: Container(
-          child: _user == null ? _buildGoogleSignInButton() : HomePage()),
+      home: Scaffold(
+        appBar: AppBar(title: new Text("Firebase Chat")),
+        body: Container(
+          child: _user == null ? _buildGoogleSignInButton() : HomePage()
+        ),
+      )
     );
   }
+
   Widget _buildGoogleSignInButton() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -61,10 +62,9 @@ class _MyAppState extends State<MyApp>{
   Future<FirebaseUser> _handleGoogleSignIn() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    FirebaseUser user = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken
-    ));
+    FirebaseUser user = await _auth.signInWithCredential(
+        GoogleAuthProvider.getCredential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
     print("signed in " + user.displayName);
     return user;
   }
