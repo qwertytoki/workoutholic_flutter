@@ -26,35 +26,37 @@ class _MyAppState extends State<MyApp> {
   final _auth = FirebaseAuth.instance;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _getCurrentUser().then((user) {
       setState(() {
         _user = user;
       });
     });
-    // _user = await _getCurrentUser();
   }
-  
-  Future<FirebaseUser> _getCurrentUser() async{
-    return  _auth.currentUser();
+
+  Future<FirebaseUser> _getCurrentUser() async {
+    return _auth.currentUser();
   }
+
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'login',
-      home: Scaffold(
-        appBar: AppBar(title: new Text("Firebase Chat")),
-        body: Container(
-          child: _user == null ? _buildGoogleSignInButton() : HomePage()
-        ),
-      )
-    );
+        title: 'login',
+        home: Scaffold(
+          body: Container(
+              child: _user == null ? _buildGoogleSignInButton() : HomePage()),
+        ));
   }
 
   Widget _buildGoogleSignInButton() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+    return Scaffold(
+      
+      appBar: AppBar(
+        title: new Text('Welcome'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
         Center(
             child: RaisedButton(
           child: Text("Google Sign In"),
@@ -69,6 +71,8 @@ class _MyAppState extends State<MyApp> {
           },
         )),
       ],
+      )
+      
     );
   }
 

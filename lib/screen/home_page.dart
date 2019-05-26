@@ -80,24 +80,6 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return new Scaffold(
-  //       appBar: new AppBar(
-  //         title: new Text('Welcome'),
-  //         actions: <Widget>[
-  //           new FlatButton(
-  //               child: new Text('Logout',
-  //                   style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-  //               onPressed: _signOut)
-  //         ],
-  //       ),
-  //       body: new Container(
-  //           child: new Center(
-  //               child: new Text('welcome',
-  //                   style: new TextStyle(fontSize: 32.0)))));
-  // }
   //ここから移植
   @override
   Widget build(BuildContext context) {
