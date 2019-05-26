@@ -6,8 +6,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:workoutholic/auth.dart';
-// import 'package:workoutholic/root_page.dart';
 
 void main() {
   runApp(new MyApp());
@@ -44,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         title: 'login',
         home: Scaffold(
           body: Container(
+            // ここをログインページにしてあげる必要がありそう
               child: _user == null ? _buildGoogleSignInButton() : HomePage()),
         ));
   }
