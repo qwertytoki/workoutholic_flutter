@@ -5,6 +5,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/home_page.dart';
+import 'package:workoutholic/screen/login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
@@ -43,7 +44,9 @@ class _MyAppState extends State<MyApp> {
         home: Scaffold(
           body: Container(
             // ここをログインページにしてあげる必要がありそう
-              child: _user == null ? _buildGoogleSignInButton() : HomePage()),
+            // statefulWidgetなので、_userをSetStateで変えるとここの値も変わる
+              // child: _user == null ? _buildGoogleSignInButton() : HomePage()),
+              child: _user == null ? LoginPage() : HomePage()),
         ));
   }
 

@@ -80,7 +80,6 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
-  //ここから移植
   @override
   Widget build(BuildContext context) {
     return Scaffold(
