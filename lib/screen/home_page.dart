@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
-// import 'package:intl/date_symbol_data_local.dart';
+import 'package:workoutholic/screen/login_page.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -72,12 +72,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e);
-    }
+    LoginPage();
   }
 
   @override
