@@ -10,28 +10,27 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Login"),
         ),
-        body: Container(child: _buildGoogleSignInButton()));
+        body: Container(child: _buildGoogleSignInButton(context)));
   }
 }
 
-Widget _buildGoogleSignInButton() {
+Widget _buildGoogleSignInButton(BuildContext context) {
   return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-              child: RaisedButton(
-            child: Text("Google Sign In"),
-            onPressed: () {
-              _handleGoogleSignIn();
-            },
-          )),
-        ],
-      ));
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Center(
+          child: RaisedButton(
+        child: Text("Google Sign In"),
+        onPressed: () {
+          _handleGoogleSignIn(context);
+        },
+      )),
+    ],
+  ));
 }
 
-void _handleGoogleSignIn() async {
-  FirebaseUser _user;
+void _handleGoogleSignIn(BuildContext context) async {
   final _googleSignIn = new GoogleSignIn();
   final _auth = FirebaseAuth.instance;
   GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -41,7 +40,11 @@ void _handleGoogleSignIn() async {
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
   print("signed in " + user.displayName);
   if (user != null) {
-    new HomePage();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) {
+        return HomePage();
+      },
+    ));
   }
 }
 

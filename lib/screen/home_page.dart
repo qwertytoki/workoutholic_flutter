@@ -113,10 +113,9 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     widget._auth.signOut();
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return new LoginPage();
+        return LoginPage();
       },
     ));
-    LoginPage();
   }
 
   @override
