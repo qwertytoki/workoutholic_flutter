@@ -16,9 +16,6 @@ class LoginPage extends StatelessWidget {
 
 Widget _buildGoogleSignInButton() {
   return Scaffold(
-      appBar: AppBar(
-        title: new Text('Welcome'),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
