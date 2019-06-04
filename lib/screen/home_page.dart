@@ -116,37 +116,37 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   // Simple TableCalendar configuration (using Styles)
-  Widget _buildTableCalendar() {
-    return TableCalendar(
-      locale: 'en_US',
-      events: _visibleEvents,
-      holidays: _visibleHolidays,
-      initialCalendarFormat: CalendarFormat.month,
-      formatAnimation: FormatAnimation.slide,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      availableGestures: AvailableGestures.all,
-      availableCalendarFormats: const {
-        CalendarFormat.month: 'Month'
-        // CalendarFormat.twoWeeks: '2 weeks',
-        // CalendarFormat.week: 'Week',
-      },
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.brown[700],
-      ),
-      headerStyle: HeaderStyle(
-        formatButtonTextStyle:
-            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-    );
-  }
+  // Widget _buildTableCalendar() {
+  //   return TableCalendar(
+  //     locale: 'en_US',
+  //     events: _visibleEvents,
+  //     holidays: _visibleHolidays,
+  //     initialCalendarFormat: CalendarFormat.month,
+  //     formatAnimation: FormatAnimation.slide,
+  //     startingDayOfWeek: StartingDayOfWeek.monday,
+  //     availableGestures: AvailableGestures.all,
+  //     availableCalendarFormats: const {
+  //       CalendarFormat.month: 'Month'
+  //       // CalendarFormat.twoWeeks: '2 weeks',
+  //       // CalendarFormat.week: 'Week',
+  //     },
+  //     calendarStyle: CalendarStyle(
+  //       selectedColor: Colors.deepOrange[400],
+  //       todayColor: Colors.deepOrange[200],
+  //       markersColor: Colors.brown[700],
+  //     ),
+  //     headerStyle: HeaderStyle(
+  //       formatButtonTextStyle:
+  //           TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+  //       formatButtonDecoration: BoxDecoration(
+  //         color: Colors.deepOrange[400],
+  //         borderRadius: BorderRadius.circular(16.0),
+  //       ),
+  //     ),
+  //     onDaySelected: _onDaySelected,
+  //     onVisibleDaysChanged: _onVisibleDaysChanged,
+  //   );
+  // }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
