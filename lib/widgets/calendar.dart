@@ -120,32 +120,7 @@ Widget _buildTableCalendarWithBuilders() {
       },
       onVisibleDaysChanged: _onVisibleDaysChanged,
     );
-    void _onDaySelected(DateTime day, List events) {
-    setState(() {
-      _selectedDay = day;
-      _selectedEvents = events;
-    });
-  }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-    setState(() {
-      _visibleEvents = Map.fromEntries(
-        _events.entries.where(
-          (entry) =>
-              entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-              entry.key.isBefore(last.add(const Duration(days: 1))),
-        ),
-      );
-
-      _visibleHolidays = Map.fromEntries(
-        _holidays.entries.where(
-          (entry) =>
-              entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-              entry.key.isBefore(last.add(const Duration(days: 1))),
-        ),
-      );
-    });
+    
   }
 
   Widget _buildEventsMarker(DateTime date, List events) {
