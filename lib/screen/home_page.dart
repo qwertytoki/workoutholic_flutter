@@ -151,7 +151,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
-      locale: 'pl_PL',
+      locale: 'en_US',
       events: _visibleEvents,
       holidays: _visibleHolidays,
       initialCalendarFormat: CalendarFormat.month,
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
         CalendarFormat.week: '',
       },
       calendarStyle: CalendarStyle(
-        outsideDaysVisible: false,
+        outsideDaysVisible: true,
         weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
         holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
       ),
