@@ -5,14 +5,6 @@ import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// class HomePage extends StatelessWidget {
-//   HomePage({this.auth, this.onSignedOut});
-//   final BaseAuth auth;
-//   final VoidCallback onSignedOut;
-//   @override
-//   _HomePageState createState() => _HomePageState();
-
-// Widgetを宣言する
 class HomePage extends StatefulWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   HomePage({this.auth, this.onSignedOut});
@@ -30,7 +22,6 @@ final Map<DateTime, List> _holidays = {
   DateTime(2019, 4, 22): ['Easter Monday'],
 };
 
-// Stateを宣言する
 class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   _MyHomePageState();
   DateTime _selectedDay;
@@ -45,57 +36,9 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
     _selectedDay = DateTime.now();
     _events = {
-      _selectedDay.subtract(Duration(days: 30)): [
-        'Event A0',
-        'Event B0',
-        'Event C0'
-      ],
-      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-      _selectedDay.subtract(Duration(days: 20)): [
-        'Event A2',
-        'Event B2',
-        'Event C2',
-        'Event D2'
-      ],
-      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
-      _selectedDay.subtract(Duration(days: 10)): [
-        'Event A4',
-        'Event B4',
-        'Event C4'
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        'Event A5',
-        'Event B5',
-        'Event C5'
-      ],
-      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      _selectedDay.add(Duration(days: 1)): [
-        'Event A8',
-        'Event B8',
-        'Event C8',
-        'Event D8'
-      ],
-      _selectedDay.add(Duration(days: 3)):
-          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-      _selectedDay.add(Duration(days: 7)): [
-        'Event A10',
-        'Event B10',
-        'Event C10'
-      ],
-      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
-      _selectedDay.add(Duration(days: 17)): [
-        'Event A12',
-        'Event B12',
-        'Event C12',
-        'Event D12'
-      ],
-      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
-      _selectedDay.add(Duration(days: 26)): [
-        'Event A14',
-        'Event B14',
-        'Event C14'
-      ],
+      _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
+      _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],
+      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk'],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -135,8 +78,8 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: <Widget>[
           // Switch out 2 lines below to play with TableCalendar's settings
           //-----------------------
-          _buildTableCalendar(),
-          // _buildTableCalendarWithBuilders(),
+          // _buildTableCalendar(),
+          _buildTableCalendarWithBuilders(),
           const SizedBox(height: 8.0),
           Expanded(child: _buildEventList()),
         ],
@@ -178,14 +121,14 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
       locale: 'en_US',
       events: _visibleEvents,
       holidays: _visibleHolidays,
-      initialCalendarFormat: CalendarFormat.week,
+      initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.monday,
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {
-        CalendarFormat.month: 'Month',
-        CalendarFormat.twoWeeks: '2 weeks',
-        CalendarFormat.week: 'Week',
+        CalendarFormat.month: 'Month'
+        // CalendarFormat.twoWeeks: '2 weeks',
+        // CalendarFormat.week: 'Week',
       },
       calendarStyle: CalendarStyle(
         selectedColor: Colors.deepOrange[400],
