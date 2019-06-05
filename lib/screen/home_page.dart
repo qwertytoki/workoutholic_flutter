@@ -83,7 +83,30 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
             Expanded(child: _buildEventList()),
           ],
         ),
-      )
+      ),
+      bottomNavigationBar: new BottomNavigationBar(
+        items: [
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text("test1"),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text("test2"),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.bookmark),
+            title: new Text("test3"),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.person),
+            title: new Text("test4"),
+          ),
+        ],
+        // onTap: onNavigationTapped,
+        // currentIndex: _page,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
     
   }
