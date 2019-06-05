@@ -43,39 +43,33 @@ class _MyAppState extends State<MyApp> {
         title: 'login',
         home: Scaffold(
           body: Container(
-            // ここをログインページにしてあげる必要がありそう
-            // statefulWidgetなので、_userをSetStateで変えるとここの値も変わる
-              // child: _user == null ? _buildGoogleSignInButton() : HomePage()),
               child: _user == null ? LoginPage() : HomePage()),
         ));
   }
 
   Widget _buildGoogleSignInButton() {
     return Scaffold(
-      
-      appBar: AppBar(
-        title: new Text('Welcome'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-        Center(
-            child: RaisedButton(
-          child: Text("Google Sign In"),
-          onPressed: () {
-            _handleGoogleSignIn().then((user) {
-              setState(() {
-                _user = user;
-              });
-            }).catchError((error) {
-              print(error);
-            });
-          },
-        )),
-      ],
-      )
-      
-    );
+        appBar: AppBar(
+          title: new Text('Welcome'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+                child: RaisedButton(
+              child: Text("Google Sign In"),
+              onPressed: () {
+                _handleGoogleSignIn().then((user) {
+                  setState(() {
+                    _user = user;
+                  });
+                }).catchError((error) {
+                  print(error);
+                });
+              },
+            )),
+          ],
+        ));
   }
 
   Future<FirebaseUser> _handleGoogleSignIn() async {

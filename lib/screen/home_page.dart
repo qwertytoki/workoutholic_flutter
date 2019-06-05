@@ -14,8 +14,6 @@ class HomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   _MyHomePageState();
   PageController _pageController;
@@ -31,20 +29,16 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
       this._page = page;
     });
   }
- 
 
   @override
   void initState() {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
-      body:PageView(
+      body: PageView(
         children: <Widget>[
           new WorkoutPage(),
           new TransitionPage(),
@@ -53,7 +47,6 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
         controller: _pageController,
         onPageChanged: onPageChanged,
       ),
-
       bottomNavigationBar: new BottomNavigationBar(
         items: [
           new BottomNavigationBarItem(
@@ -73,6 +66,6 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
         // currentIndex: _page,
         type: BottomNavigationBarType.fixed,
       ),
-    ); 
+    );
   }
 }

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/screen/workoutMenuSelect.dart';
 import 'package:workoutholic/data/workoutSet.dart';
 
-
 class WorkoutSetSelect extends StatelessWidget {
   @override
   final DateTime selectedDate;
@@ -16,6 +15,7 @@ class WorkoutSetSelect extends StatelessWidget {
       body: _buildBody(context),
     );
   }
+
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('workoutSet').snapshots(),
@@ -25,12 +25,14 @@ class WorkoutSetSelect extends StatelessWidget {
       },
     );
   }
+
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-   return ListView(
-     padding: const EdgeInsets.only(top: 20.0),
-     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-   );
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+    );
   }
+
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final workoutSet = WorkoutSet.fromSnapshot(data);
     return Padding(
@@ -45,9 +47,11 @@ class WorkoutSetSelect extends StatelessWidget {
           title: Text(workoutSet.setName),
           // trailing: Text(record.votes.toString()),
           onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
-          ),
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        WorkoutMenuSelect(workoutSet: workoutSet)),
+              ),
         ),
       ),
     );

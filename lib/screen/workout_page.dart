@@ -22,7 +22,8 @@ final Map<DateTime, List> _holidays = {
   DateTime(2019, 4, 22): ['Easter Monday'],
 };
 
-class _MyWorkoutPageState extends State<WorkoutPage> with TickerProviderStateMixin {
+class _MyWorkoutPageState extends State<WorkoutPage>
+    with TickerProviderStateMixin {
   _MyWorkoutPageState();
   DateTime _selectedDay;
   Map<DateTime, List> _events;
@@ -63,10 +64,9 @@ class _MyWorkoutPageState extends State<WorkoutPage> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      body:SafeArea( 
-        child:Column(
+      body: SafeArea(
+        child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             _buildTableCalendarWithBuilders(),
@@ -76,7 +76,6 @@ class _MyWorkoutPageState extends State<WorkoutPage> with TickerProviderStateMix
         ),
       ),
     );
-    
   }
 
   void _onDaySelected(DateTime day, List events) {
