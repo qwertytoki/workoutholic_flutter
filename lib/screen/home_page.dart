@@ -87,20 +87,16 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
       bottomNavigationBar: new BottomNavigationBar(
         items: [
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text("test1"),
+            icon: new Icon(Icons.fitness_center),
+            title: new Text("Workout"),
           ),
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text("test2"),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.bookmark),
-            title: new Text("test3"),
+            icon: new Icon(Icons.trending_up),
+            title: new Text("Transition"),
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.person),
-            title: new Text("test4"),
+            title: new Text("Profile"),
           ),
         ],
         // onTap: onNavigationTapped,
