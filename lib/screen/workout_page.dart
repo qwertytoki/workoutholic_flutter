@@ -5,13 +5,13 @@ import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class HomePage extends StatefulWidget {
+class WorkoutPage extends StatefulWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  HomePage({this.auth, this.onSignedOut});
+  WorkoutPage({this.auth, this.onSignedOut});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
 
 final Map<DateTime, List> _holidays = {
@@ -22,8 +22,8 @@ final Map<DateTime, List> _holidays = {
   DateTime(2019, 4, 22): ['Easter Monday'],
 };
 
-class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
-  _MyHomePageState();
+class _MyWorkoutPageState extends State<WorkoutPage> with TickerProviderStateMixin {
+  _MyWorkoutPageState();
   DateTime _selectedDay;
   Map<DateTime, List> _events;
   Map<DateTime, List> _visibleEvents;
@@ -63,16 +63,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // return SafeArea(
-      // appBar: AppBar(
-      //   title: new Text('Welcome'),
-      //   actions: <Widget>[
-      //     new FlatButton(
-      //         child: new Text('Logout',
-      //             style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-      //         onPressed: _signOut)
-      //   ],
-      // ),
+    
     return Scaffold(
       body:SafeArea( 
         child:Column(
@@ -83,25 +74,6 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
             Expanded(child: _buildEventList()),
           ],
         ),
-      ),
-      bottomNavigationBar: new BottomNavigationBar(
-        items: [
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.fitness_center),
-            title: new Text("Workout"),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.trending_up),
-            title: new Text("Transition"),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.person),
-            title: new Text("Profile"),
-          ),
-        ],
-        // onTap: onNavigationTapped,
-        // currentIndex: _page,
-        type: BottomNavigationBarType.fixed,
       ),
     );
     
