@@ -63,17 +63,17 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: new Text('Welcome'),
-        actions: <Widget>[
-          new FlatButton(
-              child: new Text('Logout',
-                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: _signOut)
-        ],
-      ),
-      body: Column(
+    return SafeArea(
+      // appBar: AppBar(
+      //   title: new Text('Welcome'),
+      //   actions: <Widget>[
+      //     new FlatButton(
+      //         child: new Text('Logout',
+      //             style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+      //         onPressed: _signOut)
+      //   ],
+      // ),
+      child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           // Switch out 2 lines below to play with TableCalendar's settings
