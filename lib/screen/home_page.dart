@@ -63,7 +63,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    // return SafeArea(
       // appBar: AppBar(
       //   title: new Text('Welcome'),
       //   actions: <Widget>[
@@ -73,18 +73,19 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
       //         onPressed: _signOut)
       //   ],
       // ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          // _buildTableCalendar(),
-          _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      ),
+    return Scaffold(
+      body:SafeArea( 
+        child:Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            _buildTableCalendarWithBuilders(),
+            const SizedBox(height: 8.0),
+            Expanded(child: _buildEventList()),
+          ],
+        ),
+      )
     );
+    
   }
 
   void _onDaySelected(DateTime day, List events) {
