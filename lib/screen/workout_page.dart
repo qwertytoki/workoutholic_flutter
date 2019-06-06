@@ -53,15 +53,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _controller.forward();
   }
 
-  void _signOut() async {
-    widget._auth.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) {
-        return LoginPage();
-      },
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

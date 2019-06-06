@@ -6,7 +6,6 @@ import 'package:workoutholic/screen/transition_page.dart';
 import 'package:workoutholic/screen/profile_page.dart';
 
 class HomePage extends StatefulWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   HomePage({this.auth, this.onSignedOut});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
