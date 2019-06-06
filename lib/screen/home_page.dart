@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/workout_page.dart';
 import 'package:workoutholic/screen/transition_page.dart';
 import 'package:workoutholic/screen/profile_page.dart';
@@ -14,13 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
-  _MyHomePageState();
   PageController _pageController;
   int _page = 0;
 
   void onNavigationTapped(int page) {
-    _pageController.animateToPage(page,
-        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+    _pageController.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
   void onPageChanged(int page) {
@@ -32,6 +29,13 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
   }
 
   @override
@@ -61,8 +65,8 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
             title: new Text("Profile"),
           ),
         ],
-        // onTap: onNavigationTapped,
-        // currentIndex: _page,
+        onTap: onNavigationTapped,
+        currentIndex: _page,
         type: BottomNavigationBarType.fixed,
       ),
     );

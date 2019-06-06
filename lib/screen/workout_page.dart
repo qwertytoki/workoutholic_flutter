@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
-import 'package:workoutholic/screen/login_page.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class WorkoutPage extends StatefulWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   WorkoutPage({this.auth, this.onSignedOut});
   final BaseAuth auth;
   final VoidCallback onSignedOut;
