@@ -17,7 +17,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _page = 0;
 
   void onNavigationTapped(int page) {
-    _pageController.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.ease);
+    _pageController.animateToPage(page, duration: const Duration(milliseconds: 1), curve: Curves.ease);
   }
 
   void onPageChanged(int page) {
