@@ -36,7 +36,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _events = {
       _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
       _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],
-      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk'],
+      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk','Crunch'],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
