@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:workoutholic/auth.dart';
 import 'package:workoutholic/screen/workout_page.dart';
 import 'package:workoutholic/screen/transition_page.dart';
 import 'package:workoutholic/screen/profile_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({this.auth, this.onSignedOut});
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
