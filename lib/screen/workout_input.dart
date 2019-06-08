@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/data/workout_set.dart';
-import 'package:workoutholic/screen/workout_menu_select.dart';
+import 'package:workoutholic/data/workout_menu.dart';
 
-class WorkoutSetSelectPage extends StatelessWidget {
+class WorkoutInputPage extends StatelessWidget {
   @override
-  // final DateTime selectedDate;
-  // WorkoutSetSelect({Key key, @required this.selectedDate}) : super(key: key);
-  
+  final WorkoutSet workoutSet;
+  WorkoutInputPage({Key key, @required this.workoutSet}) : super(key: key);
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Workout Set"),
+        title: Text("Choose Workout"),
       ),
       body: _buildBody(context),
     );
@@ -19,12 +18,11 @@ class WorkoutSetSelectPage extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('workoutSet').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
+        stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return LinearProgressIndicator();
+          return _buildList(context, snapshot.data.documents);
+        });
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -47,12 +45,10 @@ class WorkoutSetSelectPage extends StatelessWidget {
         child: ListTile(
           title: Text(workoutSet.setName),
           // trailing: Text(record.votes.toString()),
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        WorkoutMenuSelect(workoutSet: workoutSet)),
-              ),
+          // onTap: () => Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
+          // ),
         ),
       ),
     );

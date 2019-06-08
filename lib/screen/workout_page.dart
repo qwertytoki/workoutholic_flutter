@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:workoutholic/screen/workout_set_select.dart';
+import 'package:workoutholic/screen/workout_input.dart';
 
 class WorkoutPage extends StatefulWidget {
   WorkoutPage({this.auth, this.onSignedOut});
@@ -65,11 +67,19 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       ),
       floatingActionButton: FloatingActionButton(
       onPressed: () {
-        // Add your onPressed code here!
+        moveToSetSelect();
       },
       child: Icon(Icons.add),
     ),
     );
+  }
+
+  void moveToSetSelect(){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) {
+        return WorkoutSetSelect();
+      },
+    ));
   }
 
   void _onDaySelected(DateTime day, List events) {
@@ -268,10 +278,17 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
-                  onTap: () => print('$event tapped!'),
+                  onTap: () => moveToMenu(),
                 ),
               ))
           .toList(),
     );
+  }
+  void moveToMenu(){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) {
+        return WorkoutInputPage();
+      },
+    ));
   }
 }
