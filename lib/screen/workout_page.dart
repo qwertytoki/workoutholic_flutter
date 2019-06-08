@@ -63,6 +63,12 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        // Add your onPressed code here!
+      },
+      child: Icon(Icons.add),
+    ),
     );
   }
 
