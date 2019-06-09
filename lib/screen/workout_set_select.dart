@@ -18,43 +18,66 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('workoutSet').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
+    return _buildList(context);
   }
 
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+      children: <Widget>[
+        ListTile(
+          leading: Icon(Icons.map),
+          title: Text('Map'),
+        ),
+        ListTile(
+          leading: Icon(Icons.photo_album),
+          title: Text('Album'),
+        ),
+        ListTile(
+          leading: Icon(Icons.phone),
+          title: Text('Phone'),
+        ),
+      ],
     );
   }
 
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final workoutSet = WorkoutSet.fromSnapshot(data);
-    return Padding(
-      key: ValueKey(workoutSet.setName),
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(workoutSet.setName),
-          // trailing: Text(record.votes.toString()),
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        WorkoutMenuSelect(workoutSet: workoutSet)),
-              ),
-        ),
-      ),
-    );
-  }
+// firebase使うなら以下のソース
+  // Widget _buildBody(BuildContext context) {
+  //   return StreamBuilder<QuerySnapshot>(
+  //     stream: Firestore.instance.collection('workoutSet').snapshots(),
+  //     builder: (context, snapshot) {
+  //       if (!snapshot.hasData) return LinearProgressIndicator();
+  //       return _buildList(context, snapshot.data.documents);
+  //     },
+  //   );
+  // }
+
+  // Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  //   return ListView(
+  //     padding: const EdgeInsets.only(top: 20.0),
+  //     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+  //   );
+  // }
+  // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+  //   final workoutSet = WorkoutSet.fromSnapshot(data);
+  //   return Padding(
+  //     key: ValueKey(workoutSet.setName),
+  //     padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         border: Border.all(color: Colors.grey),
+  //         borderRadius: BorderRadius.circular(5.0),
+  //       ),
+  //       child: ListTile(
+  //         title: Text(workoutSet.setName),
+  //         // trailing: Text(record.votes.toString()),
+  //         onTap: () => Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                   builder: (context) =>
+  //                       WorkoutMenuSelect(workoutSet: workoutSet)),
+  //             ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
