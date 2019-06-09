@@ -32,8 +32,15 @@ class WorkoutSetSelectPage extends StatelessWidget {
       itemBuilder: (context, int index) {
       return ListTile(
         title: Text(data[index]),
+        onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        WorkoutMenuSelect()),
+              ),
+        );
+        }
       );
-    });
   }
 
 // firebase使うなら以下のソース
