@@ -38,7 +38,14 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _events = {
       _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
       _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],
-      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk','Crunch'],
+      _selectedDay: [
+        'Bench Press',
+        'Squat',
+        'Dead Lift',
+        'Chinning',
+        'Plunk',
+        'Crunch'
+      ],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -66,20 +73,19 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        moveToSetSelect();
-      },
-      child: Icon(Icons.add),
-    ),
+        onPressed: () {
+          moveToSetSelect();
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 
-  void moveToSetSelect(){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) {
-        return WorkoutSetSelect();
-      },
-    ));
+  void moveToSetSelect() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WorkoutSetSelectPage()),
+    );
   }
 
   void _onDaySelected(DateTime day, List events) {
@@ -284,7 +290,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           .toList(),
     );
   }
-  void moveToMenu(){
+
+  void moveToMenu() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
         return WorkoutInputPage();

@@ -7,7 +7,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
   @override
   // final DateTime selectedDate;
   // WorkoutSetSelect({Key key, @required this.selectedDate}) : super(key: key);
-  
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +38,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
     final workoutSet = WorkoutSet.fromSnapshot(data);
     return Padding(
       key: ValueKey(workoutSet.setName),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
