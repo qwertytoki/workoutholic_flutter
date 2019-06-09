@@ -38,14 +38,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _events = {
       _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
       _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],
-      _selectedDay: [
-        'Bench Press',
-        'Squat',
-        'Dead Lift',
-        'Chinning',
-        'Plunk',
-        'Crunch'
-      ],
+      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk'],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -115,39 +108,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       );
     });
   }
-
-  // Simple TableCalendar configuration (using Styles)
-  // Widget _buildTableCalendar() {
-  //   return TableCalendar(
-  //     locale: 'en_US',
-  //     events: _visibleEvents,
-  //     holidays: _visibleHolidays,
-  //     initialCalendarFormat: CalendarFormat.month,
-  //     formatAnimation: FormatAnimation.slide,
-  //     startingDayOfWeek: StartingDayOfWeek.monday,
-  //     availableGestures: AvailableGestures.all,
-  //     availableCalendarFormats: const {
-  //       CalendarFormat.month: 'Month'
-  //       // CalendarFormat.twoWeeks: '2 weeks',
-  //       // CalendarFormat.week: 'Week',
-  //     },
-  //     calendarStyle: CalendarStyle(
-  //       selectedColor: Colors.deepOrange[400],
-  //       todayColor: Colors.deepOrange[200],
-  //       markersColor: Colors.brown[700],
-  //     ),
-  //     headerStyle: HeaderStyle(
-  //       formatButtonTextStyle:
-  //           TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-  //       formatButtonDecoration: BoxDecoration(
-  //         color: Colors.deepOrange[400],
-  //         borderRadius: BorderRadius.circular(16.0),
-  //       ),
-  //     ),
-  //     onDaySelected: _onDaySelected,
-  //     onVisibleDaysChanged: _onVisibleDaysChanged,
-  //   );
-  // }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
@@ -292,10 +252,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   void moveToMenu() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) {
-        return WorkoutInputPage();
-      },
-    ));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WorkoutInputPage()),
+    );
   }
 }

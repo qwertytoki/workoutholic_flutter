@@ -5,24 +5,26 @@ import 'package:workoutholic/data/workout_menu.dart';
 
 class WorkoutInputPage extends StatelessWidget {
   @override
-  final WorkoutSet workoutSet;
-  WorkoutInputPage({Key key, @required this.workoutSet}) : super(key: key);
+  // final WorkoutSet workey key, @required this.workoutSetoutSet;
+  // WorkoutInputPage({K}) : super(key: key);
+  WorkoutSet _workoutSet;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Choose Workout"),
+        title: Text("Inout Workout"),
       ),
       body: _buildBody(context),
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return LinearProgressIndicator();
-          return _buildList(context, snapshot.data.documents);
-        });
+    return Text("data");
+    // return StreamBuilder<QuerySnapshot>(
+    //     stream: WorkoutMenu.getMenuFromWorkoutSet(_workoutSet.workoutIds),
+    //     builder: (context, snapshot) {
+    //       if (!snapshot.hasData) return LinearProgressIndicator();
+    //       return _buildList(context, snapshot.data.documents);
+    //     });
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
