@@ -22,22 +22,18 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          leading: Icon(Icons.map),
-          title: Text('Map'),
-        ),
-        ListTile(
-          leading: Icon(Icons.photo_album),
-          title: Text('Album'),
-        ),
-        ListTile(
-          leading: Icon(Icons.phone),
-          title: Text('Phone'),
-        ),
-      ],
-    );
+    const data = [
+      'abc',
+      'def',
+      'ghi',
+    ];
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (context, int index) {
+      return ListTile(
+        title: Text(data[index]),
+      );
+    });
   }
 
 // firebase使うなら以下のソース
