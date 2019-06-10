@@ -23,9 +23,11 @@ class WorkoutSetSelectPage extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     const data = [
-      'abc',
-      'def',
-      'ghi',
+      'Big 3',
+      'Legs',
+      'Chest and Triceps',
+      'Back and Biceps',
+      'Abs'
     ];
     return ListView.builder(
       itemCount: data.length,
