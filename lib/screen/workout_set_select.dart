@@ -30,10 +30,15 @@ class WorkoutSetSelectPage extends StatelessWidget {
       'Abs'
     ];
     return ListView.builder(
+      padding: const EdgeInsets.all(16.0),  
       itemCount: data.length,
       itemBuilder: (context, int index) {
+      if (index.isOdd) return Divider(); 
       return ListTile(
-        title: Text(data[index]),
+        title: Text(
+          data[index],
+          style: const TextStyle(fontSize: 18.0),
+        ),
         onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
