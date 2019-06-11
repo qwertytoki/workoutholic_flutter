@@ -2,50 +2,70 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WorkMenu {
   WorkMenu({
-    this.uid = '',
-    this.userNumber = '',
-    this.displayName = '',
+    this.id = '',
+    this.code = '',
+    this.nameEn = '',
+    this.nameJa = '',
     this.description = '',
-    this.coverImageUrlMobile = '',
-    this.photoUrlMobile = '',
-    this.language = '',
+    this.photoURL = '',
+    this.workType = '',
   });
 
-  String uid;
-  String userNumber;
-  String displayName;
+  String id;
+  String code;
+  String nameEn;
+  String nameJa;
   String description;
-  String coverImageUrlMobile;
-  String photoUrlMobile;
-  String language;
+  String photoURL;
+  String workType;
 
   static WorkMenu of(DocumentSnapshot document) {
     if (!document.exists) {
       return new WorkMenu();
     }
     return new WorkMenu(
-      uid: document.documentID,
-      userNumber: document['user_number'],
-      displayName: document['display_name'],
-      description: document['description'],
-      coverImageUrlMobile: document['cover_image_url_mobile'] ?? '',
-      photoUrlMobile: document['photo_url_mobile'] ?? '',
-      language: document['language_code'],
+      id: document.documentID,
+      code: document['code'],
+      nameEn: document['name_en'],
+      nameJa: document['name_ja'],
+      description: document['description'] ?? '',
+      photoURL: document['photo_url'] ?? '',
+      workType: document['work_type'],
     );
   }
 
   bool isEmpty() {
-    return this.uid == '';
+    return this.id == '';
   }
 
   Map<String, Object> toMapForUser() {
     Map<String, Object> data = new Map();
-    data.putIfAbsent('user_number', () => userNumber);
-    data.putIfAbsent('photo_url_mobile', () => photoUrlMobile);
-    data.putIfAbsent('display_name', () => displayName);
-    data.putIfAbsent('cover_image_url_mobile', () => coverImageUrlMobile);
+    data.putIfAbsent('code', () => code);
+    data.putIfAbsent('name_en', () => nameEn);
+    data.putIfAbsent('name_ja', () => nameJa);
     data.putIfAbsent('description', () => description);
-    data.putIfAbsent('language_code', () => language);
+    data.putIfAbsent('photo_url', () => photoURL);
+    data.putIfAbsent('work_type', () => workType);
     return data;
+  }
+
+  // Delete me after using firebase
+  static WorkMenu mockOf(
+      String mockId,
+      String mockCode,
+      String mockNameEn,
+      String mockNameJa,
+      String mockDiscription,
+      String mockPhotoURL,
+      String mockWorkType) {
+    return new WorkMenu(
+      id: mockId,
+      code: mockCode,
+      nameEn: mockNameEn,
+      nameJa: mockNameJa,
+      description: mockDiscription,
+      photoURL: mockPhotoURL,
+      workType: mockWorkType,
+    );
   }
 }
