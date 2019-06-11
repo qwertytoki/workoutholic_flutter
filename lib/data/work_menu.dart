@@ -38,7 +38,7 @@ class WorkMenu {
     return this.id == '';
   }
 
-  Map<String, Object> toMapForUser() {
+  Map<String, Object> toMapForMenu() {
     Map<String, Object> data = new Map();
     data.putIfAbsent('code', () => code);
     data.putIfAbsent('name_en', () => nameEn);
@@ -50,22 +50,22 @@ class WorkMenu {
   }
 
   // Delete me after using firebase
-  static WorkMenu mockOf(
-      String mockId,
-      String mockCode,
-      String mockNameEn,
-      String mockNameJa,
-      String mockDiscription,
-      String mockPhotoURL,
-      String mockWorkType) {
+  static WorkMenu createNewMenu(
+      String id,
+      String code,
+      String nameEn,
+      String nameJa,
+      String discription,
+      String photoURL,
+      String workType) {
     return new WorkMenu(
-      id: mockId,
-      code: mockCode,
-      nameEn: mockNameEn,
-      nameJa: mockNameJa,
-      description: mockDiscription,
-      photoURL: mockPhotoURL,
-      workType: mockWorkType,
+      id: id,
+      code: code,
+      nameEn: nameEn,
+      nameJa: nameJa,
+      description: discription,
+      photoURL: photoURL,
+      workType: workType,
     );
   }
 }
