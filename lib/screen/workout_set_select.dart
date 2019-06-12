@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/data/workout_set.dart';
+import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
+import 'package:workoutholic/dto/work_set.dart';
 
 class WorkoutSetSelectPage extends StatelessWidget {
   @override
@@ -29,6 +30,8 @@ class WorkoutSetSelectPage extends StatelessWidget {
       'Back and Biceps',
       'Abs'
     ];
+    List<WorkSet> workSets = genarateMockData();
+
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),  
       itemCount: data.length,
@@ -48,6 +51,13 @@ class WorkoutSetSelectPage extends StatelessWidget {
         );
         }
       );
+  }
+  List<WorkSet> genrateMockData(){
+    List<WorkSet> workSets = new List();  
+    workSets.add(WorkSet.createNewSet("id1", "", "Big3", "Big3", "The day condition is perfect", null, true));
+    workSets.add(WorkSet.createNewSet("id2", "", "Chest Day", "胸の日", "Every Wednesday", null, true));
+    workSets.add(WorkSet.createNewSet("id3", "", "Legs Day", "脚の日", "Every Monday", null, true));
+    return workSets;
   }
 
 // firebase使うなら以下のソース

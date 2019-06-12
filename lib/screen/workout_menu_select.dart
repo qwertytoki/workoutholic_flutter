@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/data/workout_set.dart';
-import 'package:workoutholic/data/workout_menu.dart';
+import 'package:workoutholic/dto/workout_set.dart';
+import 'package:workoutholic/dto/workout_menu.dart';
+import 'package:workoutholic/dto/work_set.dart';
+import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
-import 'package:workoutholic/data/work_menu.dart';
+
+
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
