@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/data/workout_set.dart';
 import 'package:workoutholic/data/workout_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
-
+import 'package:workoutholic/data/work_menu.dart';
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
@@ -28,6 +28,7 @@ class WorkoutMenuSelect extends StatelessWidget {
       'def',
       'ghi',
     ];
+    List<WorkMenu> menus = createMockData();
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, int index) {
@@ -42,6 +43,12 @@ class WorkoutMenuSelect extends StatelessWidget {
         );
         }
       );
+  }
+
+
+// for mock data
+  List<WorkMenu> createMockData(){
+    return null;
   }
   
 

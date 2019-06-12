@@ -27,6 +27,7 @@ class WorkoutInputPage extends StatelessWidget {
     //     });
   }
 
+  // for firebase
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
