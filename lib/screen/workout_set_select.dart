@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
+import 'package:workoutholic/dao/work_set_dao.dart';
 
 class WorkoutSetSelectPage extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
       'Back and Biceps',
       'Abs'
     ];
-    List<WorkSet> workSets = genarateMockData();
+    List<WorkSet> workSets = WorkSetDao.genarateMockData();
 
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),  
