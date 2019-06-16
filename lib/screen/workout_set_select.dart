@@ -5,6 +5,7 @@ import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
 
+
 class WorkoutSetSelectPage extends StatelessWidget {
   @override
   // final DateTime selectedDate;
@@ -31,16 +32,18 @@ class WorkoutSetSelectPage extends StatelessWidget {
       'Back and Biceps',
       'Abs'
     ];
-    List<WorkSet> workSets = WorkSetDao.genarateMockData();
+    List<WorkSet> workSets = generateMockData();
 
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black38,
+      ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: data.length,
+        itemCount: workSets.length,
         itemBuilder: (context, int index) {
-          if (index.isOdd) return Divider();
           return ListTile(
             title: Text(
-              data[index],
+              workSets[index].nameEn,
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(
@@ -51,15 +54,9 @@ class WorkoutSetSelectPage extends StatelessWidget {
         });
   }
 
-  List<WorkSet> genrateMockData() {
-    List<WorkSet> workSets = new List();
-    workSets.add(WorkSet.createNewSet(
-        "id1", "", "Big3", "Big3", "The day condition is perfect", null, true));
-    workSets.add(WorkSet.createNewSet(
-        "id2", "", "Chest Day", "胸の日", "Every Wednesday", null, true));
-    workSets.add(WorkSet.createNewSet(
-        "id3", "", "Legs Day", "脚の日", "Every Monday", null, true));
-    return workSets;
+  // Firebaseに置き換える予定なので隔離してる
+  List<WorkSet> generateMockData() {
+    return WorkSetDao.genarateMockData();
   }
 
 // firebase使うなら以下のソース
