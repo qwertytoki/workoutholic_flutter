@@ -33,7 +33,11 @@ class WorkoutMenuSelect extends StatelessWidget {
       'ghi',
     ];
     List<WorkMenu> menus = createMockData();
-    return ListView.builder(
+    return ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+              color: Colors.black38,
+            ),
+        padding: const EdgeInsets.all(16.0),
         itemCount: this.workSet.menus.length,
         itemBuilder: (context, int index) {
           return ListTile(
