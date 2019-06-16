@@ -9,7 +9,7 @@ class WorkSetDao{
     menus1.add("squat");
     menus1.add("dead_lift");
     workSets.add(WorkSet.createNewSet(
-        "id1", "", "Big3", "Big3", "The day condition is perfect", menus, true));
+        "id1", "", "Big3", "Big3", "The day condition is perfect", menus1, true));
     List<String> menus2 = new List();
     menus2.add("bench_press");
     menus2.add("incline_bench_press");
