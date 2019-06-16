@@ -5,7 +5,6 @@ import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
 
-
 class WorkoutSetSelectPage extends StatelessWidget {
   @override
   // final DateTime selectedDate;
@@ -25,19 +24,11 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    const data = [
-      'Big 3',
-      'Legs',
-      'Chest and Triceps',
-      'Back and Biceps',
-      'Abs'
-    ];
     List<WorkSet> workSets = generateMockData();
-
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
-        color: Colors.black38,
-      ),
+        separatorBuilder: (context, index) => Divider(
+              color: Colors.black38,
+            ),
         padding: const EdgeInsets.all(16.0),
         itemCount: workSets.length,
         itemBuilder: (context, int index) {
