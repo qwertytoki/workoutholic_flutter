@@ -39,7 +39,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
             ),
             onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WorkoutMenuSelect()),
+                  MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workSets[index])),
                 ),
           );
         });

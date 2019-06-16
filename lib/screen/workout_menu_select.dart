@@ -6,10 +6,10 @@ import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
 
-
-
 class WorkoutMenuSelect extends StatelessWidget {
   @override
+  WorkSet workSet;
+  WorkoutMenuSelect(@required this.workSet);
   // final WorkoutSet workoutSet;
   // WorkoutMenuSelect({Key key, @required this.workoutSet}) : super(key: key);
 
@@ -21,6 +21,7 @@ class WorkoutMenuSelect extends StatelessWidget {
       body: _buildBody(context),
     );
   }
+
   Widget _buildBody(BuildContext context) {
     return _buildList(context);
   }
@@ -33,27 +34,25 @@ class WorkoutMenuSelect extends StatelessWidget {
     ];
     List<WorkMenu> menus = createMockData();
     return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (context, int index) {
-      return ListTile(
-        title: Text(data[index]),
-        onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        WorkoutInputPage()),
-              ),
-        );
-        }
-      );
+        itemCount: this.workSet.menus.length,
+        itemBuilder: (context, int index) {
+          return ListTile(
+            title: Text(
+              this.workSet.menus[index],
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WorkoutInputPage()),
+                ),
+          );
+        });
   }
-
 
 // for mock data
-  List<WorkMenu> createMockData(){
+  List<WorkMenu> createMockData() {
     return null;
   }
-  
 
   // Widget _buildBody(BuildContext context) {
   //   // return StreamBuilder<QuerySnapshot>(
