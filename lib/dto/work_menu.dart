@@ -6,7 +6,6 @@ class WorkMenu {
     this.code = '',
     this.nameEn = '',
     this.nameJa = '',
-    this.description = '',
     this.photoURL = '',
     this.workType = '',
   });
@@ -15,7 +14,6 @@ class WorkMenu {
   String code;
   String nameEn;
   String nameJa;
-  String description;
   String photoURL;
   String workType;
 
@@ -28,7 +26,6 @@ class WorkMenu {
       code: document['code'],
       nameEn: document['name_en'],
       nameJa: document['name_ja'],
-      description: document['description'] ?? '',
       photoURL: document['photo_url'] ?? '',
       workType: document['work_type'],
     );
@@ -43,7 +40,6 @@ class WorkMenu {
     data.putIfAbsent('code', () => code);
     data.putIfAbsent('name_en', () => nameEn);
     data.putIfAbsent('name_ja', () => nameJa);
-    data.putIfAbsent('description', () => description);
     data.putIfAbsent('photo_url', () => photoURL);
     data.putIfAbsent('work_type', () => workType);
     return data;
@@ -55,7 +51,6 @@ class WorkMenu {
       String code,
       String nameEn,
       String nameJa,
-      String discription,
       String photoURL,
       String workType) {
     return new WorkMenu(
@@ -63,7 +58,6 @@ class WorkMenu {
       code: code,
       nameEn: nameEn,
       nameJa: nameJa,
-      description: discription,
       photoURL: photoURL,
       workType: workType,
     );

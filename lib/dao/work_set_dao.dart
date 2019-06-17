@@ -19,7 +19,7 @@ class WorkSetDao{
     List<String> menus3 = new List();
     menus3.add("squat");
     menus3.add("lunge");
-    menus3.add("leg_extention");
+    menus3.add("leg_extenion");
     workSets.add(WorkSet.createNewSet(
         "id3", "", "Legs Day", "脚の日", "Every Monday", menus3, true));
     return workSets;
