@@ -30,4 +30,11 @@ class WorkMenuDao {
         "id7", "leg_extension", "Leg Extension", "レッグエクステンション", "URL7", "LIFT"));
     return workMenus;
   }
+  static List<WorkMenu> getMenus(List<String>menuList){
+    //FireStoreに書き換え
+    List<WorkMenu> allData = genarateMockData();
+    List<WorkMenu> result = allData;
+    return result;
+
+  }
 }
