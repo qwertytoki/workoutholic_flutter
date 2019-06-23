@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AddSet extends StatelessWidget {
-  @override
-  // final WorkoutSet workey key, @required this.workoutSetoutSet;
-  // WorkoutInputPage({K}) : super(key: key);
-  @override
+class AddSetPage extends StatefulWidget {
+    // final WorkoutSet workey key, @required this.workoutSetoutSet;
+    // WorkoutInputPage({K}) : super(key: key);
+    @override
+    _AddSetPageState createState() => _AddSetPageState();
+  }
+  class _AddSetPageState extends State<AddSetPage>{
+
   Widget build(BuildContext context) {
+    final TextEditingController setNameController = TextEditingController();
     Scaffold scaffold = new Scaffold(
       appBar: AppBar(
         title: Text("Create New Set"),
@@ -17,10 +21,10 @@ class AddSet extends StatelessWidget {
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: new InputDecoration(
-                hintText: Texts.get(TextKey.AP_NUMBER_HINT),
-                labelText: Texts.get(TextKey.AP_NUMBER_LABEL),
+                hintText: "Type your set name.",
+                // labelText: Texts.get(TextKey.AP_NUMBER_LABEL),
               ),
-              controller: _userNumberController,
+              controller: setNameController,
               // inputFormatters: [new UserNumberTextFormatter()],
             ),
             Padding(
@@ -34,8 +38,8 @@ class AddSet extends StatelessWidget {
                     child: new Builder(
                       builder: (BuildContext context) {
                         return OutlineButton(
-                          child: Text(Texts.get(TextKey.AP_ADD_BUTTON_LABEL)),
-                          onPressed: () => _inviteUser(context),
+                          child: Text("Add"),
+                          onPressed: () => _saveSet(),
                         );
                       },
                     ),
@@ -49,35 +53,11 @@ class AddSet extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Text(Texts.get(TextKey.AP_MEMBERS_LABEL)),
+                  // Text(Texts.get(TextKey.AP_MEMBERS_LABEL)),
                 ],
               ),
             ),
-            Expanded(
-              child: ListView(
-                children: members.map((uid) {
-                  return FutureBuilder(
-                    future: UserDao.getUserByUid(uid),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<User> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        User user = snapshot.data;
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.0),
-                          child: UserAvatarName(
-                            name: user.displayName,
-                            avatarImageUrl: user.photoUrlMobile,
-                            avatarUid: user.uid,
-                            uid: widget.uid,
-                          ),
-                        );
-                      }
-                      return new Container();
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
+            
           ],
         ),
       ),
@@ -86,8 +66,11 @@ class AddSet extends StatelessWidget {
     return WillPopScope(
       child: scaffold,
       onWillPop: () {
-        Navigator.of(context).pop(members);
+        Navigator.of(context).pop("test");
       },
     );
+  }
+  void _saveSet(){
+    print("add");
   }
 }

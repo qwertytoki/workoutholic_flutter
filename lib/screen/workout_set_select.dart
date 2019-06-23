@@ -22,7 +22,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
               onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddSet(),
+                      builder: (context) => AddSetPage(),
                     ),
                   ))
         ],
