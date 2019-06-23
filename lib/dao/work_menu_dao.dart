@@ -31,10 +31,16 @@ class WorkMenuDao {
     return workMenus;
   }
   static List<WorkMenu> getMenus(List<String>menuList){
-    //FireStoreに書き換え
-    List<WorkMenu> allData = genarateMockData();
-    List<WorkMenu> result = allData;
-    return result;
-
+    // FireStoreに書き換え
+    List<WorkMenu> allMenus = genarateMockData();
+    List<WorkMenu> resultMenus = new List();
+    allMenus.forEach((menu){
+      if(menuList.contains(menu.code)){
+        resultMenus.add(menu);
+      }
+    });
+    return resultMenus;
   }
+
 }
+

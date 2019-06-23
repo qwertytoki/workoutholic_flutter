@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/dto/workout_set.dart';
-import 'package:workoutholic/dto/workout_menu.dart';
 import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
+import 'package:workoutholic/dao/work_menu_dao.dart';
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
   WorkSet workSet;
-  WorkoutMenuSelect(@required this.workSet);
+  // これなんでKeyいれるんだっけ？
+  WorkoutMenuSelect({Key key, @required this.workSet}) :super(key:key);
   // final WorkoutSet workoutSet;
   // WorkoutMenuSelect({Key key, @required this.workoutSet}) : super(key: key);
 
@@ -32,17 +32,17 @@ class WorkoutMenuSelect extends StatelessWidget {
       'def',
       'ghi',
     ];
-    List<WorkMenu> menus = createMockData();
+    List<WorkMenu> menus = WorkMenuDao.getMenus(this.workSet.menus);
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(
               color: Colors.black38,
             ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: this.workSet.menus.length,
+        itemCount: menus.length,
         itemBuilder: (context, int index) {
           return ListTile(
             title: Text(
-              this.workSet.menus[index],
+              menus[index].nameEn,
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(
