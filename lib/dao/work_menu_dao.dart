@@ -10,7 +10,7 @@ class WorkMenuDao {
     workMenus.add(WorkMenu.createNewMenu(
         "id3", "dead_lift", "Dead Lift", "デッドリフト", "URL3", "LIFT"));
     workMenus.add(WorkMenu.createNewMenu("id4", "incline_bench_press",
-        "Inclind Bench Press", "インクライン ベンチプレス", "URL4", "LIFT"));
+        "Incline Bench Press", "インクライン ベンチプレス", "URL4", "LIFT"));
     workMenus.add(WorkMenu.createNewMenu("id5", "decline_bench_press",
         "Decline Bench Press", "デクライン ベンチプレス", "URL5", "LIFT"));
     workMenus.add(
