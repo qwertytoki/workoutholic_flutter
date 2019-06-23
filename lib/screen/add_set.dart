@@ -63,12 +63,7 @@ class AddSetPage extends StatefulWidget {
       ),
     );
     // this WillPopScope is not needed...? #105
-    return WillPopScope(
-      child: scaffold,
-      onWillPop: () {
-        Navigator.of(context).pop("test");
-      },
-    );
+    return scaffold;
   }
   void _saveSet(){
     print("add");
