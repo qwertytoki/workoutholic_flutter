@@ -15,7 +15,7 @@ class AddSetPage extends StatefulWidget {
         title: Text("Create New Set"),
         ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             TextFormField(
