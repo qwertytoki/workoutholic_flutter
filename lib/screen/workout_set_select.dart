@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
+import 'package:workoutholic/screen/add_set.dart';
 
 class WorkoutSetSelectPage extends StatelessWidget {
   @override
@@ -14,6 +15,17 @@ class WorkoutSetSelectPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Select Workout Set"),
+        actions: <Widget>[
+          FlatButton(
+              child: Text('Add',
+                  style: TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddSet(),
+                    ),
+                  ))
+        ],
       ),
       body: _buildBody(context),
     );
@@ -39,7 +51,9 @@ class WorkoutSetSelectPage extends StatelessWidget {
             ),
             onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workSet:workSets[index])),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          WorkoutMenuSelect(workSet: workSets[index])),
                 ),
           );
         });
