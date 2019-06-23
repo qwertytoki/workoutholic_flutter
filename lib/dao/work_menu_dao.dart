@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/work_menu.dart';
-
-/**
-  String id;
-  String code;
-  String nameEn;
-  String nameJa;
-  String description;
-  String photoURL;
-  String workType;
- */
 
 class WorkMenuDao {
   static List<WorkMenu> genarateMockData() {
@@ -40,6 +29,7 @@ class WorkMenuDao {
       }
     });
     return resultMenus;
+
   }
 
 }

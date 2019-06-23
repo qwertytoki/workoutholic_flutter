@@ -7,9 +7,8 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
-  WorkSet workSet;
-  // これなんでKeyいれるんだっけ？
-  WorkoutMenuSelect({Key key, @required this.workSet}) :super(key:key);
+  final WorkSet workSet;
+  WorkoutMenuSelect({@required this.workSet});
   // final WorkoutSet workoutSet;
   // WorkoutMenuSelect({Key key, @required this.workoutSet}) : super(key: key);
 
@@ -27,11 +26,6 @@ class WorkoutMenuSelect extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    const data = [
-      'abc',
-      'def',
-      'ghi',
-    ];
     List<WorkMenu> menus = WorkMenuDao.getMenus(this.workSet.menus);
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(

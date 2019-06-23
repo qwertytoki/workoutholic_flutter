@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/dto/workout_set.dart';
+// import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
@@ -39,7 +39,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
             ),
             onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workSets[index])),
+                  MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workSet:workSets[index])),
                 ),
           );
         });
