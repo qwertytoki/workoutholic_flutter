@@ -244,7 +244,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                 ),
               ))
           .toList(),
-          
     );
   }
 
