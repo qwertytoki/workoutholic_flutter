@@ -3,11 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/dto/workout_menu.dart';
 
-class WorkoutInputPage extends StatelessWidget {
+class WorkoutInputPage extends StatefulWidget {
+  WorkoutInputPage({Key key}) : super(key: key);
+
   @override
-  // final WorkoutSet workey key, @required this.workoutSetoutSet;
-  // WorkoutInputPage({K}) : super(key: key);
-  WorkoutSet _workoutSet;
+  _WorkoutInputPageState createState() => _WorkoutInputPageState();
+
+}
+
+class _WorkoutInputPageState extends State<WorkoutInputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -18,11 +22,23 @@ class WorkoutInputPage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+    final items = List<String>.generate(5, (i) => "100 kg 5 回");
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return ListTile(title: Text('${items[index]}'));
+        final item = items[index];
+        return Dismissible(
+          key:Key(item),
+          onDismissed:(direction){
+            setState((){
+              items.removeAt(index);
+            });
+            Scaffold.of(context).showSnackBar(SnackBar(content:Text("deleteする")));
+
+          },
+          background: Container(color:Colors.red),
+          child: ListTile(title: Text('$item')),
+        );
       },
     );
 
