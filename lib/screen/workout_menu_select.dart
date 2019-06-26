@@ -15,7 +15,7 @@ class WorkoutMenuSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Choose Workout"),
+        title: Text("メニューを選択"),
       ),
       body: _buildBody(context),
     );
@@ -36,7 +36,7 @@ class WorkoutMenuSelect extends StatelessWidget {
         itemBuilder: (context, int index) {
           return ListTile(
             title: Text(
-              menus[index].nameEn,
+              menus[index].nameJa,
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(

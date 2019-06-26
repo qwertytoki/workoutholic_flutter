@@ -14,7 +14,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Workout Set"),
+        title: Text("セットを選択"),
         actions: <Widget>[
           FlatButton(
               child: Text('Add',
@@ -46,7 +46,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
         itemBuilder: (context, int index) {
           return ListTile(
             title: Text(
-              workSets[index].nameEn,
+              workSets[index].nameJa,
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(

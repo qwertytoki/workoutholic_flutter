@@ -11,7 +11,7 @@ class WorkoutInputPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Inout Workout"),
+        title: Text("ベンチプレス"),
       ),
       body: _buildBody(context),
     );
