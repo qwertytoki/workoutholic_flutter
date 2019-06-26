@@ -8,10 +8,10 @@ class WorkoutInputPage extends StatefulWidget {
 
   @override
   _WorkoutInputPageState createState() => _WorkoutInputPageState();
-
 }
 
 class _WorkoutInputPageState extends State<WorkoutInputPage> {
+  final items = List<String>.generate(5, (i) => "100 kg ${i} 回");
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -22,21 +22,20 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final items = List<String>.generate(5, (i) => "100 kg 5 回");
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
         return Dismissible(
-          key:Key(item),
-          onDismissed:(direction){
-            setState((){
+          key: Key(item),
+          onDismissed: (direction) {
+            setState(() {
               items.removeAt(index);
             });
-            Scaffold.of(context).showSnackBar(SnackBar(content:Text("deleteする")));
-
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text("deleteする")));
           },
-          background: Container(color:Colors.red),
+          background: Container(color: Colors.red),
           child: ListTile(title: Text('$item')),
         );
       },
