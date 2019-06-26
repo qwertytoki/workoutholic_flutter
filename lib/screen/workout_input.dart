@@ -18,7 +18,14 @@ class WorkoutInputPage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Text("data");
+    final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(title: Text('${items[index]}'));
+      },
+    );
+
     // return StreamBuilder<QuerySnapshot>(
     //     stream: WorkoutMenu.getMenuFromWorkoutSet(_workoutSet.workoutIds),
     //     builder: (context, snapshot) {
