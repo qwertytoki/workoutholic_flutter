@@ -18,34 +18,34 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String stateText;
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Picker'),
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        alignment: Alignment.topCenter,
-        child: ListView(
-          children: <Widget>[
-            (stateText != null) ? Text(stateText) : Container(),
-            RaisedButton(
-              child: Text('Picker Show'),
-              onPressed: () {
-                showPicker(context);
-              },
-            ),])
-      )
-      );
-          
     // return Scaffold(
+    //   key: _scaffoldKey,
     //   appBar: AppBar(
-    //     title: Text("ベンチプレス"),
+    //     title: Text('Picker'),
+    //     automaticallyImplyLeading: false,
+    //     elevation: 0.0,
     //   ),
-    //   body: _buildBody(context),
-    // );
+    //   body: Container(
+    //     padding: EdgeInsets.all(10.0),
+    //     alignment: Alignment.topCenter,
+    //     child: ListView(
+    //       children: <Widget>[
+    //         (stateText != null) ? Text(stateText) : Container(),
+    //         RaisedButton(
+    //           child: Text('Picker Show'),
+    //           onPressed: () {
+    //             showPicker(context);
+    //           },
+    //         ),])
+    //   )
+    //   );
+          
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("ベンチプレス"),
+      ),
+      body: _buildBody(context),
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -63,7 +63,12 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
                 .showSnackBar(SnackBar(content: Text("deleteする")));
           },
           background: Container(color: Colors.red),
-          child: ListTile(title: Text('$item')),
+          child: ListTile(
+            title: Text('$item'),
+            onTap: () {
+                showPicker(context);
+            },
+          ),
         );
       },
     );
@@ -96,11 +101,6 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
         ),
         child: ListTile(
           title: Text(workoutSet.setName),
-          // trailing: Text(record.votes.toString()),
-          // onTap: () => Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
-          // ),
         ),
       ),
     );
