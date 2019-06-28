@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/dto/workout_menu.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 
 class WorkoutInputPage extends StatefulWidget {
   WorkoutInputPage({Key key}) : super(key: key);
@@ -11,7 +12,7 @@ class WorkoutInputPage extends StatefulWidget {
 }
 
 class _WorkoutInputPageState extends State<WorkoutInputPage> {
-  final items = List<String>.generate(5, (i) => "100 kg ${i} 回");
+  final items = List<String>.generate(5, (i) => "100 kg ${i+1} 回");
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
