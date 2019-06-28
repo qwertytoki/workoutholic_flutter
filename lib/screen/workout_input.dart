@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/dto/workout_menu.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:workoutholic/const/picker_data.dart';
+import 'dart:convert';
 
 class WorkoutInputPage extends StatefulWidget {
   WorkoutInputPage({Key key}) : super(key: key);
@@ -13,13 +15,37 @@ class WorkoutInputPage extends StatefulWidget {
 
 class _WorkoutInputPageState extends State<WorkoutInputPage> {
   final items = List<String>.generate(5, (i) => "100 kg ${i+1} 回");
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String stateText;
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("ベンチプレス"),
+        title: Text('Picker'),
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
       ),
-      body: _buildBody(context),
-    );
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        alignment: Alignment.topCenter,
+        child: ListView(
+          children: <Widget>[
+            (stateText != null) ? Text(stateText) : Container(),
+            RaisedButton(
+              child: Text('Picker Show'),
+              onPressed: () {
+                showPicker(context);
+              },
+            ),])
+      )
+      );
+          
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text("ベンチプレス"),
+    //   ),
+    //   body: _buildBody(context),
+    // );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -79,4 +105,17 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
       ),
     );
   }
+  showPicker(BuildContext context) {
+      Picker picker = new Picker(
+        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData)),
+        changeToFirst: true,
+        textAlign: TextAlign.left,
+        columnPadding: const EdgeInsets.all(8.0),
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.getSelectedValues());
+        }
+      );
+      picker.show(_scaffoldKey.currentState);
+    }
 }
