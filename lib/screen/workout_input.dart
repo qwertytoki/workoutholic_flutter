@@ -14,64 +14,41 @@ class WorkoutInputPage extends StatefulWidget {
 }
 
 class _WorkoutInputPageState extends State<WorkoutInputPage> {
-  final items = List<String>.generate(5, (i) => "100 kg ${i+1} 回");
+  final items = List<String>.generate(5, (i) => "100 kg ${i + 1} 回");
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String stateText;
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   key: _scaffoldKey,
-    //   appBar: AppBar(
-    //     title: Text('Picker'),
-    //     automaticallyImplyLeading: false,
-    //     elevation: 0.0,
-    //   ),
-    //   body: Container(
-    //     padding: EdgeInsets.all(10.0),
-    //     alignment: Alignment.topCenter,
-    //     child: ListView(
-    //       children: <Widget>[
-    //         (stateText != null) ? Text(stateText) : Container(),
-    //         RaisedButton(
-    //           child: Text('Picker Show'),
-    //           onPressed: () {
-    //             showPicker(context);
-    //           },
-    //         ),])
-    //   )
-    //   );
-          
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("ベンチプレス"),
+        title: Text('Picker'),
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
       ),
-      body: _buildBody(context),
+      body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return Dismissible(
+              key: Key(item),
+              onDismissed: (direction) {
+                setState(() {
+                  items.removeAt(index);
+                });
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text("deleteする")));
+              },
+              background: Container(color: Colors.red),
+              child: ListTile(
+                title: Text('$item'),
+                onTap: () {
+                  showPicker(context);
+                },
+              ),
+            );
+          }),
     );
   }
-
-  Widget _buildBody(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return Dismissible(
-          key: Key(item),
-          onDismissed: (direction) {
-            setState(() {
-              items.removeAt(index);
-            });
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text("deleteする")));
-          },
-          background: Container(color: Colors.red),
-          child: ListTile(
-            title: Text('$item'),
-            onTap: () {
-                showPicker(context);
-            },
-          ),
-        );
-      },
-    );
 
     // return StreamBuilder<QuerySnapshot>(
     //     stream: WorkoutMenu.getMenuFromWorkoutSet(_workoutSet.workoutIds),
@@ -105,17 +82,18 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
       ),
     );
   }
+
   showPicker(BuildContext context) {
-      Picker picker = new Picker(
-        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData)),
+    Picker picker = new Picker(
+        adapter: PickerDataAdapter<String>(
+            pickerdata: new JsonDecoder().convert(PickerData)),
         changeToFirst: true,
         textAlign: TextAlign.left,
         columnPadding: const EdgeInsets.all(8.0),
         onConfirm: (Picker picker, List value) {
           print(value.toString());
           print(picker.getSelectedValues());
-        }
-      );
-      picker.show(_scaffoldKey.currentState);
-    }
+        });
+    picker.show(_scaffoldKey.currentState);
+  }
 }
