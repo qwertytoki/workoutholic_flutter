@@ -5,9 +5,11 @@ import 'package:workoutholic/dto/workout_menu.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
 import 'dart:convert';
+import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkoutInputPage extends StatefulWidget {
-  WorkoutInputPage({Key key}) : super(key: key);
+  final WorkMenu workMenu;
+  WorkoutInputPage({@required this.workMenu});
 
   @override
   _WorkoutInputPageState createState() => _WorkoutInputPageState();
@@ -20,7 +22,7 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Picker'),
+        title: Text(widget.workMenu.nameJa),
         automaticallyImplyLeading: false,
         elevation: 0.0,
       ),

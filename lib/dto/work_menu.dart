@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class WorkMenu {
+class WorkMenu { 
   WorkMenu({
     this.id = '',
     this.code = '',

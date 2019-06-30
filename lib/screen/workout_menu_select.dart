@@ -41,7 +41,7 @@ class WorkoutMenuSelect extends StatelessWidget {
             ),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => WorkoutInputPage()),
+              MaterialPageRoute(builder: (context) => WorkoutInputPage(workMenu: menus[index])),
             ),
           );
         });
