@@ -50,11 +50,11 @@ class WorkoutSetSelectPage extends StatelessWidget {
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          WorkoutMenuSelect(workSet: workSets[index])),
-                ),
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      WorkoutMenuSelect(workSet: workSets[index])),
+            ),
           );
         });
   }

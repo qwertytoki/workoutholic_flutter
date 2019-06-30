@@ -40,9 +40,9 @@ class WorkoutMenuSelect extends StatelessWidget {
               style: const TextStyle(fontSize: 18.0),
             ),
             onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WorkoutInputPage()),
-                ),
+              context,
+              MaterialPageRoute(builder: (context) => WorkoutInputPage()),
+            ),
           );
         });
   }
