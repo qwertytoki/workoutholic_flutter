@@ -5,7 +5,9 @@ import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/dto/work_log.dart';
+import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
@@ -49,7 +51,10 @@ class WorkoutMenuSelect extends StatelessWidget {
             );
           }else if(item is WorkLog){
             if(item.weights.length == 0){
-              
+              WorkLogDao.getDefaultWeight().forEach((weight){
+                // ここにworkLog埋め込む 
+                // 60kg 5回 みたいなね。
+              });
             }
           }
         });
