@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workoutholic/const/list_for_set_select.dart';
 
-class WorkMenu { 
+class WorkMenu implements ListForSetSelect{ 
   WorkMenu({
     this.id = '',
     this.code = '',
