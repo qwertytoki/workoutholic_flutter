@@ -7,7 +7,6 @@ import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/screen/add_set.dart';
-import 'package:workoutholic/const/list_item.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 
 class WorkoutSetSelectPage extends StatelessWidget {
@@ -48,8 +47,12 @@ class WorkoutSetSelectPage extends StatelessWidget {
       menuList.forEach((menu) {
         displayList.add(menu);
       });
+      displayList.add(new Separator());
+      
     });
+    
     return ListView.builder(
+        padding: const EdgeInsets.all(16.0),
         itemCount: displayList.length,
         itemBuilder: (context, int index) {
           final item = displayList[index];
@@ -63,6 +66,8 @@ class WorkoutSetSelectPage extends StatelessWidget {
             return ListTile(
               title: Text(item.nameJa),
             );
+          }else if (item is Separator){
+            return Divider(color: Colors.black38);
           }
         });
     // return ListView.separated(
