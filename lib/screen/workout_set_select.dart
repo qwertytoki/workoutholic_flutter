@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_set.dart';
+import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_set_dao.dart';
+import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/screen/add_set.dart';
+import 'package:workoutholic/const/list_item.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 
 class WorkoutSetSelectPage extends StatelessWidget {
@@ -33,7 +36,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return _buildList2(context);
+    return _buildList(context);
   }
 
   Widget _buildList2(BuildContext context) {
@@ -66,26 +69,52 @@ class WorkoutSetSelectPage extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     List<WorkSet> workSets = generateMockData();
-    return ListView.separated(
-        separatorBuilder: (context, index) => Divider(
-              color: Colors.black38,
-            ),
-        padding: const EdgeInsets.all(16.0),
-        itemCount: workSets.length,
-        itemBuilder: (context, int index) {
+    List<ListForSetSelect> displayList = [];
+    workSets.forEach((set){
+      displayList.add(set);
+      List<WorkMenu> menuList = WorkMenuDao.getMenus(set.menus);
+      menuList.forEach((menu){
+        displayList.add(menu);
+      });
+    });
+    return ListView.builder(
+      itemCount:displayList.length,
+      itemBuilder:(context,int index){
+        final item = displayList[index];
+        if(item is WorkSet){
           return ListTile(
             title: Text(
-              workSets[index].nameJa,
-              style: const TextStyle(fontSize: 18.0),
-            ),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      WorkoutMenuSelect(workSet: workSets[index])),
-            ),
+              item.nameJa,
+              style: Theme.of(context).textTheme.headline,
+            )
           );
-        });
+        } else if(item is WorkMenu){
+          return ListTile(
+            title: Text(item.nameJa),
+          );
+        }
+      }
+    );
+    // return ListView.separated(
+    //     separatorBuilder: (context, index) => Divider(
+    //           color: Colors.black38,
+    //         ),
+    //     padding: const EdgeInsets.all(16.0),
+    //     itemCount: workSets.length,
+    //     itemBuilder: (context, int index) {
+    //       return ListTile(
+    //         title: Text(
+    //           workSets[index].nameJa,
+    //           style: const TextStyle(fontSize: 18.0),
+    //         ),
+    //         onTap: () => Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //               builder: (context) =>
+    //                   WorkoutMenuSelect(workSet: workSets[index])),
+    //         ),
+    //       );
+    //     });
   }
 
   // Firebaseに置き換える予定なので隔離してる
