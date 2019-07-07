@@ -15,7 +15,7 @@ class WorkoutMenuSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("メニューを選択"),
+        title: Text(workSet.nameJa),
       ),
       body: _buildBody(context),
     );
