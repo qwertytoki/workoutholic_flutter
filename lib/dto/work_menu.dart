@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+import 'package:workoutholic/dto/work_set.dart';
 
 class WorkMenu implements ListForSetSelect{ 
   WorkMenu({
@@ -17,6 +18,8 @@ class WorkMenu implements ListForSetSelect{
   String nameJa;
   String photoURL;
   String workType;
+  // DataBaseには持たない。ロジック上で使う
+  WorkSet workSet;
 
   static WorkMenu of(DocumentSnapshot document) {
     if (!document.exists) {

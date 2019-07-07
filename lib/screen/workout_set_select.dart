@@ -45,10 +45,10 @@ class WorkoutSetSelectPage extends StatelessWidget {
       displayList.add(set);
       List<WorkMenu> menuList = WorkMenuDao.getMenus(set.menus);
       menuList.forEach((menu) {
+        menu.workSet = set;
         displayList.add(menu);
       });
       displayList.add(new Separator());
-      
     });
     
     return ListView.builder(
@@ -61,35 +61,27 @@ class WorkoutSetSelectPage extends StatelessWidget {
                 title: Text(
               item.nameJa,
               style: Theme.of(context).textTheme.headline,
-            ));
+            ),
+             onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      WorkoutMenuSelect(workSet: item)),
+            ),);
           } else if (item is WorkMenu) {
             return ListTile(
               title: Text(item.nameJa),
+              onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      WorkoutMenuSelect(workSet: item.workSet)),
+            )
             );
           }else if (item is Separator){
             return Divider(color: Colors.black38);
           }
         });
-    // return ListView.separated(
-    //     separatorBuilder: (context, index) => Divider(
-    //           color: Colors.black38,
-    //         ),
-    //     padding: const EdgeInsets.all(16.0),
-    //     itemCount: workSets.length,
-    //     itemBuilder: (context, int index) {
-    //       return ListTile(
-    //         title: Text(
-    //           workSets[index].nameJa,
-    //           style: const TextStyle(fontSize: 18.0),
-    //         ),
-    //         onTap: () => Navigator.push(
-    //           context,
-    //           MaterialPageRoute(
-    //               builder: (context) =>
-    //                   WorkoutMenuSelect(workSet: workSets[index])),
-    //         ),
-    //       );
-    //     });
   }
 
   // Firebaseに置き換える予定なので隔離してる
