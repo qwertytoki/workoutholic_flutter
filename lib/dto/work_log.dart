@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/work_type.dart';
+import 'package:workoutholic/const/list_for_set_select.dart';
 
-class WorkLog {
+class WorkLog implements ListForSetSelect {
   WorkLog({
     this.id = '',
     this.userCode = '',

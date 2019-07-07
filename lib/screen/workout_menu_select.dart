@@ -4,6 +4,8 @@ import 'package:workoutholic/dto/work_set.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
+import 'package:workoutholic/dto/work_log.dart';
+import 'package:workoutholic/const/list_for_set_select.dart';
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
@@ -27,6 +29,30 @@ class WorkoutMenuSelect extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     List<WorkMenu> menus = WorkMenuDao.getMenus(this.workSet.menus);
+    List<ListForSetSelect> displayList = [];
+    menus.forEach((menu) {
+      displayList.add(menu);
+      // ワークアウト履歴があればそれを、なければデフォルトを表示する
+      displayList.add(WorkLog());
+    });
+    return ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: displayList.length,
+        itemBuilder: (context, int index) {
+          final item = displayList[index];
+          if (item is WorkMenu) {
+            return ListTile(
+              title: Text(
+                item.nameJa,
+                style: Theme.of(context).textTheme.headline,
+              ),
+            );
+          }else if(item is WorkLog){
+            if(item.weights.length == 0){
+              
+            }
+          }
+        });
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(
               color: Colors.black38,
@@ -41,7 +67,9 @@ class WorkoutMenuSelect extends StatelessWidget {
             ),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => WorkoutInputPage(workMenu: menus[index])),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      WorkoutInputPage(workMenu: menus[index])),
             ),
           );
         });
