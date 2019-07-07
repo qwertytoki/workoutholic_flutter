@@ -50,7 +50,8 @@ class WorkoutSetSelectPage extends StatelessWidget {
       });
       displayList.add(new Separator());
     });
-    
+    displayList.add(new AddNewSet());
+
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: displayList.length,
@@ -58,29 +59,38 @@ class WorkoutSetSelectPage extends StatelessWidget {
           final item = displayList[index];
           if (item is WorkSet) {
             return ListTile(
-                title: Text(
-              item.nameJa,
-              style: Theme.of(context).textTheme.headline,
-            ),
-             onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      WorkoutMenuSelect(workSet: item)),
-            ),);
+              title: Text(
+                item.nameJa,
+                style: Theme.of(context).textTheme.headline,
+              ),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkoutMenuSelect(workSet: item)),
+              ),
+            );
           } else if (item is WorkMenu) {
             return ListTile(
-              title: Text(item.nameJa),
-              onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      WorkoutMenuSelect(workSet: item.workSet)),
-            )
-            );
-          }else if (item is Separator){
+                title: Text(item.nameJa),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              WorkoutMenuSelect(workSet: item.workSet)),
+                    ));
+          } else if (item is Separator) {
             return Divider(color: Colors.black38);
+          } else {
+            return ListTile(
+                title: Text("セットを新規作成", textAlign: TextAlign.center),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddSetPage(),
+                      ),
+                    ));
           }
+          ;
         });
   }
 
