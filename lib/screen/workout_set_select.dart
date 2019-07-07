@@ -39,62 +39,32 @@ class WorkoutSetSelectPage extends StatelessWidget {
     return _buildList(context);
   }
 
-  Widget _buildList2(BuildContext context) {
-    List<ListItem> items = List<ListItem>.generate(
-        1000, (i) => i % 6 == 0 ? SetItem("Set $i") : MenuItem("Menu $i"));
-
-    return ListView.builder(
-      // Let the ListView know how many items it needs to build.
-      itemCount: items.length,
-      // Provide a builder function. This is where the magic happens.
-      // Convert each item into a widget based on the type of item it is.
-      itemBuilder: (context, index) {
-        final item = items[index];
-
-        if (item is SetItem) {
-          return ListTile(
-            title: Text(
-              item.setName,
-              style: Theme.of(context).textTheme.headline,
-            ),
-          );
-        } else if (item is MenuItem) {
-          return ListTile(
-            title: Text(item.menuName),
-          );
-        }
-      },
-    );
-  }
-
   Widget _buildList(BuildContext context) {
     List<WorkSet> workSets = generateMockData();
     List<ListForSetSelect> displayList = [];
-    workSets.forEach((set){
+    workSets.forEach((set) {
       displayList.add(set);
       List<WorkMenu> menuList = WorkMenuDao.getMenus(set.menus);
-      menuList.forEach((menu){
+      menuList.forEach((menu) {
         displayList.add(menu);
       });
     });
     return ListView.builder(
-      itemCount:displayList.length,
-      itemBuilder:(context,int index){
-        final item = displayList[index];
-        if(item is WorkSet){
-          return ListTile(
-            title: Text(
+        itemCount: displayList.length,
+        itemBuilder: (context, int index) {
+          final item = displayList[index];
+          if (item is WorkSet) {
+            return ListTile(
+                title: Text(
               item.nameJa,
               style: Theme.of(context).textTheme.headline,
-            )
-          );
-        } else if(item is WorkMenu){
-          return ListTile(
-            title: Text(item.nameJa),
-          );
-        }
-      }
-    );
+            ));
+          } else if (item is WorkMenu) {
+            return ListTile(
+              title: Text(item.nameJa),
+            );
+          }
+        });
     // return ListView.separated(
     //     separatorBuilder: (context, index) => Divider(
     //           color: Colors.black38,
