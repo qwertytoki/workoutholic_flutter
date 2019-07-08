@@ -5,21 +5,19 @@ import 'package:workoutholic/const/list_for_set_select.dart';
 class WorkLog implements ListForSetSelect {
   WorkLog({
     this.id = '',
-    this.userCode = '',
+    this.userId = '',
     this.menuCode = '',
-    this.reps = const [],
-    this.weights = const [],
     this.date,
     this.workType = WorkType.LIFT,
+    this.logs = const [];
   });
 
   String id;
-  String userCode;
+  String userId;
   String menuCode;
-  List<int> reps;
-  List<int> weights;
   Timestamp date;
   WorkType workType;
+  List<Map<String,int>> logs;
 
   static WorkLog of(DocumentSnapshot document) {
     if (!document.exists) {
@@ -27,12 +25,11 @@ class WorkLog implements ListForSetSelect {
     }
     return new WorkLog(
       id: document.documentID,
-      userCode: document['user_code'],
+      userId: document['user_id'],
       menuCode: document['menu_code'],
-      reps: document['reps'],
-      weights: document['weights'],
       date: document['date'] ?? '',
       workType: document['work_type'],
+      logs: new List<Map<String,int>>.from(document['logs']),
     );
   }
 
@@ -41,14 +38,13 @@ class WorkLog implements ListForSetSelect {
   }
 
   // Delete me after using firebase
-  static WorkLog createNewLog(String id, String userCode, String menuCode,
-      List<int> reps, List<int> weights, Timestamp date, WorkType workType) {
+  static WorkLog createNewLog(String id, String userId, String menuCode,
+      List<Map<String,int>> logs, Timestamp date, WorkType workType) {
     return new WorkLog(
       id: id,
-      userCode: userCode,
+      userId: userId,
       menuCode: menuCode,
-      reps: reps,
-      weights: weights,
+      logs: logs,
       date: date,
       workType: workType,
     );
