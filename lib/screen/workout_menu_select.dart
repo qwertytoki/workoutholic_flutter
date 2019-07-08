@@ -8,7 +8,6 @@ import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 
-
 class WorkoutMenuSelect extends StatelessWidget {
   @override
   final WorkSet workSet;
@@ -49,11 +48,19 @@ class WorkoutMenuSelect extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline,
               ),
             );
-          }else if(item is WorkLog){
-            if(item.weights.length == 0){
-              WorkLogDao.getDefaultWeight().forEach((weight){
-                // ここにworkLog埋め込む 
-                // 60kg 5回 みたいなね。
+          } else if (item is WorkLog) {
+            if (item.logs.length == 0) {
+              WorkLogDao.getDefaultLogs().forEach((log) {
+                String weightUnit = log["unit"] == 0 ? "kg" : "lbs";
+                String displayText = log["weight"].toString() +
+                    weightUnit +
+                    log["reps"].toString() +
+                    "回";
+                return ListTile(
+                  title: Text(
+                    displayText,
+                  ),
+                );
               });
             }
           }
