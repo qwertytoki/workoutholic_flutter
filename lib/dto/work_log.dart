@@ -9,7 +9,7 @@ class WorkLog implements ListForSetSelect {
     this.menuCode = '',
     this.date,
     this.workType = WorkType.LIFT,
-    this.logs = const [];
+    this.logs = const []
   });
 
   String id;
