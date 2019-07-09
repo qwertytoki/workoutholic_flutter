@@ -33,8 +33,12 @@ class WorkoutMenuSelect extends StatelessWidget {
     List<ListForSetSelect> displayList = [];
     menus.forEach((menu) {
       displayList.add(menu);
-      // ワークアウト履歴があればそれを、なければデフォルトを表示する
-      displayList.add(WorkLog());
+      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // WorkLog log = menu.getWorkLog();
+      WorkLog log = new WorkLog();
+      
+
+
     });
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
