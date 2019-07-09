@@ -37,11 +37,11 @@ class WorkoutMenuSelect extends StatelessWidget {
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
       // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
-      if(log.logs.length==0){
-        
+      if (log.logs.length == 0) {
+        displayList.addAll(WorkoutRowData.getDefaultLogs());
+      } else {
+        displayList.addAll(WorkoutRowData.translateFromMap(log.logs));
       }
-
-
     });
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -55,21 +55,16 @@ class WorkoutMenuSelect extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline,
               ),
             );
-          } else if (item is WorkLog) {
-            if (item.logs.length == 0) {
-              WorkLogDao.getDefaultLogs().forEach((log) {
-                String weightUnit = log["unit"] == 0 ? "kg" : "lbs";
-                String displayText = log["weight"].toString() +
-                    weightUnit +
-                    log["reps"].toString() +
-                    "回";
-                return ListTile(
-                  title: Text(
-                    displayText,
-                  ),
-                );
-              });
-            }
+          } else if (item is WorkoutRowData) {
+            String weight = item.weight.toString();
+            String weightUnit = item.weightUnit==0?"kg":"lbs";
+            String reps = item.reps.toString();
+            String repsUnit = "回";
+            return ListTile(
+              title: Text(
+                weight + weightUnit+reps+repsUnit
+              ),
+            );
           }
         });
   }

@@ -11,4 +11,18 @@ class WorkoutRowData implements ListForSetSelect {
     return new WorkoutRowData(
         weight: weight, weightUnit: weightUnit, reps: reps);
   }
+  static List<WorkoutRowData> translateFromMap(List<Map<String,int>> logs){
+    List<WorkoutRowData> list = new List();
+    logs.forEach((log){
+      list.add(newData(log["weight"],log["unit"],log["reps"]));
+    });
+    return list;
+  }
+  static List<WorkoutRowData> getDefaultLogs() {
+    List<WorkoutRowData> defaultLogs = [];
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10));
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10));
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10));
+    return defaultLogs;
+  }
 }
