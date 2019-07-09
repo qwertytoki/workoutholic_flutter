@@ -65,26 +65,6 @@ class WorkoutMenuSelect extends StatelessWidget {
             }
           }
         });
-    // return ListView.separated(
-    //     separatorBuilder: (context, index) => Divider(
-    //           color: Colors.black38,
-    //         ),
-    //     padding: const EdgeInsets.all(16.0),
-    //     itemCount: menus.length,
-    //     itemBuilder: (context, int index) {
-    //       return ListTile(
-    //         title: Text(
-    //           menus[index].nameJa,
-    //           style: const TextStyle(fontSize: 18.0),
-    //         ),
-    //         onTap: () => Navigator.push(
-    //           context,
-    //           MaterialPageRoute(
-    //               builder: (context) =>
-    //                   WorkoutInputPage(workMenu: menus[index])),
-    //         ),
-    //       );
-    //     });
   }
 
 // for mock data
