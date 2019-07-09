@@ -1,14 +1,12 @@
 import 'package:workoutholic/dto/work_log.dart';
+import 'package:workoutholic/dto/workout_row_data.dart';
 
 class WorkLogDao {
-  static List<Map<String, int>> getDefaultLogs() {
-    List<Map<String, int>> defaultLogs = [];
-    defaultLogs.add({"reps": 10, "weight": 60, "unit": 0});
-    defaultLogs.add({"reps": 10, "weight": 60, "unit": 0});
-    defaultLogs.add({"reps": 10, "weight": 60, "unit": 0});
-    defaultLogs.add({"reps": 10, "weight": 60, "unit": 0});
-    defaultLogs.add({"reps": 10, "weight": 60, "unit": 0});
-
+  static List<WorkoutRowData> getDefaultLogs() {
+    List<WorkoutRowData> defaultLogs = [];
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10);
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10);
+    defaultLogs.add(WorkoutRowData.newData(60, 0, 10);
     return defaultLogs;
   }
 }

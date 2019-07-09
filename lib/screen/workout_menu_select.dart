@@ -7,6 +7,7 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+import 'package:workoutholic/dto/workout_row_data.dart';
 
 class WorkoutMenuSelect extends StatelessWidget {
   @override
@@ -36,7 +37,9 @@ class WorkoutMenuSelect extends StatelessWidget {
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
       // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
-      
+      if(log.logs.length==0){
+        
+      }
 
 
     });
