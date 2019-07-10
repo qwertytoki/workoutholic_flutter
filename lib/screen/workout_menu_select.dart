@@ -8,18 +8,23 @@ import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/workout_row_data.dart';
+import 'package:flutter_picker/flutter_picker.dart';
+import 'package:workoutholic/const/picker_data.dart';
+import 'dart:convert';
 
-class WorkoutMenuSelect extends StatelessWidget {
+class WorkoutMenuSelect extends StatefulWidget {
   @override
   final WorkSet workSet;
   WorkoutMenuSelect({@required this.workSet});
-  // final WorkoutSet workoutSet;
-  // WorkoutMenuSelect({Key key, @required this.workoutSet}) : super(key: key);
 
-  Widget build(BuildContext context) {
+  _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
+}
+class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(workSet.nameJa),
+        title: Text(widget.workSet.nameJa),
       ),
       body: _buildBody(context),
     );
@@ -30,7 +35,7 @@ class WorkoutMenuSelect extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    List<WorkMenu> menus = WorkMenuDao.getMenus(this.workSet.menus);
+    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workSet.menus);
     List<ListForSetSelect> displayList = [];
     menus.forEach((menu) {
       displayList.add(menu);
@@ -57,17 +62,35 @@ class WorkoutMenuSelect extends StatelessWidget {
             );
           } else if (item is WorkoutRowData) {
             String weight = item.weight.toString();
-            String weightUnit = item.weightUnit==0?"kg":"lbs";
+            String weightUnit = item.weightUnit == 0 ? "kg" : "lbs";
             String reps = item.reps.toString();
             String repsUnit = "回";
             return ListTile(
-              title: Text(
-                weight + weightUnit+reps+repsUnit
-              ),
+              title: Text(weight + weightUnit + reps + repsUnit),
+              onTap: () {
+                showPicker(context);
+              },
             );
           }
         });
   }
+
+  showPicker(BuildContext context) {
+    Picker picker = new Picker(
+        adapter: PickerDataAdapter<String>(
+            pickerdata: new JsonDecoder().convert(PickerData)),
+        changeToFirst: true,
+        textAlign: TextAlign.left,
+        columnPadding: const EdgeInsets.all(8.0),
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.getSelectedValues());
+        });
+    picker.show(_scaffoldKey.currentState);
+  }
+}
+
+ 
 
   // Widget _buildBody(BuildContext context) {
   //   // return StreamBuilder<QuerySnapshot>(
@@ -106,4 +129,4 @@ class WorkoutMenuSelect extends StatelessWidget {
   //     ),
   //   );
   // }
-}
+

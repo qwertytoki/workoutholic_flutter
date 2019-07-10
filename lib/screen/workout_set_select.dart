@@ -61,7 +61,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
             return ListTile(
               title: Text(
                 item.nameJa,
-                style: Theme.of(context).textTheme.headline,
+              style: Theme.of(context).textTheme.headline,
               ),
               onTap: () => Navigator.push(
                 context,
