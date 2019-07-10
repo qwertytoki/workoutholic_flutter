@@ -69,11 +69,6 @@ class WorkoutMenuSelect extends StatelessWidget {
         });
   }
 
-// for mock data
-  List<WorkMenu> createMockData() {
-    return null;
-  }
-
   // Widget _buildBody(BuildContext context) {
   //   // return StreamBuilder<QuerySnapshot>(
   //   //     stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
