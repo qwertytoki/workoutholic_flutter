@@ -23,6 +23,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
    Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.workSet.nameJa),
       ),
