@@ -69,11 +69,22 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return ListTile(
               title: Text(weight + weightUnit + reps + repsUnit),
               onTap: () {
-                showPicker(context);
+                showPickerArray(context);
               },
             );
           }
         });
+  }
+  showPickerArray(BuildContext context) {
+    new Picker(
+        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
+        hideHeader: true,
+        title: new Text("Please Select"),
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.getSelectedValues());
+        }
+    ).showDialog(context);
   }
 
   showPicker(BuildContext context) {
