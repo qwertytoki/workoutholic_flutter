@@ -79,7 +79,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     new Picker(
         adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
         hideHeader: true,
-        title: new Text("Please Select"),
+        title: Text("結果を入力"),
         onConfirm: (Picker picker, List value) {
           print(value.toString());
           print(picker.getSelectedValues());
