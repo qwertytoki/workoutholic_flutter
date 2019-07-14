@@ -80,6 +80,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
         hideHeader: true,
         title: Text("結果を入力"),
+        // 初期値
+        selecteds: [47, 0, 10,0],
         onConfirm: (Picker picker, List value) {
           print(value.toString());
           print(picker.getSelectedValues());
