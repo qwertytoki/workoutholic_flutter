@@ -88,11 +88,11 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         onConfirm: (Picker picker, List value) {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
-            int weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
+            double weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
             displayList[indexOfList] = WorkoutRowData.newData(
-                int.parse(selectedVals[0]),
+                double.parse(selectedVals[0]),
                 weightUnit,
-                int.parse(selectedVals[2]));
+                double.parse(selectedVals[2]));
           });
         }).showDialog(context);
   }
