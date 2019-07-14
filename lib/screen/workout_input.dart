@@ -54,7 +54,7 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
   showPicker(BuildContext context) {
     Picker picker = new Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: new JsonDecoder().convert(PickerData)),
+            pickerdata: new JsonDecoder().convert(PickerData2)),
         changeToFirst: true,
         textAlign: TextAlign.left,
         columnPadding: const EdgeInsets.all(8.0),

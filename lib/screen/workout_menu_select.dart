@@ -19,9 +19,11 @@ class WorkoutMenuSelect extends StatefulWidget {
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
+
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-   Widget build(BuildContext context) {
+  List<ListForSetSelect> displayList = [];
+  Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -37,7 +39,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   Widget _buildList(BuildContext context) {
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workSet.menus);
-    List<ListForSetSelect> displayList = [];
     menus.forEach((menu) {
       displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
@@ -69,64 +70,68 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return ListTile(
               title: Text(weight + weightUnit + reps + repsUnit),
               onTap: () {
-                showPickerArray(context);
+                showPickerArray(context, displayList.indexOf(item));
               },
             );
           }
         });
   }
-  showPickerArray(BuildContext context) {
+
+  showPickerArray(BuildContext context, int indexOfList) {
     new Picker(
-        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
+        adapter: PickerDataAdapter<String>(
+            pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
         hideHeader: true,
         title: Text("結果を入力"),
         // 初期値
-        selecteds: [47, 0, 10,0],
+        selecteds: [47, 0, 10, 0],
         onConfirm: (Picker picker, List value) {
-          print(value.toString());
-          print(picker.getSelectedValues());
-        }
-    ).showDialog(context);
+          setState(() {
+            List<String> selectedVals = picker.getSelectedValues();
+            int weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
+            displayList[indexOfList] = WorkoutRowData.newData(
+                int.parse(selectedVals[0]),
+                weightUnit,
+                int.parse(selectedVals[2]));
+          });
+        }).showDialog(context);
   }
 }
 
- 
+// Widget _buildBody(BuildContext context) {
+//   // return StreamBuilder<QuerySnapshot>(
+//   //     stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
+//   //     builder: (context, snapshot) {
+//   //       if (!snapshot.hasData) return LinearProgressIndicator();
+//   //       return _buildList(context, snapshot.data.documents);
+//   //     });
+// }
 
-  // Widget _buildBody(BuildContext context) {
-  //   // return StreamBuilder<QuerySnapshot>(
-  //   //     stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
-  //   //     builder: (context, snapshot) {
-  //   //       if (!snapshot.hasData) return LinearProgressIndicator();
-  //   //       return _buildList(context, snapshot.data.documents);
-  //   //     });
-  // }
+// Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+//   return ListView(
+//     padding: const EdgeInsets.only(top: 20.0),
+//     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+//   );
+// }
 
-  // Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-  //   return ListView(
-  //     padding: const EdgeInsets.only(top: 20.0),
-  //     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-  //   );
-  // }
-
-  // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-  //   final workoutSet = WorkoutSet.fromSnapshot(data);
-  //   return Padding(
-  //     key: ValueKey(workoutSet.setName),
-  //     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-  //     child: Container(
-  //       decoration: BoxDecoration(
-  //         border: Border.all(color: Colors.grey),
-  //         borderRadius: BorderRadius.circular(5.0),
-  //       ),
-  //       child: ListTile(
-  //         title: Text(workoutSet.setName),
-  //         // trailing: Text(record.votes.toString()),
-  //         // onTap: () => Navigator.push(
-  //         //   context,
-  //         //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
-  //         // ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
+// Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+//   final workoutSet = WorkoutSet.fromSnapshot(data);
+//   return Padding(
+//     key: ValueKey(workoutSet.setName),
+//     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+//     child: Container(
+//       decoration: BoxDecoration(
+//         border: Border.all(color: Colors.grey),
+//         borderRadius: BorderRadius.circular(5.0),
+//       ),
+//       child: ListTile(
+//         title: Text(workoutSet.setName),
+//         // trailing: Text(record.votes.toString()),
+//         // onTap: () => Navigator.push(
+//         //   context,
+//         //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
+//         // ),
+//       ),
+//     ),
+//   );
+// }
