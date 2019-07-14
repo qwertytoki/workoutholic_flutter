@@ -36,8 +36,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   Widget _buildBody(BuildContext context) {
     return _buildList(context);
   }
-
-  Widget _buildList(BuildContext context) {
+  @override
+  void initState() {
+    
+    super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workSet.menus);
     menus.forEach((menu) {
       displayList.add(menu);
@@ -50,6 +52,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         displayList.addAll(WorkoutRowData.translateFromMap(log.logs));
       }
     });
+  }
+
+  Widget _buildList(BuildContext context) {
+    
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: displayList.length,
