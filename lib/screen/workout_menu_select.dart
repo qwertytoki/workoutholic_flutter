@@ -70,9 +70,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             );
           } else if (item is WorkoutRowData) {
             String weight = item.weight.toString();
-            String weightUnit = item.weightUnit == 0 ? "kg" : "lbs";
+            String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
             String reps = item.reps.toString();
-            String repsUnit = "回";
+            String repsUnit = " 回" ;
             return ListTile(
               title: Text(weight + weightUnit + reps + repsUnit),
               onTap: () {
@@ -84,13 +84,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   showPickerArray(BuildContext context, int indexOfList) {
+    WorkoutRowData rowData = displayList[indexOfList];
     new Picker(
         adapter: PickerDataAdapter<String>(
             pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
         hideHeader: true,
         title: Text("結果を入力"),
         // 初期値
-        selecteds: [47, 0, 10, 0],
+        selecteds: [getWeightForPicker(rowData.weight), 0, rowData.reps, 0],
         onConfirm: (Picker picker, List value) {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
@@ -101,6 +102,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 double.parse(selectedVals[2]));
           });
         }).showDialog(context);
+  }
+  int getWeightForPicker(double weight){ 
+    if(weight <= 40){
+      return weight.round()-1;
+    }
+    weight = weight-40;
+    int returnNum = (weight/2.5).round();
+    return returnNum+39;
   }
 }
 
