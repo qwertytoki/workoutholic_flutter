@@ -30,10 +30,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         title: Text(widget.workSet.nameJa),
         actions: <Widget>[
           FlatButton(
-              child: Text('完了',
-                  style: TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: () => print("pressed"),
-                  )
+            child: Text('完了',
+                style: TextStyle(fontSize: 17.0, color: Colors.white)),
+            onPressed: () => print("pressed"),
+          )
         ],
       ),
       body: _buildBody(context),
@@ -43,9 +43,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   Widget _buildBody(BuildContext context) {
     return _buildList(context);
   }
+
   @override
   void initState() {
-    
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workSet.menus);
     menus.forEach((menu) {
@@ -62,7 +62,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context) {
-    
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: displayList.length,
@@ -79,13 +78,24 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             String weight = item.weight.toString();
             String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
             String reps = item.reps.toString();
-            String repsUnit = " 回" ;
-            return ListTile(
-              title: Text(weight + weightUnit + reps + repsUnit),
-              onTap: () {
-                showPickerArray(context, displayList.indexOf(item));
-              },
-            );
+            String repsUnit = " 回";
+
+            return Dismissible(
+                key: Key(index.toString()),
+                onDismissed: (direction) {
+                  setState(() {
+                    displayList.removeAt(index);
+                  });
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text("deleteする")));
+                },
+                background: Container(color: Colors.red),
+                child: ListTile(
+                  title: Text(weight + weightUnit + reps + repsUnit),
+                  onTap: () {
+                    showPickerArray(context, displayList.indexOf(item));
+                  },
+                ));
           }
         });
   }
@@ -110,13 +120,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           });
         }).showDialog(context);
   }
-  int getWeightForPicker(double weight){ 
-    if(weight <= 40){
-      return weight.round()-1;
+
+  int getWeightForPicker(double weight) {
+    if (weight <= 40) {
+      return weight.round() - 1;
     }
-    weight = weight-40;
-    int returnNum = (weight/2.5).round();
-    return returnNum+39;
+    weight = weight - 40;
+    int returnNum = (weight / 2.5).round();
+    return returnNum + 39;
   }
 }
 
