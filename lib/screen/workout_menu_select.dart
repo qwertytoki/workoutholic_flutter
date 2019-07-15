@@ -28,6 +28,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.workSet.nameJa),
+        actions: <Widget>[
+          FlatButton(
+              child: Text('完了',
+                  style: TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: () => print("pressed"),
+                  )
+        ],
       ),
       body: _buildBody(context),
     );
