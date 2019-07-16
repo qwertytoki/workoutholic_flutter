@@ -59,6 +59,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       } else {
         displayList.addAll(WorkoutRowData.translateFromMap(log.logs));
       }
+      displayList.add(new AddNewSet());
+      displayList.add(new Separator());
     });
   }
 
@@ -81,7 +83,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
             String reps = item.reps.toString();
             String repsUnit = " 回";
-
             return Dismissible(
                 key: Key(id),
                 onDismissed: (direction) {
@@ -100,6 +101,16 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                     showPickerArray(context, displayList.indexOf(item));
                   },
                 ));
+          } else if (item is Separator) {
+            return Divider(color: Colors.black38);
+          } else {
+            return ListTile(
+                title: Text("セットを新規作成"),
+                onTap: () => {
+                      setState(() {
+                        print("tapped");
+                      })
+                    });
           }
         });
   }
