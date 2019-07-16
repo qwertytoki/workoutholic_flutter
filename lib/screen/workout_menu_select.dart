@@ -11,6 +11,7 @@ import 'package:workoutholic/dto/workout_row_data.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
 import 'dart:convert';
+import 'package:uuid/uuid.dart';
 
 class WorkoutMenuSelect extends StatefulWidget {
   @override
@@ -75,13 +76,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
               ),
             );
           } else if (item is WorkoutRowData) {
+            String id = new Uuid().toString();
             String weight = item.weight.toString();
             String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
             String reps = item.reps.toString();
             String repsUnit = " 回";
 
             return Dismissible(
-                key: Key(index.toString()),
+                key: Key(id),
                 onDismissed: (direction) {
                   setState(() {
                     displayList.removeAt(index);
