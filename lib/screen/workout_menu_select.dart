@@ -76,7 +76,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
               ),
             );
           } else if (item is WorkoutRowData) {
-            String id = new Uuid().toString();
+            String id = new Uuid().hashCode.toString();
             String weight = item.weight.toString();
             String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
             String reps = item.reps.toString();
@@ -85,11 +85,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return Dismissible(
                 key: Key(id),
                 onDismissed: (direction) {
-                  setState(() {
-                    displayList.removeAt(index);
-                  });
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text("deleteする")));
+                  if (displayList.contains(item)) {
+                    setState(() {
+                      displayList.remove(item);
+                    });
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text("削除しました")));
+                  }
                 },
                 background: Container(color: Colors.red),
                 child: ListTile(
