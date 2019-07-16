@@ -105,11 +105,12 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return Divider(color: Colors.black38);
           } else {
             return ListTile(
-                title: Text("セットを新規作成"),
+                title: Text("セットを追加"),
                 onTap: () => {
                       setState(() {
-                        print("tapped");
-                      })
+                        displayList.insert(
+                            index, WorkoutRowData.newData(60, 0, 10));
+                      }),
                     });
           }
         });
