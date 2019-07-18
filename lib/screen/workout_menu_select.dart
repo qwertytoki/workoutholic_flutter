@@ -70,11 +70,17 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         itemCount: displayList.length,
         itemBuilder: (context, int index) {
           final item = displayList[index];
+          final bool alreadySaved = true;
           if (item is WorkMenu) {
             return ListTile(
               title: Text(
                 item.nameJa,
                 style: Theme.of(context).textTheme.headline,
+              ),
+              trailing: Icon(
+                // Add the lines from here...
+                alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
+                color: alreadySaved ? Colors.blue : null,
               ),
             );
           } else if (item is WorkoutRowData) {
