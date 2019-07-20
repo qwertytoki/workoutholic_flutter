@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/dto/work_set.dart';
+import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/screen/workout_input.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
@@ -15,8 +15,8 @@ import 'package:uuid/uuid.dart';
 
 class WorkoutMenuSelect extends StatefulWidget {
   @override
-  final WorkSet workSet;
-  WorkoutMenuSelect({@required this.workSet});
+  final WorkPlan workPlan;
+  WorkoutMenuSelect({@required this.workPlan});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -28,7 +28,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(widget.workSet.nameJa),
+        title: Text(widget.workPlan.nameJa),
         actions: <Widget>[
           FlatButton(
             child: Text('完了',
@@ -48,7 +48,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     super.initState();
-    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workSet.menus);
+    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
     menus.forEach((menu) {
       displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
@@ -155,7 +155,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
 // Widget _buildBody(BuildContext context) {
 //   // return StreamBuilder<QuerySnapshot>(
-//   //     stream: WorkoutMenu.getMenuFromWorkoutSet(workoutSet.workoutIds),
+//   //     stream: WorkoutMenu.getMenuFromWorkoutPlan(workoutPlan.workoutIds),
 //   //     builder: (context, snapshot) {
 //   //       if (!snapshot.hasData) return LinearProgressIndicator();
 //   //       return _buildList(context, snapshot.data.documents);
@@ -170,9 +170,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 // }
 
 // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-//   final workoutSet = WorkoutSet.fromSnapshot(data);
+//   final workoutPlan = WorkoutPlan.fromSnapshot(data);
 //   return Padding(
-//     key: ValueKey(workoutSet.setName),
+//     key: ValueKey(workoutPlan.setName),
 //     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
 //     child: Container(
 //       decoration: BoxDecoration(
@@ -180,11 +180,11 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 //         borderRadius: BorderRadius.circular(5.0),
 //       ),
 //       child: ListTile(
-//         title: Text(workoutSet.setName),
+//         title: Text(workoutPlan.setName),
 //         // trailing: Text(record.votes.toString()),
 //         // onTap: () => Navigator.push(
 //         //   context,
-//         //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutSet:workoutSet)),
+//         //   MaterialPageRoute(builder: (context) => WorkoutMenuSelect(workoutPlan:workoutPlan)),
 //         // ),
 //       ),
 //     ),

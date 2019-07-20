@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workoutholic/dto/workout_set.dart';
+import 'package:workoutholic/dto/workout_plan.dart';
 import 'package:workoutholic/dto/workout_menu.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
@@ -100,7 +100,7 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
   //   );
 
   // return StreamBuilder<QuerySnapshot>(
-  //     stream: WorkoutMenu.getMenuFromWorkoutSet(_workoutSet.workoutIds),
+  //     stream: WorkoutMenu.getMenuFromWorkoutPlan(_workoutPlan.workoutIds),
   //     builder: (context, snapshot) {
   //       if (!snapshot.hasData) return LinearProgressIndicator();
   //       return _buildList(context, snapshot.data.documents);
@@ -116,9 +116,9 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
 // }
 
 // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-//   final workoutSet = WorkoutSet.fromSnapshot(data);
+//   final workoutPlan = WorkoutPlan.fromSnapshot(data);
 //   return Padding(
-//     key: ValueKey(workoutSet.setName),
+//     key: ValueKey(workoutPlan.setName),
 //     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
 //     child: Container(
 //       decoration: BoxDecoration(
@@ -126,7 +126,7 @@ class _WorkoutInputPageState extends State<WorkoutInputPage> {
 //         borderRadius: BorderRadius.circular(5.0),
 //       ),
 //       child: ListTile(
-//         title: Text(workoutSet.setName),
+//         title: Text(workoutPlan.setName),
 //       ),
 //     ),
 //   );

@@ -1,8 +1,8 @@
 // deprecated firebase接続の参考にとっといてるだけ
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// class WorkoutSet {
-//   static const String WORKOUT_MENU = "workoutSet";
+// class WorkoutPlan {
+//   static const String WORKOUT_MENU = "workoutPlan";
 
 //   static Stream<QuerySnapshot> getAllWorkouts() {
 //     return Firestore.instance
@@ -11,20 +11,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //         .snapshots();
 //   }
 // }
-class WorkoutSet {
+class WorkoutPlan {
   final String setName;
   final List<String> workoutIds;
   final DocumentReference reference;
 
-  WorkoutSet.fromMap(Map<String, dynamic> map, {this.reference})
+  WorkoutPlan.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map['setName'] != null),
         assert(map['workoutIds'] != null),
         setName = map['setName'],
         workoutIds = map['workoutIds'].cast<String>();
 
-  WorkoutSet.fromSnapshot(DocumentSnapshot snapshot)
+  WorkoutPlan.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
   @override
-  String toString() => "WorkoutSet<$setName>";
+  String toString() => "WorkoutPlan<$setName>";
 }

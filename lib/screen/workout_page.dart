@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/auth.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:workoutholic/screen/workout_set_select.dart';
+import 'package:workoutholic/screen/workout_plan_select.dart';
 import 'package:workoutholic/screen/workout_input.dart';
 
 class WorkoutPage extends StatefulWidget {
@@ -77,7 +77,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void moveToSetSelect() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => WorkoutSetSelectPage()),
+      MaterialPageRoute(builder: (context) => WorkoutPlanSelectPage()),
     );
   }
 

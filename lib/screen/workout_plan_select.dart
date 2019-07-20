@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:workoutholic/dto/workout_set.dart';
+// import 'package:workoutholic/dto/workout_plan.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
-import 'package:workoutholic/dto/work_set.dart';
+import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
-import 'package:workoutholic/dao/work_set_dao.dart';
+import 'package:workoutholic/dao/work_plan_dao.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/screen/add_set.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 
-class WorkoutSetSelectPage extends StatelessWidget {
+class WorkoutPlanSelectPage extends StatelessWidget {
   @override
   // final DateTime selectedDate;
-  // WorkoutSetSelect({Key key, @required this.selectedDate}) : super(key: key);
+  // WorkoutPlanSelect({Key key, @required this.selectedDate}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +39,13 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    List<WorkSet> workSets = generateMockData();
+    List<WorkPlan> workPlans = generateMockData();
     List<ListForSetSelect> displayList = [];
-    workSets.forEach((set) {
+    workPlans.forEach((set) {
       displayList.add(set);
       List<WorkMenu> menuList = WorkMenuDao.getMenus(set.menus);
       menuList.forEach((menu) {
-        menu.workSet = set;
+        menu.workPlan = set;
         displayList.add(menu);
       });
       displayList.add(new Separator());
@@ -57,7 +57,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
         itemCount: displayList.length,
         itemBuilder: (context, int index) {
           final item = displayList[index];
-          if (item is WorkSet) {
+          if (item is WorkPlan) {
             return ListTile(
               title: Text(
                 item.nameJa,
@@ -66,7 +66,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => WorkoutMenuSelect(workSet: item)),
+                    builder: (context) => WorkoutMenuSelect(workPlan: item)),
               ),
             );
           } else if (item is WorkMenu) {
@@ -76,7 +76,7 @@ class WorkoutSetSelectPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              WorkoutMenuSelect(workSet: item.workSet)),
+                              WorkoutMenuSelect(workPlan: item.workPlan)),
                     ));
           } else if (item is Separator) {
             return Divider(color: Colors.black38);
@@ -95,14 +95,14 @@ class WorkoutSetSelectPage extends StatelessWidget {
   }
 
   // Firebaseに置き換える予定なので隔離してる
-  List<WorkSet> generateMockData() {
-    return WorkSetDao.genarateMockData();
+  List<WorkPlan> generateMockData() {
+    return WorkPlanDao.genarateMockData();
   }
 
 // firebase使うなら以下のソース
   // Widget _buildBody(BuildContext context) {
   //   return StreamBuilder<QuerySnapshot>(
-  //     stream: Firestore.instance.collection('workoutSet').snapshots(),
+  //     stream: Firestore.instance.collection('workoutPlan').snapshots(),
   //     builder: (context, snapshot) {
   //       if (!snapshot.hasData) return LinearProgressIndicator();
   //       return _buildList(context, snapshot.data.documents);
@@ -117,9 +117,9 @@ class WorkoutSetSelectPage extends StatelessWidget {
   //   );
   // }
   // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-  //   final workoutSet = WorkoutSet.fromSnapshot(data);
+  //   final workoutPlan = WorkoutPlan.fromSnapshot(data);
   //   return Padding(
-  //     key: ValueKey(workoutSet.setName),
+  //     key: ValueKey(workoutPlan.setName),
   //     padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
   //     child: Container(
   //       decoration: BoxDecoration(
@@ -127,13 +127,13 @@ class WorkoutSetSelectPage extends StatelessWidget {
   //         borderRadius: BorderRadius.circular(5.0),
   //       ),
   //       child: ListTile(
-  //         title: Text(workoutSet.setName),
+  //         title: Text(workoutPlan.setName),
   //         // trailing: Text(record.votes.toString()),
   //         onTap: () => Navigator.push(
   //               context,
   //               MaterialPageRoute(
   //                   builder: (context) =>
-  //                       WorkoutMenuSelect(workoutSet: workoutSet)),
+  //                       WorkoutMenuSelect(workoutPlan: workoutPlan)),
   //             ),
   //       ),
   //     ),

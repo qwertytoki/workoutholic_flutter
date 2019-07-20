@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddSetPage extends StatefulWidget {
-    // final WorkoutSet workey key, @required this.workoutSetoutSet;
+    // final WorkoutPlan workey key, @required this.workoutPlanoutSet;
     // WorkoutInputPage({K}) : super(key: key);
     @override
     _AddSetPageState createState() => _AddSetPageState();
