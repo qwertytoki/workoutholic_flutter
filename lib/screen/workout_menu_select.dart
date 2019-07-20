@@ -21,7 +21,7 @@ class WorkoutMenuSelect extends StatefulWidget {
 }
 
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
-  // final Set<WordPair> _saved = Set<WordPair>(); 
+  final Set<WorkMenu> _saved = Set<WorkMenu>(); 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> displayList = [];
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         itemCount: displayList.length,
         itemBuilder: (context, int index) {
           final item = displayList[index];
-          final bool alreadySaved = true;
+          final bool alreadySaved = _saved.contains(item);
           if (item is WorkMenu) {
             return ListTile(
               title: Text(
@@ -81,7 +81,15 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 // Add the lines from here...
                 alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
                 color: alreadySaved ? Colors.blue : null,
-              ),
+              ),onTap: () {      // Add 9 lines from here...
+                setState(() {
+                  if (alreadySaved) {
+                    _saved.remove(item);
+                  } else { 
+                    _saved.add(item); 
+                  } 
+                });
+              }, 
             );
           } else if (item is WorkoutSet) {
             String id = new Uuid().hashCode.toString();
