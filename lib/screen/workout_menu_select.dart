@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
-import 'package:workoutholic/screen/workout_input.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
@@ -17,11 +16,12 @@ class WorkoutMenuSelect extends StatefulWidget {
   @override
   final WorkPlan workPlan;
   WorkoutMenuSelect({@required this.workPlan});
-
+  
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
 
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
+  // final Set<WordPair> _saved = Set<WordPair>(); 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> displayList = [];
   Widget build(BuildContext context) {
