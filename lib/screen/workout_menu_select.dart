@@ -7,7 +7,7 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
-import 'package:workoutholic/dto/workout_row_data.dart';
+import 'package:workoutholic/dto/workout_set.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
 import 'dart:convert';
@@ -55,9 +55,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
       if (log.logs.length == 0) {
-        displayList.addAll(WorkoutRowData.getDefaultLogs());
+        displayList.addAll(WorkoutSet.getDefaultLogs());
       } else {
-        displayList.addAll(WorkoutRowData.translateFromMap(log.logs));
+        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
       }
       displayList.add(new AddNewSet());
       displayList.add(new Separator());
@@ -83,7 +83,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 color: alreadySaved ? Colors.blue : null,
               ),
             );
-          } else if (item is WorkoutRowData) {
+          } else if (item is WorkoutSet) {
             String id = new Uuid().hashCode.toString();
             String weight = item.weight.toString();
             String weightUnit = item.weightUnit == 0 ? " kg " : " lbs ";
@@ -115,7 +115,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 onTap: () => {
                       setState(() {
                         displayList.insert(
-                            index, WorkoutRowData.newData(60, 0, 10));
+                            index, WorkoutSet.newData(60, 0, 10));
                       }),
                     });
           }
@@ -123,7 +123,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   showPickerArray(BuildContext context, int indexOfList) {
-    WorkoutRowData rowData = displayList[indexOfList];
+    WorkoutSet rowData = displayList[indexOfList];
     new Picker(
         adapter: PickerDataAdapter<String>(
             pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
@@ -135,7 +135,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
             double weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
-            displayList[indexOfList] = WorkoutRowData.newData(
+            displayList[indexOfList] = WorkoutSet.newData(
                 double.parse(selectedVals[0]),
                 weightUnit,
                 double.parse(selectedVals[2]));

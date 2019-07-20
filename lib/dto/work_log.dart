@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/work_type.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
-import 'package:workoutholic/dto/workout_row_data.dart';
+import 'package:workoutholic/dto/workout_set.dart';
 
 class WorkLog implements ListForSetSelect {
   WorkLog({
@@ -40,9 +40,9 @@ class WorkLog implements ListForSetSelect {
 
   // Delete me after using firebase
   static WorkLog createNewLog(String id, String userId, String menuCode,
-      List<WorkoutRowData> workoutRowDatas, Timestamp date, WorkType workType) {
+      List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {
         List<Map<String,double>> logs = new List();
-        workoutRowDatas.forEach((data){
+        workoutSets.forEach((data){
           logs.add({"reps": data.reps.toDouble(), "weight": data.weight, "unit": data.weightUnit.toDouble()});
         });
     return new WorkLog(
