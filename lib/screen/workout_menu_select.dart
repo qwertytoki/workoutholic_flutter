@@ -11,6 +11,7 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
+import 'package:workoutholic/screen/home_page.dart';
 
 class WorkoutMenuSelect extends StatefulWidget {
   @override
@@ -33,7 +34,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           FlatButton(
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: () => print("pressed"),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage())),
           )
         ],
       ),

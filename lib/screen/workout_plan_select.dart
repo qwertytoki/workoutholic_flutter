@@ -17,7 +17,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("セットを選択"),
+        title: Text("トレーニングを選択"),
         actions: <Widget>[
           FlatButton(
               child: Text('Add',
@@ -82,7 +82,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
             return Divider(color: Colors.black38);
           } else {
             return ListTile(
-                title: Text("セットを新規作成", textAlign: TextAlign.center),
+                title: Text("トレーニングプランを新規作成", textAlign: TextAlign.center),
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
