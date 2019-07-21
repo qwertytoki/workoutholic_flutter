@@ -17,12 +17,12 @@ class WorkoutMenuSelect extends StatefulWidget {
   @override
   final WorkPlan workPlan;
   WorkoutMenuSelect({@required this.workPlan});
-  
+
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
 
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
-  final Set<WorkMenu> _saved = Set<WorkMenu>(); 
+  final Set<WorkMenu> _saved = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> displayList = [];
   Widget build(BuildContext context) {
@@ -35,8 +35,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage())),
+                context, MaterialPageRoute(builder: (context) => HomePage())),
           )
         ],
       ),
@@ -65,6 +64,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       displayList.add(new AddNewSet());
       displayList.add(new Separator());
     });
+    displayList.add(new AddNewMenu());
   }
 
   Widget _buildList(BuildContext context) {
@@ -84,15 +84,17 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 // Add the lines from here...
                 alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
                 color: alreadySaved ? Colors.blue : null,
-              ),onTap: () {      // Add 9 lines from here...
+              ),
+              onTap: () {
+                // Add 9 lines from here...
                 setState(() {
                   if (alreadySaved) {
                     _saved.remove(item);
-                  } else { 
-                    _saved.add(item); 
-                  } 
+                  } else {
+                    _saved.add(item);
+                  }
                 });
-              }, 
+              },
             );
           } else if (item is WorkoutSet) {
             String id = new Uuid().hashCode.toString();
@@ -120,7 +122,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 ));
           } else if (item is Separator) {
             return Divider(color: Colors.black38);
-          } else {
+          } else if (item is AddNewSet) {
             return ListTile(
                 title: Text("セットを追加"),
                 onTap: () => {
@@ -129,6 +131,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                             index, WorkoutSet.newData(60, 0, 10));
                       }),
                     });
+          } else {
+            return ListTile(
+                title: Text("メニューを追加", textAlign: TextAlign.center),
+                onTap: () => print("hoge"));
           }
         });
   }

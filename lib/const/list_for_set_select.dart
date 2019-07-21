@@ -5,3 +5,5 @@ class Separator implements ListForSetSelect {}
 
 // Set新規追加用クラス
 class AddNewSet implements ListForSetSelect {}
+
+class AddNewMenu implements ListForSetSelect {}
