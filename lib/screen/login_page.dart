@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/home_page.dart';
+import 'package:workoutholic/dao/user_dao.dart';
 
 class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
