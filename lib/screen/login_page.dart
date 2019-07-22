@@ -45,7 +45,7 @@ void _handleGoogleSignIn(BuildContext context) async {
   if (fbUser != null) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return HomePage();
+        return HomePage(user: user);
       },
     ));
   }

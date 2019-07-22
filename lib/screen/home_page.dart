@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/screen/workout_page.dart';
 import 'package:workoutholic/screen/transition_page.dart';
 import 'package:workoutholic/screen/profile_page.dart';
+import 'package:workoutholic/dto/user.dart';
 
 class HomePage extends StatefulWidget {
+  final User user;
   @override
+  HomePage({@required this.user});
+
   _MyHomePageState createState() => _MyHomePageState();
 }
 

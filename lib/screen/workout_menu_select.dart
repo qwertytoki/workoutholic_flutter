@@ -14,8 +14,8 @@ import 'package:uuid/uuid.dart';
 import 'package:workoutholic/screen/home_page.dart';
 
 class WorkoutMenuSelect extends StatefulWidget {
-  @override
   final WorkPlan workPlan;
+  @override
   WorkoutMenuSelect({@required this.workPlan});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
