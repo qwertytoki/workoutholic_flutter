@@ -45,8 +45,8 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: PageView(
         children: <Widget>[
           new WorkoutPage(),
-          new TransitionPage(),
-          new ProfilePage(),
+          new TransitionPage(), 
+          new ProfilePage(user:widget.user), 
         ],
         controller: _pageController,
         onPageChanged: onPageChanged,
@@ -55,15 +55,15 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
         items: [
           new BottomNavigationBarItem(
             icon: new Icon(Icons.fitness_center),
-            title: new Text("Workout"),
+            title: new Text("ワークアウト"),
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.trending_up),
-            title: new Text("Transition"),
+            title: new Text("遷移グラフ"),
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.person),
-            title: new Text("Profile"),
+            title: new Text("プロフィール"),
           ),
         ],
         onTap: onNavigationTapped,
