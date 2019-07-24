@@ -6,9 +6,10 @@ import 'package:workoutholic/dto/user.dart';
 // import 'package:workoutholic/dao/user_dao.dart';
 
 class ProfilePage extends StatelessWidget {
-  final User user;
+  final User user ;
   @override
   ProfilePage({@required this.user});
+  
   
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +30,6 @@ class ProfilePage extends StatelessWidget {
   Widget buildBody(){ 
     return ListView(
       children: <Widget>[
-        TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: new InputDecoration(
-                hintText: "Type you name.",
-                // labelText: Texts.get(r setTextKey.AP_NUMBER_LABEL),
-              ),
-        ),
         SizedBox(height: 16.0,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -50,7 +44,7 @@ class ProfilePage extends StatelessWidget {
                 icon:Icon(CupertinoIcons.pencil,
                 color: Colors.grey),
                 onPressed: (){
-                  print("pressed");
+                  print(this.user.displayName);
                 },
               ) 
             ]

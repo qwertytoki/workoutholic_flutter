@@ -30,6 +30,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    print(widget.user.displayName);
     _pageController = PageController();
   }
 
@@ -41,12 +42,13 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    User user = widget.user;
     return Scaffold(
       body: PageView(
         children: <Widget>[
           new WorkoutPage(),
           new TransitionPage(), 
-          new ProfilePage(user:widget.user), 
+          new ProfilePage(user:user), 
         ],
         controller: _pageController,
         onPageChanged: onPageChanged,
