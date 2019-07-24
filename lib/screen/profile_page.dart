@@ -1,17 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/login_page.dart';
 import 'package:workoutholic/dto/user.dart';
-import 'package:workoutholic/dao/user_dao.dart';
+// import 'package:workoutholic/dao/user_dao.dart';
 
 class ProfilePage extends StatelessWidget {
   final User user;
   @override
   ProfilePage({@required this.user});
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("プロフィール"),
         actions: <Widget>[
           FlatButton(
               child: Text('Logout',
@@ -21,7 +23,47 @@ class ProfilePage extends StatelessWidget {
               })
         ],
       ),
+      body: buildBody(),
     );
+  }
+  Widget buildBody(){ 
+    return ListView(
+      children: <Widget>[
+        TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: new InputDecoration(
+                hintText: "Type your set name.",
+                // labelText: Texts.get(TextKey.AP_NUMBER_LABEL),
+              ),
+        ),
+        SizedBox(height: 16.0,),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: Text("user.description"),
+                ),
+              ),
+              IconButton(
+                icon:Icon(CupertinoIcons.pencil,
+                color: Colors.grey),
+                onPressed: (){
+                  print("pressed");
+                },
+              ) 
+            ]
+          ),
+        ),
+        SizedBox(height: 16.0,),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text("user.description")
+        )
+      ]
+    );
+
   }
 
   void _signOut(BuildContext context) async {

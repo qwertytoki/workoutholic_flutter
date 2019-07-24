@@ -30,12 +30,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                   ))
         ],
       ),
-      body: _buildBody(context),
+      body: _buildList(context),
     );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return _buildList(context);
   }
 
   Widget _buildList(BuildContext context) {
