@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
-abstract class BaseAuth{
+abstract class BaseAuth {
   // Future<String> signInWithEmailAndPassword(String email, String password);
   // Future<String> createUserWithEmailAndPassword(String email, String password);
   Future<FirebaseUser> currentUser();
@@ -13,39 +13,42 @@ abstract class BaseAuth{
   // void uodateUserData(FirebaseUser user);
 }
 
-class Auth implements BaseAuth{
+class Auth implements BaseAuth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final Firestore _db = Firestore.instance;
 
   Observable<FirebaseUser> user;
-  Observable<Map<String,dynamic>> profile;
+  Observable<Map<String, dynamic>> profile;
   PublishSubject loading = PublishSubject();
 
   // constructor
-  Auth(){
+  Auth() {
     user = Observable(_auth.onAuthStateChanged);
-    profile =user.switchMap((FirebaseUser u){
-      if(u!= null){
-        return _db.collection('users').document(u.uid).snapshots().map((snap) =>snap.data);
+    profile = user.switchMap((FirebaseUser u) {
+      if (u != null) {
+        return _db
+            .collection('users')
+            .document(u.uid)
+            .snapshots()
+            .map((snap) => snap.data);
       } else {
-        return Observable.just({ });
+        return Observable.just({});
       }
     });
   }
-  Future<FirebaseUser> currentUser() async{
+  Future<FirebaseUser> currentUser() async {
     FirebaseUser user = await _auth.currentUser();
     return user;
   }
 
-  Future<FirebaseUser> googleSignIn() async{
+  Future<FirebaseUser> googleSignIn() async {
     loading.add(true);
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    FirebaseUser user = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken
-    ));
+    FirebaseUser user = await _auth.signInWithCredential(
+        GoogleAuthProvider.getCredential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
 
     updateUserData(user);
     print("signed in " + user.displayName);
@@ -53,20 +56,18 @@ class Auth implements BaseAuth{
     loading.add(false);
     return user;
   }
-  
 
-  void updateUserData(FirebaseUser user) async{
+  void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
     return ref.setData({
       'uid': user.uid,
-      'email':user.email,
-      'photoURL':user.photoUrl,
-      'displayName':DateTime.now()
-    },merge:true);
-
+      'email': user.email,
+      'photoURL': user.photoUrl,
+      'displayName': DateTime.now()
+    }, merge: true);
   }
 
-  Future<void> signOut() async{
+  Future<void> signOut() async {
     return _auth.signOut();
   }
   // Future<String> signInWithEmailAndPassword(String email, String password) async{
@@ -77,5 +78,5 @@ class Auth implements BaseAuth{
   // Future<String> createUserWithEmailAndPassword(String email,String password) async {
   //   FirebaseUser user = await _auth.createUserWithEmailAndPassword(email:email, password:password);
   //   return user.uid;
-  // } 
-} 
+  // }
+}

@@ -1,14 +1,14 @@
 import 'package:workoutholic/dto/work_plan.dart';
 
-class WorkPlanDao{
-  static List<WorkPlan> genarateMockData(){
+class WorkPlanDao {
+  static List<WorkPlan> genarateMockData() {
     List<WorkPlan> workPlans = new List();
     List<String> menus1 = new List();
     menus1.add("bench_press");
     menus1.add("squat");
     menus1.add("dead_lift");
-    workPlans.add(WorkPlan.createNewSet(
-        "id1", "", "Big 3", "Big 3", "The day condition is perfect", menus1, true));
+    workPlans.add(WorkPlan.createNewSet("id1", "", "Big 3", "Big 3",
+        "The day condition is perfect", menus1, true));
     List<String> menus2 = new List();
     menus2.add("bench_press");
     menus2.add("incline_bench_press");

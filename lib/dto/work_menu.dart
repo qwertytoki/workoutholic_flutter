@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 
-class WorkMenu implements ListForSetSelect{ 
+class WorkMenu implements ListForSetSelect {
   WorkMenu({
     this.id = '',
     this.code = '',
@@ -50,13 +50,8 @@ class WorkMenu implements ListForSetSelect{
   }
 
   // Delete me after using firebase
-  static WorkMenu createNewMenu(
-      String id,
-      String code,
-      String nameEn,
-      String nameJa,
-      String photoURL,
-      String workType) {
+  static WorkMenu createNewMenu(String id, String code, String nameEn,
+      String nameJa, String photoURL, String workType) {
     return new WorkMenu(
       id: id,
       code: code,

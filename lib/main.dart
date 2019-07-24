@@ -38,8 +38,7 @@ class _MyAppState extends State<MyApp> {
     return new MaterialApp(
         title: 'login',
         home: Scaffold(
-          body: Container(
-              child: _user == null ? LoginPage() : HomePage()),
+          body: Container(child: _user == null ? LoginPage() : HomePage()),
         ));
   }
 }

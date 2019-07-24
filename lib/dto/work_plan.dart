@@ -8,7 +8,7 @@ class WorkPlan implements ListForSetSelect {
     this.nameEn = '',
     this.nameJa = '',
     this.note = '',
-    this.menus = const[],
+    this.menus = const [],
     this.isDefault = false,
   });
 
@@ -25,14 +25,13 @@ class WorkPlan implements ListForSetSelect {
       return new WorkPlan();
     }
     return new WorkPlan(
-      id: document.documentID,
-      userId: document['user_id'],
-      nameEn: document['name_en'],
-      nameJa: document['name_ja'],
-      note: document['note'] ?? '',
-      menus: new List<String>.from(document['menus']),
-      isDefault: document['is_default']
-    );
+        id: document.documentID,
+        userId: document['user_id'],
+        nameEn: document['name_en'],
+        nameJa: document['name_ja'],
+        note: document['note'] ?? '',
+        menus: new List<String>.from(document['menus']),
+        isDefault: document['is_default']);
   }
 
   bool isEmpty() {
@@ -51,14 +50,8 @@ class WorkPlan implements ListForSetSelect {
   }
 
   // Delete me after using firebase
-  static WorkPlan createNewSet(
-      String id,
-      String userId,
-      String nameEn,
-      String nameJa,
-      String note,
-      List<String> menus,
-      bool isDefault) {
+  static WorkPlan createNewSet(String id, String userId, String nameEn,
+      String nameJa, String note, List<String> menus, bool isDefault) {
     return new WorkPlan(
       id: id,
       userId: userId,

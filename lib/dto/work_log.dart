@@ -4,21 +4,20 @@ import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 
 class WorkLog implements ListForSetSelect {
-  WorkLog({
-    this.id = '',
-    this.userId = '',
-    this.menuCode = '',
-    this.date,
-    this.workType = WorkType.LIFT,
-    this.logs = const []
-  });
+  WorkLog(
+      {this.id = '',
+      this.userId = '',
+      this.menuCode = '',
+      this.date,
+      this.workType = WorkType.LIFT,
+      this.logs = const []});
 
   String id;
   String userId;
   String menuCode;
   Timestamp date;
   WorkType workType;
-  List<Map<String,double>> logs;
+  List<Map<String, double>> logs;
 
   static WorkLog of(DocumentSnapshot document) {
     if (!document.exists) {
@@ -30,7 +29,7 @@ class WorkLog implements ListForSetSelect {
       menuCode: document['menu_code'],
       date: document['date'] ?? '',
       workType: document['work_type'],
-      logs: new List<Map<String,double>>.from(document['logs']),
+      logs: new List<Map<String, double>>.from(document['logs']),
     );
   }
 
@@ -41,10 +40,14 @@ class WorkLog implements ListForSetSelect {
   // Delete me after using firebase
   static WorkLog createNewLog(String id, String userId, String menuCode,
       List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {
-        List<Map<String,double>> logs = new List();
-        workoutSets.forEach((data){
-          logs.add({"reps": data.reps.toDouble(), "weight": data.weight, "unit": data.weightUnit.toDouble()});
-        });
+    List<Map<String, double>> logs = new List();
+    workoutSets.forEach((data) {
+      logs.add({
+        "reps": data.reps.toDouble(),
+        "weight": data.weight,
+        "unit": data.weightUnit.toDouble()
+      });
+    });
     return new WorkLog(
       id: id,
       userId: userId,

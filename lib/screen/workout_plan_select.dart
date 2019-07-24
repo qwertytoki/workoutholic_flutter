@@ -61,13 +61,14 @@ class WorkoutPlanSelectPage extends StatelessWidget {
             return ListTile(
               title: Text(
                 item.nameJa,
-              style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.headline,
               ),
               onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WorkoutMenuSelect(workPlan: item)),
-              ),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            WorkoutMenuSelect(workPlan: item)),
+                  ),
             );
           } else if (item is WorkMenu) {
             return ListTile(
@@ -90,7 +91,6 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                       ),
                     ));
           }
-          ;
         });
   }
 

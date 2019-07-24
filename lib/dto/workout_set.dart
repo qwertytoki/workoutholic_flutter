@@ -11,13 +11,15 @@ class WorkoutSet implements ListForSetSelect {
     return new WorkoutSet(
         weight: weight, weightUnit: weightUnit.round(), reps: reps.round());
   }
-  static List<WorkoutSet> translateFromMap(List<Map<String,double>> logs){
+
+  static List<WorkoutSet> translateFromMap(List<Map<String, double>> logs) {
     List<WorkoutSet> list = new List();
-    logs.forEach((log){
-      list.add(newData(log["weight"],log["unit"],log["reps"]));
+    logs.forEach((log) {
+      list.add(newData(log["weight"], log["unit"], log["reps"]));
     });
     return list;
   }
+
   static List<WorkoutSet> getDefaultLogs() {
     List<WorkoutSet> defaultLogs = [];
     defaultLogs.add(WorkoutSet.newData(60, 0, 10));

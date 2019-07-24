@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AddSetPage extends StatefulWidget {
-    // final WorkoutPlan workey key, @required this.workoutPlanoutSet;
-    // WorkoutInputPage({K}) : super(key: key);
-    @override
-    _AddSetPageState createState() => _AddSetPageState();
-  }
-  class _AddSetPageState extends State<AddSetPage>{
+  // final WorkoutPlan workey key, @required this.workoutPlanoutSet;
+  // WorkoutInputPage({K}) : super(key: key);
+  @override
+  _AddSetPageState createState() => _AddSetPageState();
+}
 
+class _AddSetPageState extends State<AddSetPage> {
   Widget build(BuildContext context) {
     final TextEditingController setNameController = TextEditingController();
     Scaffold scaffold = new Scaffold(
       appBar: AppBar(
         title: Text("Create New Set"),
-        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -57,7 +57,6 @@ class AddSetPage extends StatefulWidget {
                 ],
               ),
             ),
-            
           ],
         ),
       ),
@@ -65,7 +64,8 @@ class AddSetPage extends StatefulWidget {
     // this WillPopScope is not needed...? #105
     return scaffold;
   }
-  void _saveSet(){
+
+  void _saveSet() {
     print("add");
   }
 }
