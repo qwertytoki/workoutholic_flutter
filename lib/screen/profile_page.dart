@@ -32,8 +32,8 @@ class ProfilePage extends StatelessWidget {
         TextFormField(
               keyboardType: TextInputType.number,
               decoration: new InputDecoration(
-                hintText: "Type your set name.",
-                // labelText: Texts.get(TextKey.AP_NUMBER_LABEL),
+                hintText: "Type you name.",
+                // labelText: Texts.get(r setTextKey.AP_NUMBER_LABEL),
               ),
         ),
         SizedBox(height: 16.0,),
@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  child: Text("user.description"),
+                  child: Text("ここに名前が入る"),
                 ),
               ),
               IconButton(
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
         SizedBox(height: 16.0,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text("user.description")
+          child: Text("ここに自分の目標が入る")
         )
       ]
     );
