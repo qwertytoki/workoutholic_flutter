@@ -37,7 +37,7 @@ class ProfilePage extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  child: Text("ここに名前が入る"),
+                  child: Text(this.user.displayName),
                 ),
               ),
               IconButton(
@@ -53,7 +53,7 @@ class ProfilePage extends StatelessWidget {
         SizedBox(height: 16.0,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text("ここに自分の目標が入る")
+          child: Text(this.user.description)
         )
       ]
     );
