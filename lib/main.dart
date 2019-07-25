@@ -9,8 +9,6 @@ import 'package:workoutholic/dao/user_dao.dart';
 
 void main() {
   runApp(MyApp());
-  //これ何してるんだろう
-  // initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatefulWidget {
