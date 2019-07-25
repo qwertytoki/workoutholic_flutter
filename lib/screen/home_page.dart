@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
   final User user;
   @override
   HomePage({@required this.user});
-
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -29,8 +28,8 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    super.initState();
     print(widget.user.displayName);
+    super.initState();
     _pageController = PageController();
   }
 

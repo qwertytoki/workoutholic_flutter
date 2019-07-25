@@ -10,7 +10,6 @@ class ProfilePage extends StatelessWidget {
   @override
   ProfilePage({@required this.user});
   
-  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

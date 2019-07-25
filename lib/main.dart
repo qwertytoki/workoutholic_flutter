@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/home_page.dart';
 import 'package:workoutholic/screen/login_page.dart';
+import 'package:workoutholic/dto/user.dart';
+import 'package:workoutholic/dao/user_dao.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(MyApp());
   //これ何してるんだろう
   // initializeDateFormatting().then((_) => runApp(MyApp()));
 }
@@ -17,17 +19,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  FirebaseUser _user;
+  User user;
   final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
-    _getCurrentUser().then((user) {
-      setState(() {
-        _user = user;
+    _getCurrentUser().then((fbUser) {
+      _getUser(fbUser).then((userVal) {
+        setState(() {
+          user = userVal;
+        });
       });
     });
+  }
+
+  Future<User> _getUser(FirebaseUser fbUser) async {
+    return await UserDao.getUserByUid(fbUser.uid);
   }
 
   Future<FirebaseUser> _getCurrentUser() async {
@@ -35,10 +43,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
         title: 'login',
         home: Scaffold(
-          body: Container(child: _user == null ? LoginPage() : HomePage()),
+          body: Container(
+              child: user == null ? LoginPage() : HomePage(user: user)),
         ));
   }
 }
