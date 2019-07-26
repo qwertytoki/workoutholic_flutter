@@ -8,11 +8,12 @@ import 'package:workoutholic/dao/work_plan_dao.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/screen/add_set.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+import 'package:workoutholic/dto/user.dart';
 
 class WorkoutPlanSelectPage extends StatelessWidget {
+  final User user;
   @override
-  // final DateTime selectedDate;
-  // WorkoutPlanSelect({Key key, @required this.selectedDate}) : super(key: key);
+  WorkoutPlanSelectPage({@required this.user});
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +61,11 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline,
               ),
               onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            WorkoutMenuSelect(workPlan: item)),
-                  ),
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        WorkoutMenuSelect(user: this.user, workPlan: item)),
+              ),
             );
           } else if (item is WorkMenu) {
             return ListTile(
@@ -72,8 +73,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              WorkoutMenuSelect(workPlan: item.workPlan)),
+                          builder: (context) => WorkoutMenuSelect(
+                              user: this.user, workPlan: item.workPlan)),
                     ));
           } else if (item is Separator) {
             return Divider(color: Colors.black38);

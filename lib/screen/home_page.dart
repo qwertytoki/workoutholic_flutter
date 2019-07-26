@@ -45,9 +45,9 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: PageView(
         children: <Widget>[
-          new WorkoutPage(),
-          new TransitionPage(), 
-          new ProfilePage(user:user), 
+          new WorkoutPage(user: user),
+          new TransitionPage(user: user),
+          new ProfilePage(user: user),
         ],
         controller: _pageController,
         onPageChanged: onPageChanged,

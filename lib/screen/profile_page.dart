@@ -6,10 +6,10 @@ import 'package:workoutholic/dto/user.dart';
 // import 'package:workoutholic/dao/user_dao.dart';
 
 class ProfilePage extends StatelessWidget {
-  final User user ;
+  final User user;
   @override
   ProfilePage({@required this.user});
-  
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -26,37 +26,35 @@ class ProfilePage extends StatelessWidget {
       body: buildBody(),
     );
   }
-  Widget buildBody(){ 
-    return ListView(
-      children: <Widget>[
-        SizedBox(height: 16.0,),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: Text(this.user.displayName),
-                ),
-              ),
-              IconButton(
-                icon:Icon(CupertinoIcons.pencil,
-                color: Colors.grey),
-                onPressed: (){
-                  print(this.user.displayName);
-                },
-              ) 
-            ]
-          ),
-        ),
-        SizedBox(height: 16.0,),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(this.user.description)
-        )
-      ]
-    );
 
+  Widget buildBody() {
+    return ListView(children: <Widget>[
+      SizedBox(
+        height: 16.0,
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: Row(children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Text(this.user.displayName),
+            ),
+          ),
+          IconButton(
+            icon: Icon(CupertinoIcons.pencil, color: Colors.grey),
+            onPressed: () {
+              print(this.user.displayName);
+            },
+          )
+        ]),
+      ),
+      SizedBox(
+        height: 16.0,
+      ),
+      Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(this.user.description))
+    ]);
   }
 
   void _signOut(BuildContext context) async {
