@@ -41,14 +41,19 @@ void _handleGoogleSignIn(BuildContext context) async {
       GoogleAuthProvider.getCredential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
   User user = await UserDao.getUserByUid(fbUser.uid);
-  print("signed in " + user.displayName);
-  if (fbUser != null) {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) {
-        return HomePage(user: user);
-      },
-    ));
+  if (user == null) {
+    user = await _signUpUser(fbUser,context);
   }
+  Navigator.of(context).pushReplacement(MaterialPageRoute(
+    builder: (context) {
+      return HomePage(user: user);
+    },
+  ));
 }
 
-enum FormType { login, register }
+Future<User> _signUpUser(FirebaseUser fbUser,BuildContext context) async {
+  Locale locale = Localizations.localeOf(context);
+  String language = locale.languageCode == "ja" ? "ja" : "en";
+  return await UserDao.addUser(
+      fbUser.uid, fbUser.photoUrl, fbUser.displayName, language);
+}
