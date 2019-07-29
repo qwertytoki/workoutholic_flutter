@@ -3,22 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/login_page.dart';
 import 'package:workoutholic/dto/user.dart';
-import 'package:workoutholic/screen/profile_edit.dart';
 // import 'package:workoutholic/dao/user_dao.dart';
 
-class ProfilePage extends StatelessWiFdget {
+class ProfileEdit extends StatelessWidget {
   final User user;
   @override
-  ProfilePage({@required this.user});
+  ProfileEdit({@required this.user});
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("プロフィール"),
+        title: Text("プロフィールの編集"),
         actions: <Widget>[
           IconButton(
               icon: Icon(
-                Icons.exit_to_app,
+                Icons.check,
                 color: Colors.white,
               ),
               onPressed: () {
@@ -26,11 +25,11 @@ class ProfilePage extends StatelessWiFdget {
               })
         ],
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return ListView(children: <Widget>[
       SizedBox(
         height: 16.0,
@@ -46,11 +45,7 @@ class ProfilePage extends StatelessWiFdget {
           IconButton(
             icon: Icon(CupertinoIcons.pencil, color: Colors.grey),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfileEdit(user: this.user),
-                  ));
+              print(this.user.displayName);
             },
           )
         ]),
