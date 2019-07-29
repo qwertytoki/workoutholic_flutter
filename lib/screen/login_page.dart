@@ -44,11 +44,12 @@ void _handleGoogleSignIn(BuildContext context) async {
         GoogleAuthProvider.getCredential(
             accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
     User user = await UserDao.getUserByUid(fbUser.uid);
-    if (user == null) {
+    if (user.uid=="") {
       user =new User(
         uid:fbUser.uid,
         displayName:fbUser.displayName,
         photoUrlMobile: fbUser.photoUrl,
+        description: language == 'ja'?"目標を記入しよう！":"Set your goal!",
         language: language);
       await UserDao.addUser(user);
     }
