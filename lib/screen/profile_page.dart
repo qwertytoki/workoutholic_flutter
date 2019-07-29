@@ -6,7 +6,7 @@ import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/screen/profile_edit.dart';
 // import 'package:workoutholic/dao/user_dao.dart';
 
-class ProfilePage extends StatelessWiFdget {
+class ProfilePage extends StatelessWidget {
   final User user;
   @override
   ProfilePage({@required this.user});

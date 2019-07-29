@@ -21,7 +21,7 @@ class ProfileEdit extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                _signOut(context);
+                _saveProfile(context);
               })
         ],
       ),
@@ -38,15 +38,20 @@ class ProfileEdit extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(children: <Widget>[
           Expanded(
-            child: Container(
-              child: Text(this.user.displayName),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "data",
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "1文字以上必要です";
+                    } else if (value.length > 20) {
+                      return "名前が長すぎます";
+                    }
+                  }),
             ),
-          ),
-          IconButton(
-            icon: Icon(CupertinoIcons.pencil, color: Colors.grey),
-            onPressed: () {
-              print(this.user.displayName);
-            },
           )
         ]),
       ),
@@ -59,7 +64,7 @@ class ProfileEdit extends StatelessWidget {
     ]);
   }
 
-  void _signOut(BuildContext context) async {
+  void _saveProfile(BuildContext context) async {
     final _auth = FirebaseAuth.instance;
     _auth.signOut();
     Navigator.of(context).pushReplacement(MaterialPageRoute(
