@@ -12,11 +12,13 @@ import 'package:workoutholic/const/picker_data.dart';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
 import 'package:workoutholic/screen/home_page.dart';
+import 'package:workoutholic/dto/user.dart';
 
 class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
+  final User user;
   @override
-  WorkoutMenuSelect({@required this.workPlan});
+  WorkoutMenuSelect({@required this.user, @required this.workPlan});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -35,7 +37,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage())),
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(user: widget.user))),
           )
         ],
       ),

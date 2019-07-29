@@ -3,11 +3,11 @@ import 'package:workoutholic/auth.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
+import 'package:workoutholic/dto/user.dart';
 
 class WorkoutPage extends StatefulWidget {
-  WorkoutPage({this.auth, this.onSignedOut});
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
+  final User user;
+  WorkoutPage({@required this.user});
   @override
   _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
@@ -76,7 +76,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void moveToSetSelect() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => WorkoutPlanSelectPage()),
+      MaterialPageRoute(
+          builder: (context) => WorkoutPlanSelectPage(user: widget.user)),
     );
   }
 

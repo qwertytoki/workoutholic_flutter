@@ -33,22 +33,31 @@ Widget _buildGoogleSignInButton(BuildContext context) {
 }
 
 void _handleGoogleSignIn(BuildContext context) async {
-  final _googleSignIn = new GoogleSignIn();
-  final _auth = FirebaseAuth.instance;
-  GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-  GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  FirebaseUser fbUser = await _auth.signInWithCredential(
-      GoogleAuthProvider.getCredential(
-          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
-  User user = await UserDao.getUserByUid(fbUser.uid);
-  print("signed in " + user.displayName);
-  if (fbUser != null) {
+  Locale locale = Localizations.localeOf(context);
+  String language = locale.languageCode == "ja" ? "ja" : "en";
+  try {
+    final _googleSignIn = new GoogleSignIn();
+    final _auth = FirebaseAuth.instance;
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    FirebaseUser fbUser = await _auth.signInWithCredential(
+        GoogleAuthProvider.getCredential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
+    User user = await UserDao.getUserByUid(fbUser.uid);
+    if (user == null) {
+      user = await UserDao.addUser(
+          fbUser.uid, fbUser.photoUrl, fbUser.displayName, language);
+    }
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
         return HomePage(user: user);
       },
     ));
+  } catch (e) {
+    String message = language == 'ja' ? 'ログインに失敗しました' : 'Failed to login.';
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text(message),
+    ));
+    return;
   }
 }
-
-enum FormType { login, register }
