@@ -45,8 +45,12 @@ void _handleGoogleSignIn(BuildContext context) async {
             accessToken: googleAuth.accessToken, idToken: googleAuth.idToken));
     User user = await UserDao.getUserByUid(fbUser.uid);
     if (user == null) {
-      user = await UserDao.addUser(
-          fbUser.uid, fbUser.photoUrl, fbUser.displayName, language);
+      user =new User(
+        uid:fbUser.uid,
+        displayName:fbUser.displayName,
+        photoUrlMobile: fbUser.photoUrl,
+        language: language);
+      await UserDao.addUser(user);
     }
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {

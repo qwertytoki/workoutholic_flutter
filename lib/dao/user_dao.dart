@@ -27,18 +27,11 @@ class UserDao {
     });
   }
 
-  static Future<User> addUser(String uid, String photoUrl,
-      String displayName, String language) async {
-    User user = new User(
-      photoUrlMobile: photoUrl,
-      displayName: displayName,
-      language: language,
-    );
+  static Future<void> addUser(User user) async {
     await Firestore.instance
         .collection(COLLECTION_USER)
-        .document(uid)
+        .document(user.uid)
         .setData(user.toMapForUser());
-    return user;
   }
 
   static Future<void> updateUser(User user) {
