@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:workoutholic/screen/login_page.dart';
 import 'package:workoutholic/dto/user.dart';
-// import 'package:workoutholic/dao/user_dao.dart';
+import 'package:workoutholic/dao/user_dao.dart';
+import 'package:workoutholic/screen/profile_page.dart'; 
 
 class ProfileEdit extends StatelessWidget {
   final User user;
@@ -65,11 +64,9 @@ class ProfileEdit extends StatelessWidget {
   }
 
   void _saveProfile(BuildContext context) async {
-    final _auth = FirebaseAuth.instance;
-    _auth.signOut();
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return LoginPage();
+        return ProfilePage(user: this.user,);
       },
     ));
   }
