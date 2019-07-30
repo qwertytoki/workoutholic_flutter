@@ -12,8 +12,9 @@ import 'package:workoutholic/dto/user.dart';
 
 class WorkoutPlanSelectPage extends StatelessWidget {
   final User user;
+  final DateTime date;
   @override
-  WorkoutPlanSelectPage({@required this.user});
+  WorkoutPlanSelectPage({@required this.user, @required this.date});
 
   Widget build(BuildContext context) {
     return Scaffold(

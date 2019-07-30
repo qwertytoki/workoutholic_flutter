@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workoutholic/auth.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
@@ -77,7 +76,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => WorkoutPlanSelectPage(user: widget.user)),
+          builder: (context) => WorkoutPlanSelectPage(user: widget.user,date:_selectedDay)),
     );
   }
 
@@ -177,17 +176,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
               ),
             );
           }
-
-          if (holidays != null) {
-            children.add(
-              Positioned(
-                right: -2,
-                top: -2,
-                child: _buildHolidaysMarker(),
-              ),
-            );
-          }
-
           return children;
         },
       ),
@@ -224,14 +212,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
-  Widget _buildHolidaysMarker() {
-    return Icon(
-      Icons.add_box,
-      size: 20.0,
-      color: Colors.blueGrey[800],
-    );
-  }
-
   Widget _buildEventList() {
     return ListView(
       children: _selectedEvents
@@ -240,14 +220,14 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
-                  onTap: () => moveToMenu(),
+                  onTap: () => moveToMenu(_selectedDay),
                 ),
               ))
           .toList(),
     );
   }
 
-  void moveToMenu() {
+  void moveToMenu(DateTime _date) {
     print("pressed");
   }
 }
