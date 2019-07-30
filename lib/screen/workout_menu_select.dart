@@ -17,8 +17,10 @@ import 'package:workoutholic/dto/user.dart';
 class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
   final User user;
+  final DateTime date;
   @override
-  WorkoutMenuSelect({@required this.user, @required this.workPlan});
+  WorkoutMenuSelect(
+      {@required this.user, @required this.workPlan, @required this.date});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }

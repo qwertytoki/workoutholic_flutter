@@ -64,8 +64,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        WorkoutMenuSelect(user: this.user, workPlan: item)),
+                    builder: (context) => WorkoutMenuSelect(
+                        user: this.user, workPlan: item, date: this.date)),
               ),
             );
           } else if (item is WorkMenu) {
@@ -75,7 +75,9 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => WorkoutMenuSelect(
-                              user: this.user, workPlan: item.workPlan)),
+                              user: this.user,
+                              workPlan: item.workPlan,
+                              date: this.date)),
                     ));
           } else if (item is Separator) {
             return Divider(color: Colors.black38);
