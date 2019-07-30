@@ -8,6 +8,8 @@ class ProfileEdit extends StatelessWidget {
   final User user;
   @override
   ProfileEdit({@required this.user});
+  final nameController = TextEditingController();
+  final goalController = TextEditingController();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +38,7 @@ class ProfileEdit extends StatelessWidget {
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: TextFormField(
+            controller: nameController,
             decoration: InputDecoration(
               labelText: "名前",
             ),
@@ -57,6 +60,7 @@ class ProfileEdit extends StatelessWidget {
                 child: TextFormField(
               maxLines: 5,
               keyboardType: TextInputType.multiline,
+              controller: goalController,
               decoration: InputDecoration(
                 labelText: "目標",
               ),
@@ -66,13 +70,9 @@ class ProfileEdit extends StatelessWidget {
   }
 
   void _saveProfile(BuildContext context) async {
-    
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) {
-        return ProfilePage(
-          user: this.user,
-        );
-      },
-    ));
+    user.displayName = this.nameController.text;
+    user.description = this.goalController.text;
+    UserDao.updateUser(user);
+    Navigator.of(context).pop();
   }
 }
