@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dao/user_dao.dart';
-import 'package:workoutholic/screen/profile_page.dart'; 
+import 'package:workoutholic/screen/profile_page.dart';
 
 class ProfileEdit extends StatelessWidget {
   final User user;
@@ -35,38 +35,43 @@ class ProfileEdit extends StatelessWidget {
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "data",
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return "1文字以上必要です";
-                    } else if (value.length > 20) {
-                      return "名前が長すぎます";
-                    }
-                  }),
+        child: TextFormField(
+            decoration: InputDecoration(
+              labelText: "名前",
             ),
-          )
-        ]),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "1文字以上必要です";
+              } else if (value.length > 20) {
+                return "名前が長すぎます";
+              }
+            }),
       ),
       SizedBox(
         height: 16.0,
       ),
       Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(this.user.description))
+          child: Row(children: <Widget>[
+            Expanded(
+                child: TextFormField(
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                labelText: "目標",
+              ),
+            ))
+          ]))
     ]);
   }
 
   void _saveProfile(BuildContext context) async {
+    
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return ProfilePage(user: this.user,);
+        return ProfilePage(
+          user: this.user,
+        );
       },
     ));
   }
