@@ -8,10 +8,12 @@ class ProfileEdit extends StatelessWidget {
   final User user;
   @override
   ProfileEdit({@required this.user});
-  final nameController = TextEditingController();
-  final goalController = TextEditingController();
+  TextEditingController nameController;
+  TextEditingController goalController;
 
   Widget build(BuildContext context) {
+    nameController = TextEditingController(text: user.displayName);
+    goalController = TextEditingController(text: user.description);
     return Scaffold(
       appBar: AppBar(
         title: Text("プロフィールの編集"),
