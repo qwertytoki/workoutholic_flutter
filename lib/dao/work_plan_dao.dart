@@ -23,4 +23,7 @@ class WorkPlanDao {
         "id3", "", "Legs Day", "脚の日", "Every Monday", menus3, true));
     return workPlans;
   }
+  static Future<List<WorkPlan>> getPlanByUser(String userId) async{
+    return null;
+  }
 }

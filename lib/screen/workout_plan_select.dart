@@ -37,7 +37,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    List<WorkPlan> workPlans = generateMockData();
+    List<WorkPlan> workPlans = await WorkPlanDao.getPlanByUser(user.uid);
+    // List<WorkPlan> workPlans = generateMockData();
     List<ListForSetSelect> displayList = [];
     workPlans.forEach((set) {
       displayList.add(set);
@@ -98,6 +99,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   List<WorkPlan> generateMockData() {
     return WorkPlanDao.genarateMockData();
   }
+
 
 // firebase使うなら以下のソース
   // Widget _buildBody(BuildContext context) {
