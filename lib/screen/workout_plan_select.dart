@@ -37,7 +37,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    List<WorkPlan> workPlans = await WorkPlanDao.getPlanByUser(user.uid);
+    List<WorkPlan> workPlans =  await loadPlan(user.uid);
+    
     // List<WorkPlan> workPlans = generateMockData();
     List<ListForSetSelect> displayList = [];
     workPlans.forEach((set) {
@@ -93,6 +94,10 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                     ));
           }
         });
+  }
+  List<WorkPlan> loadPlan(String uid) async{
+    return await WorkPlanDao.getPlanByUser(userId);
+
   }
 
   // Firebaseに置き換える予定なので隔離してる
