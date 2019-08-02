@@ -98,8 +98,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
         });
   }
   Future<List<WorkPlan>> loadPlan(String uid) async{
-    return await WorkPlanDao.getPlanByUser(uid);
-
+    return await WorkPlanDao.getPlansByUser(uid);
   }
 
   // Firebaseに置き換える予定なので隔離してる

@@ -1,4 +1,5 @@
 import 'package:workoutholic/dto/work_plan.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WorkPlanDao {
   static List<WorkPlan> genarateMockData() {
@@ -23,7 +24,16 @@ class WorkPlanDao {
         "id3", "", "Legs Day", "脚の日", "Every Monday", menus3, true));
     return workPlans;
   }
-  static Future<List<WorkPlan>> getPlanByUser(String userId) async{
-    return null;
+  static Future<List<WorkPlan>> getPlansByUser(String userId) async{
+    // ユーザー固有のメニューを取得する
+    QuerySnapshot snapshot = await Firestore.instance
+    .collection('workPlan')
+    .where('uid',isEqualTo: userId)
+    .getDocuments();
+    List<WorkPlan> plans = new List();
+    snapshot.documents.forEach((DocumentSnapshot doc){
+      plans.add(WorkPlan.of(doc));
+    });
+    return plans;
   }
 }
