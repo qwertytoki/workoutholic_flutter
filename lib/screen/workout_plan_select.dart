@@ -36,9 +36,11 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     );
   }
 
-  Widget _buildList(BuildContext context) {
-    List<WorkPlan> workPlans =  await loadPlan(user.uid);
-    
+  Widget _buildList(BuildContext context)  {
+    List<WorkPlan> workPlans;
+    loadPlan(user.uid).then((planList){
+      workPlans = planList;
+    });
     // List<WorkPlan> workPlans = generateMockData();
     List<ListForSetSelect> displayList = [];
     workPlans.forEach((set) {
@@ -95,8 +97,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
           }
         });
   }
-  List<WorkPlan> loadPlan(String uid) async{
-    return await WorkPlanDao.getPlanByUser(userId);
+  Future<List<WorkPlan>> loadPlan(String uid) async{
+    return await WorkPlanDao.getPlanByUser(uid);
 
   }
 
@@ -104,46 +106,4 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   List<WorkPlan> generateMockData() {
     return WorkPlanDao.genarateMockData();
   }
-
-
-// firebase使うなら以下のソース
-  // Widget _buildBody(BuildContext context) {
-  //   return StreamBuilder<QuerySnapshot>(
-  //     stream: Firestore.instance.collection('workoutPlan').snapshots(),
-  //     builder: (context, snapshot) {
-  //       if (!snapshot.hasData) return LinearProgressIndicator();
-  //       return _buildList(context, snapshot.data.documents);
-  //     },
-  //   );
-  // }
-
-  // Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-  //   return ListView(
-  //     padding: const EdgeInsets.only(top: 20.0),
-  //     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-  //   );
-  // }
-  // Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-  //   final workoutPlan = WorkoutPlan.fromSnapshot(data);
-  //   return Padding(
-  //     key: ValueKey(workoutPlan.setName),
-  //     padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
-  //     child: Container(
-  //       decoration: BoxDecoration(
-  //         border: Border.all(color: Colors.grey),
-  //         borderRadius: BorderRadius.circular(5.0),
-  //       ),
-  //       child: ListTile(
-  //         title: Text(workoutPlan.setName),
-  //         // trailing: Text(record.votes.toString()),
-  //         onTap: () => Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                   builder: (context) =>
-  //                       WorkoutMenuSelect(workoutPlan: workoutPlan)),
-  //             ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
