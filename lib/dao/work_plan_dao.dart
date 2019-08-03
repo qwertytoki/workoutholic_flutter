@@ -28,7 +28,7 @@ class WorkPlanDao {
     // ユーザー固有のメニューを取得する
     QuerySnapshot snapshot = await Firestore.instance
     .collection('workPlan')
-    .where('uid',isEqualTo: userId)
+    .where('user_id',isEqualTo: userId)
     .getDocuments();
     List<WorkPlan> plans = new List();
     snapshot.documents.forEach((DocumentSnapshot doc){
