@@ -24,16 +24,10 @@ class WorkPlanDao {
         "id3", "", "Legs Day", "脚の日", "Every Monday", menus3, true));
     return workPlans;
   }
-  static Future<List<WorkPlan>> getPlansByUser(String userId) async{
-    // ユーザー固有のメニューを取得する
-    QuerySnapshot snapshot = await Firestore.instance
+  static Stream<QuerySnapshot> getPlansByUser(String userId) {
+    return  Firestore.instance
     .collection('workPlan')
     .where('user_id',isEqualTo: userId)
-    .getDocuments();
-    List<WorkPlan> plans = new List();
-    snapshot.documents.forEach((DocumentSnapshot doc){
-      plans.add(WorkPlan.of(doc));
-    });
-    return plans;
+    .snapshots();
   }
 }

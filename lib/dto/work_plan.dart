@@ -30,8 +30,7 @@ class WorkPlan implements ListForSetSelect {
         nameEn: document['name_en'],
         nameJa: document['name_ja'],
         note: document['note'] ?? '',
-        menus: new List<String>.from(document['menus']),
-        isDefault: document['is_default']);
+        menus: new List<String>.from(document['menus']));
   }
 
   bool isEmpty() {
