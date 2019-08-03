@@ -37,6 +37,16 @@ class WorkLog implements ListForSetSelect {
     return this.id == '';
   }
 
+  static Map<String, dynamic> toMap(WorkLog log) {
+    Map<String, Object> data = new Map();
+    data.putIfAbsent('user_id', () => log.userId);
+    data.putIfAbsent('date', () => log.date);
+    data.putIfAbsent('logs', () => log.logs);
+    data.putIfAbsent('work_type', () => log.workType);
+    data.putIfAbsent('menu_code', () => log.menuCode);
+
+  }
+
   // Delete me after using firebase
   static WorkLog createNewLog(String id, String userId, String menuCode,
       List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {

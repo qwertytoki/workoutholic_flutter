@@ -27,6 +27,7 @@ class UserDao {
     });
   }
 
+  // use async because added user will used immediately
   static Future<void> addUser(User user) async {
     await Firestore.instance
         .collection(COLLECTION_USER)
