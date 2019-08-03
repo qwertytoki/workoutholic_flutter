@@ -104,9 +104,4 @@ class WorkoutPlanSelectPage extends StatelessWidget {
           }
         });
   }
-
-  // Firebaseに置き換える予定なので隔離してる
-  List<WorkPlan> generateMockData() {
-    return WorkPlanDao.genarateMockData();
-  }
 }
