@@ -26,7 +26,7 @@ class WorkoutMenuSelect extends StatefulWidget {
 }
 
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
-  final Set<WorkMenu> _saved = Set<WorkMenu>();
+  final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> displayList = [];
   Widget build(BuildContext context) {
@@ -38,15 +38,24 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           FlatButton(
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: () => Navigator.push(
+            onPressed: (){
+              saveLogs(_done);
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => HomePage(user: widget.user))),
+                    builder: (context) => HomePage(user: widget.user)));
+            }
+              
+            
           )
         ],
       ),
       body: _buildBody(context),
     );
+  }
+
+  void saveLogs(Set<WorkMenu> _done){
+    //save them
   }
 
   Widget _buildBody(BuildContext context) {
@@ -79,7 +88,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         itemCount: displayList.length,
         itemBuilder: (context, int index) {
           final item = displayList[index];
-          final bool alreadySaved = _saved.contains(item);
+          final bool alreadySaved = _done.contains(item);
           if (item is WorkMenu) {
             return ListTile(
               title: Text(
@@ -87,17 +96,15 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 style: Theme.of(context).textTheme.headline,
               ),
               trailing: Icon(
-                // Add the lines from here...
                 alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
                 color: alreadySaved ? Colors.blue : null,
               ),
               onTap: () {
-                // Add 9 lines from here...
                 setState(() {
                   if (alreadySaved) {
-                    _saved.remove(item);
+                    _done.remove(item);
                   } else {
-                    _saved.add(item);
+                    _done.add(item);
                   }
                 });
               },
