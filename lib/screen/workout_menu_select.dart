@@ -36,53 +36,24 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         title: Text(widget.workPlan.nameJa),
         actions: <Widget>[
           FlatButton(
-            child: Text('完了',
-                style: TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: (){
-              saveLogs(_done);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(user: widget.user)));
-            }
-              
-            
-          )
+              child: Text('完了',
+                  style: TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: () {
+                saveLogs(_done);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(user: widget.user)));
+              })
         ],
       ),
       body: _buildBody(context),
     );
   }
 
-  void saveLogs(Set<WorkMenu> _done){
-    //save them
-  }
+  void saveLogs(Set<WorkMenu> _done) {}
 
   Widget _buildBody(BuildContext context) {
-    return _buildList(context);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-    menus.forEach((menu) {
-      displayList.add(menu);
-      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
-      // WorkLog log = menu.getWorkLog();
-      WorkLog log = new WorkLog();
-      if (log.logs.length == 0) {
-        displayList.addAll(WorkoutSet.getDefaultLogs());
-      } else {
-        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-      }
-      displayList.add(new AddNewSet());
-      displayList.add(new Separator());
-    });
-    displayList.add(new AddNewMenu());
-  }
-
-  Widget _buildList(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: displayList.length,
@@ -150,6 +121,26 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 onTap: () => print("hoge"));
           }
         });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
+    menus.forEach((menu) {
+      displayList.add(menu);
+      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // WorkLog log = menu.getWorkLog();
+      WorkLog log = new WorkLog();
+      if (log.logs.length == 0) {
+        displayList.addAll(WorkoutSet.getDefaultLogs());
+      } else {
+        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
+      }
+      displayList.add(new AddNewSet());
+      displayList.add(new Separator());
+    });
+    displayList.add(new AddNewMenu());
   }
 
   showPickerArray(BuildContext context, int indexOfList) {
