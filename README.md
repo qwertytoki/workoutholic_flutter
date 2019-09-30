@@ -1,7 +1,8 @@
-# workoutholic
+# Workoutholic flutter
 
-The simplest workout log app. 
-All you can log in this app is..
+The world simplest workout record application. 
+
 * What kind of workout you did.
-* How much you lift.
-* How many you lift.
+* How heavy you lift.
+* How many times you lift.
+* Transition of your result 
