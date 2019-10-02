@@ -60,7 +60,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.trending_up),
-            title: new Text("遷移グラフ"),
+            title: new Text("進捗グラフ"),
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.person),
