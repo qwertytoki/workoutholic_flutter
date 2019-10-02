@@ -51,6 +51,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     );
   }
 
+
+  //TODO ここから実装。issue #7 筋トレ結果をDBに保存できる
   void saveLogs(Set<WorkMenu> _done) {}
 
   Widget _buildBody(BuildContext context) {
