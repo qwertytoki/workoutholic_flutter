@@ -25,6 +25,26 @@ class WorkoutMenuSelect extends StatefulWidget {
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
 
+@override
+void initState() {
+  super.initState();
+  List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
+  menus.forEach((menu) {
+    displayList.add(menu);
+    // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+    // WorkLog log = menu.getWorkLog();
+    WorkLog log = new WorkLog();
+    if (log.logs.length == 0) {
+      displayList.addAll(WorkoutSet.getDefaultLogs());
+    } else {
+      displayList.addAll(WorkoutSet.translateFromMap(log.logs));
+    }
+    displayList.add(new AddNewSet());
+    displayList.add(new Separator());
+  });
+  displayList.add(new AddNewMenu());
+}
+
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -32,28 +52,28 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text(widget.workPlan.nameJa),
-        actions: <Widget>[
-          FlatButton(
-              child: Text('完了',
-                  style: TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: () {
-                saveLogs(_done);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(user: widget.user)));
-              })
-        ],
-      ),
+      appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
   }
 
-
-  //TODO ここから実装。issue #7 筋トレ結果をDBに保存できる
-  void saveLogs(Set<WorkMenu> _done) {}
+  Widget _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(widget.workPlan.nameJa),
+      actions: <Widget>[
+        FlatButton(
+            child: Text('完了',
+                style: TextStyle(fontSize: 17.0, color: Colors.white)),
+            onPressed: () {
+              saveLogs(_done);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(user: widget.user)));
+            })
+      ],
+    );
+  }
 
   Widget _buildBody(BuildContext context) {
     return ListView.builder(
@@ -125,26 +145,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-    menus.forEach((menu) {
-      displayList.add(menu);
-      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
-      // WorkLog log = menu.getWorkLog();
-      WorkLog log = new WorkLog();
-      if (log.logs.length == 0) {
-        displayList.addAll(WorkoutSet.getDefaultLogs());
-      } else {
-        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-      }
-      displayList.add(new AddNewSet());
-      displayList.add(new Separator());
-    });
-    displayList.add(new AddNewMenu());
-  }
-
   showPickerArray(BuildContext context, int indexOfList) {
     WorkoutSet rowData = displayList[indexOfList];
     new Picker(
@@ -173,5 +173,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     weight = weight - 40;
     int returnNum = (weight / 2.5).round();
     return returnNum + 39;
+  }
+
+  //TODO ここから実装。issue #7 筋トレ結果をDBに保存できる
+  void saveLogs(Set<WorkMenu> _done) {
+    print(_done);
   }
 }
