@@ -177,6 +177,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   //TODO ここから実装。issue #7 筋トレ結果をDBに保存できる
   void saveLogs(List<ListForSetSelect> displayList) {
-    print(displayList);
+    // Create workLog and call workLogDao.insertLogs
+    // 
+    List<WorkLog> workLogList = [];
+    for(ListForSetSelect item in displayList){
+      WorkLog log = WorkLog.createNewLog(userId, menuCode, workoutSets, date, workType);
+      workLogList.add(log);
+    }
+    WorkLogDao.insertLogs(workLogList);
   }
 }

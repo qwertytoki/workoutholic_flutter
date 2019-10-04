@@ -47,7 +47,7 @@ class WorkLog implements ListForSetSelect {
   }
 
   // Delete me after using firebase
-  static WorkLog createNewLog(String id, String userId, String menuCode,
+  static WorkLog createNewLog(String userId, String menuCode,
       List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {
     List<Map<String, double>> logs = new List();
     workoutSets.forEach((data) {
@@ -58,7 +58,6 @@ class WorkLog implements ListForSetSelect {
       });
     });
     return new WorkLog(
-      id: id,
       userId: userId,
       menuCode: menuCode,
       logs: logs,
