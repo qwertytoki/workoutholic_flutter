@@ -44,7 +44,6 @@ class WorkLog implements ListForSetSelect {
     data.putIfAbsent('logs', () => log.logs);
     data.putIfAbsent('work_type', () => log.workType);
     data.putIfAbsent('menu_code', () => log.menuCode);
-
   }
 
   // Delete me after using firebase

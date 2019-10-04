@@ -28,25 +28,25 @@ class WorkoutMenuSelect extends StatefulWidget {
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<ListForSetSelect> displayList = [];
+  List<ListForSetSelect> _displayList = [];
   @override
   void initState() {
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
     menus.forEach((menu) {
-      displayList.add(menu);
+      _displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
       // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
       if (log.logs.length == 0) {
-        displayList.addAll(WorkoutSet.getDefaultLogs());
+        _displayList.addAll(WorkoutSet.getDefaultLogs());
       } else {
-        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
+        _displayList.addAll(WorkoutSet.translateFromMap(log.logs));
       }
-      displayList.add(new AddNewSet());
-      displayList.add(new Separator());
+      _displayList.add(new AddNewSet());
+      _displayList.add(new Separator());
     });
-    displayList.add(new AddNewMenu());
+    _displayList.add(new AddNewMenu());
   }
 
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: () {
-              saveLogs(_done);
+              saveLogs(_displayList);
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -78,9 +78,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   Widget _buildBody(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: displayList.length,
+        itemCount: _displayList.length,
         itemBuilder: (context, int index) {
-          final item = displayList[index];
+          final item = _displayList[index];
           final bool alreadySaved = _done.contains(item);
           if (item is WorkMenu) {
             return ListTile(
@@ -111,9 +111,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return Dismissible(
                 key: Key(id),
                 onDismissed: (direction) {
-                  if (displayList.contains(item)) {
+                  if (_displayList.contains(item)) {
                     setState(() {
-                      displayList.remove(item);
+                      _displayList.remove(item);
                     });
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text("削除しました")));
@@ -123,7 +123,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 child: ListTile(
                   title: Text(weight + weightUnit + reps + repsUnit),
                   onTap: () {
-                    showPickerArray(context, displayList.indexOf(item));
+                    showPickerArray(context, _displayList.indexOf(item));
                   },
                 ));
           } else if (item is Separator) {
@@ -133,7 +133,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 title: Text("セットを追加"),
                 onTap: () => {
                       setState(() {
-                        displayList.insert(
+                        _displayList.insert(
                             index, WorkoutSet.newData(60, 0, 10));
                       }),
                     });
@@ -146,7 +146,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   showPickerArray(BuildContext context, int indexOfList) {
-    WorkoutSet rowData = displayList[indexOfList];
+    WorkoutSet rowData = _displayList[indexOfList];
     new Picker(
         adapter: PickerDataAdapter<String>(
             pickerdata: new JsonDecoder().convert(PickerData2), isArray: true),
@@ -158,7 +158,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
             double weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
-            displayList[indexOfList] = WorkoutSet.newData(
+            _displayList[indexOfList] = WorkoutSet.newData(
                 double.parse(selectedVals[0]),
                 weightUnit,
                 double.parse(selectedVals[2]));
@@ -176,7 +176,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   //TODO ここから実装。issue #7 筋トレ結果をDBに保存できる
-  void saveLogs(Set<WorkMenu> _done) {
-    print(_done);
+  void saveLogs(List<ListForSetSelect> displayList) {
+    print(displayList);
   }
 }
