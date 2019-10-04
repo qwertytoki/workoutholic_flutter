@@ -25,30 +25,30 @@ class WorkoutMenuSelect extends StatefulWidget {
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
 
-@override
-void initState() {
-  super.initState();
-  List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-  menus.forEach((menu) {
-    displayList.add(menu);
-    // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
-    // WorkLog log = menu.getWorkLog();
-    WorkLog log = new WorkLog();
-    if (log.logs.length == 0) {
-      displayList.addAll(WorkoutSet.getDefaultLogs());
-    } else {
-      displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-    }
-    displayList.add(new AddNewSet());
-    displayList.add(new Separator());
-  });
-  displayList.add(new AddNewMenu());
-}
-
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> displayList = [];
+  @override
+  void initState() {
+    super.initState();
+    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
+    menus.forEach((menu) {
+      displayList.add(menu);
+      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // WorkLog log = menu.getWorkLog();
+      WorkLog log = new WorkLog();
+      if (log.logs.length == 0) {
+        displayList.addAll(WorkoutSet.getDefaultLogs());
+      } else {
+        displayList.addAll(WorkoutSet.translateFromMap(log.logs));
+      }
+      displayList.add(new AddNewSet());
+      displayList.add(new Separator());
+    });
+    displayList.add(new AddNewMenu());
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
