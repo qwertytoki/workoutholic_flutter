@@ -178,8 +178,11 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void saveLogs(List<ListForSetSelect> displayList) {
     List<WorkLog> workLogList = [];
     for(ListForSetSelect item in displayList){
-      WorkLog log = WorkLog.createNewLog(userId, menuCode, workoutSets, date, workType);
-      workLogList.add(log);
+      if(item is WorkMenu){
+        WorkLog log = WorkLog.createNewLog(userId, menuCode, workoutSets, date, workType);
+        workLogList.add(log);
+      }
+      
     }
     WorkLogDao.insertLogs(workLogList);
   }
