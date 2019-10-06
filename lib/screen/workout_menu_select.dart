@@ -65,7 +65,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: () {
-              saveLogs(_displayList);
+              saveLogs();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -175,14 +175,25 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     return returnNum + 39;
   }
 
-  void saveLogs(List<ListForSetSelect> displayList) {
+  void saveLogs() {
+    // This is O(n^2) but n will not big. so it's acceptable.
     List<WorkLog> workLogList = [];
-    for(ListForSetSelect item in displayList){
-      if(item is WorkMenu){
-        WorkLog log = WorkLog.createNewLog(userId, menuCode, workoutSets, date, workType);
-        workLogList.add(log);
+    for(WorkMenu done in this._done){
+      WorkLog log = new WorkLog();
+      List<Map<String, double>> results = [];
+      bool isDone =false;
+      for(ListForSetSelect item in this._displayList){
+        if(item is WorkMenu && item.code == done.code){
+          log.menuCode = done.code;
+          isDone = true;
+          continue;
+        }
+        if(item is WorkoutSet && isDone == true){
+          Map<String,double> result = [];
+          result.put(//TODO)
+        }
       }
-      
+      workLogList.add(log);
     }
     WorkLogDao.insertLogs(workLogList);
   }
