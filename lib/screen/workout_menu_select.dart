@@ -179,21 +179,31 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     // This is O(n^2) but n will not big. so it's acceptable.
     List<WorkLog> workLogList = [];
     for(WorkMenu done in this._done){
-      WorkLog log = new WorkLog();
+      WorkLog workLog = new WorkLog();
       List<Map<String, double>> results = [];
       bool isDone =false;
       for(ListForSetSelect item in this._displayList){
         if(item is WorkMenu && item.code == done.code){
-          log.menuCode = done.code;
+          workLog.menuCode = done.code;
           isDone = true;
+          
           continue;
         }
         if(item is WorkoutSet && isDone == true){
-          Map<String,double> result = [];
-          result.put(//TODO)
+          Map<String, Object> map = {
+            "reps":item.reps,
+            "weight":item.weight,
+            "weightUnit":item.weightUnit,
+          };
+          results.add(map);
+          continue;
         }
+        if (item is Separator) {
+          workLog.logs = results;
+        }
+
       }
-      workLogList.add(log);
+      workLogList.add(workLog);
     }
     WorkLogDao.insertLogs(workLogList);
   }
