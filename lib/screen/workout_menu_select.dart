@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+import 'package:workoutholic/const/work_type.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:workoutholic/const/picker_data.dart';
@@ -178,23 +179,27 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void saveLogs() {
     // This is O(n^2) but n will not big. so it's acceptable.
     List<WorkLog> workLogList = [];
-    for(WorkMenu done in this._done){
+    for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
       List<Map<String, Object>> results = [];
-      bool isDone =false;
-      for(ListForSetSelect item in this._displayList){
-        if(item is WorkMenu && item.code == done.code){
-          workLog.menuCode = done.code;
+      bool isDone = false;
+      for (ListForSetSelect item in this._displayList) {
+        if (item is WorkMenu && item.code == done.code) {
+          workLog = WorkLog.createNewLog(
+            widget.user.uid,
+            done.code, 
+            [], 
+            Timestamp.fromDate(widget.date), 
+            WorkType.of(done.workType));
           isDone = true;
-          
           continue;
         }
-        if(isDone == false)continue;
-        if(item is WorkoutSet){
+        if (isDone == false) continue;
+        if (item is WorkoutSet) {
           Map<String, Object> map = {
-            "reps":item.reps,
-            "weight":item.weight,
-            "weightUnit":item.weightUnit,
+            "reps": item.reps,
+            "weight": item.weight,
+            "weightUnit": item.weightUnit,
           };
           results.add(map);
           continue;
@@ -202,7 +207,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         if (item is Separator) {
           workLog.logs = results;
         }
-
       }
       workLogList.add(workLog);
     }
