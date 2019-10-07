@@ -42,7 +42,7 @@ class WorkLog implements ListForSetSelect {
     data.putIfAbsent('user_id', () => log.userId);
     data.putIfAbsent('date', () => log.date);
     data.putIfAbsent('logs', () => log.logs);
-    data.putIfAbsent('work_type', () => log.workType);
+    data.putIfAbsent('work_type', () => log.workType.value);
     data.putIfAbsent('menu_code', () => log.menuCode);
     return data;
   }
