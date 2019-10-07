@@ -5,14 +5,14 @@ import 'package:workoutholic/dto/workout_set.dart';
 
 class WorkLog implements ListForSetSelect {
   WorkLog(
-      {this.id = '',
+      {this.documentID = '',
       this.userId = '',
       this.menuCode = '',
       this.date,
       this.workType = WorkType.LIFT,
       this.logs = const []});
 
-  String id;
+  String documentID;
   String userId;
   String menuCode;
   Timestamp date;
@@ -24,7 +24,7 @@ class WorkLog implements ListForSetSelect {
       return new WorkLog();
     }
     return new WorkLog(
-      id: document.documentID,
+      documentID: document.documentID,
       userId: document['user_id'],
       menuCode: document['menu_code'],
       date: document['date'] ?? '',
@@ -34,7 +34,7 @@ class WorkLog implements ListForSetSelect {
   }
 
   bool isEmpty() {
-    return this.id == '';
+    return this.documentID == '';
   }
 
   static Map<String, dynamic> toMap(WorkLog log) {
@@ -44,6 +44,7 @@ class WorkLog implements ListForSetSelect {
     data.putIfAbsent('logs', () => log.logs);
     data.putIfAbsent('work_type', () => log.workType);
     data.putIfAbsent('menu_code', () => log.menuCode);
+    return data;
   }
 
   // Delete me after using firebase

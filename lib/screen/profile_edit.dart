@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dao/user_dao.dart';
-import 'package:workoutholic/screen/profile_page.dart';
+//import 'package:workoutholic/screen/profile_page.dart';
 
 class ProfileEdit extends StatelessWidget {
   final User user;
@@ -53,6 +53,7 @@ class ProfileEdit extends StatelessWidget {
                 } else if (value.length > 20) {
                   return "名前が長すぎます";
                 }
+                return "";
               }),
         ),
         SizedBox(
