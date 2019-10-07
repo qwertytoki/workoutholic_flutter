@@ -17,7 +17,7 @@ class WorkLog implements ListForSetSelect {
   String menuCode;
   Timestamp date;
   WorkType workType;
-  List<Map<String, double>> logs;
+  List<Map<String, Object>> logs;
 
   static WorkLog of(DocumentSnapshot document) {
     if (!document.exists) {

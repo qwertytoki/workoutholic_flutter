@@ -180,7 +180,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<WorkLog> workLogList = [];
     for(WorkMenu done in this._done){
       WorkLog workLog = new WorkLog();
-      List<Map<String, double>> results = [];
+      List<Map<String, Object>> results = [];
       bool isDone =false;
       for(ListForSetSelect item in this._displayList){
         if(item is WorkMenu && item.code == done.code){
@@ -189,7 +189,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           
           continue;
         }
-        if(item is WorkoutSet && isDone == true){
+        if(isDone == false)continue;
+        if(item is WorkoutSet){
           Map<String, Object> map = {
             "reps":item.reps,
             "weight":item.weight,
