@@ -184,6 +184,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       List<Map<String, Object>> results = [];
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
+        
         if (item is WorkMenu && item.code == done.code) {
           workLog = WorkLog.createNewLog(
             widget.user.uid,
@@ -206,6 +207,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }
         if (item is Separator) {
           workLog.logs = results;
+          isDone = false;
         }
       }
       workLogList.add(workLog);
