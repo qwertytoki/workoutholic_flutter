@@ -10,6 +10,14 @@ class WorkLogDao {
         .snapshots();
   }
 
+  static Stream<QuerySnapshot> getLogByUserAndDate(String userId,DateTime date){
+    return Firestore.instance
+        .collection("workLog")
+        .where('user_id', isEqualTo: userId)
+        .where('date',isEqualTo: date)
+        .snapshots();
+  }
+
   // Use async because I want to update calendar immediately.
   static Future<void> insertLogs(List<WorkLog> logs) async {
     logs.forEach((log) {

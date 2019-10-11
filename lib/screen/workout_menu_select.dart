@@ -21,7 +21,8 @@ class WorkoutMenuSelect extends StatefulWidget {
   final DateTime date;
   @override
   WorkoutMenuSelect(
-      {@required this.user, @required this.workPlan, @required this.date});
+      {@required this.user, @required this.workPlan, @required this.date}
+  );
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -30,10 +31,17 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = [];
+  
   @override
   void initState() {
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
+    
+    
+    List<WorkLog> todaysLogList = getTodaysLog();
+    
+
+
     menus.forEach((menu) {
       _displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
@@ -48,6 +56,15 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       _displayList.add(new Separator());
     });
     _displayList.add(new AddNewMenu());
+  }
+  List<WorkLog> getTodaysLog(){
+    return new StreamBuilder<QuerySnapshot>(
+      stream: WorkLogDao.getWishes(wishListDto.documentID, isMine, uid),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (!snapshot.hasData) {
+          return CircularLoad();
+        }
+      });
   }
 
   Widget build(BuildContext context) {
