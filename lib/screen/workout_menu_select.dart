@@ -21,8 +21,7 @@ class WorkoutMenuSelect extends StatefulWidget {
   final DateTime date;
   @override
   WorkoutMenuSelect(
-      {@required this.user, @required this.workPlan, @required this.date}
-  );
+      {@required this.user, @required this.workPlan, @required this.date});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -31,17 +30,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = [];
-  
+
   @override
   void initState() {
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-    
-    
     List<WorkLog> todaysLogList = getTodaysLog();
-    
-
-
+  
     menus.forEach((menu) {
       _displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
@@ -51,20 +46,31 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         _displayList.addAll(WorkoutSet.getDefaultLogs());
       } else {
         _displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-      }
+      }   
       _displayList.add(new AddNewSet());
       _displayList.add(new Separator());
     });
     _displayList.add(new AddNewMenu());
   }
-  List<WorkLog> getTodaysLog(){
-    return new StreamBuilder<QuerySnapshot>(
-      stream: WorkLogDao.getWishes(wishListDto.documentID, isMine, uid),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (!snapshot.hasData) {
-          return CircularLoad();
-        }
-      });
+
+  List<WorkLog> getTodaysLog() {
+    return WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
+
+    List<WorkLog> snapshot = WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
+    snapshot.data.documents.forEach((DocumentSnapshot document) {
+      list.add(WorkLog.of());
+    });
+    new StreamBuilder<QuerySnapshot>(
+        stream: ,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          // if (!snapshot.hasData) {
+          //   return CircularLoad();
+          // }
+          snapshot.data.documents.forEach((DocumentSnapshot document) {
+            list.add(WorkLog.of(document));
+          });
+        });
+    return list;
   }
 
   Widget build(BuildContext context) {
@@ -201,14 +207,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       List<Map<String, Object>> results = [];
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
-        
         if (item is WorkMenu && item.code == done.code) {
-          workLog = WorkLog.createNewLog(
-            widget.user.uid,
-            done.code, 
-            [], 
-            Timestamp.fromDate(widget.date), 
-            WorkType.of(done.workType));
+          workLog = WorkLog.createNewLog(widget.user.uid, done.code, [],
+              Timestamp.fromDate(widget.date), WorkType.of(done.workType));
           isDone = true;
           continue;
         }
