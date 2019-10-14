@@ -54,22 +54,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   List<WorkLog> getTodaysLog() {
-    return WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
-
-    List<WorkLog> snapshot = WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
-    snapshot.data.documents.forEach((DocumentSnapshot document) {
-      list.add(WorkLog.of());
+    List<WorkLog>  list = [];
+    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
+      list.addAll(workLogs);
     });
-    new StreamBuilder<QuerySnapshot>(
-        stream: ,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          // if (!snapshot.hasData) {
-          //   return CircularLoad();
-          // }
-          snapshot.data.documents.forEach((DocumentSnapshot document) {
-            list.add(WorkLog.of(document));
-          });
-        });
     return list;
   }
 
