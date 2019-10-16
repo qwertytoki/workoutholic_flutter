@@ -12,7 +12,7 @@ class WorkType {
   static List<WorkType> values() {
     return [WorkType.LIFT, WorkType.KEEP];
   }
-
+ 
   static WorkType of(String category) {
     switch (category) {
       case LIFT_VALUE:

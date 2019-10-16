@@ -28,7 +28,7 @@ class WorkLog implements ListForSetSelect {
       userId: document['user_id'],
       menuCode: document['menu_code'],
       date: document['date'] ?? '',
-      workType: document['work_type'],
+      workType: WorkType.of(document['work_type']),
       logs: new List<Map<String, double>>.from(document['logs']),
     );
   }

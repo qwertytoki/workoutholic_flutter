@@ -16,7 +16,7 @@ class WorkLogDao {
       Firestore.instance
       .collection("workLog")
       .where('user_id', isEqualTo:userId)
-      .where('date',isEqualTo:date)
+      .orderBy('date').startAt([date])
       .snapshots();
     
     snapshots.forEach((snapshot){
