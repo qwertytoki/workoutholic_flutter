@@ -54,8 +54,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   List<WorkLog> getTodaysLog() {
+    DateTime date = DateTime(2019, 10, 8);
     List<WorkLog>  list = [];
-    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
+    WorkLogDao.getLogByUserAndDate(widget.user.uid, date).then((workLogs){
       list.addAll(workLogs);
     });
     return list;
