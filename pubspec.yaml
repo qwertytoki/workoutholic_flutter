@@ -19,7 +19,7 @@ dependencies:
   firebase_auth: 0.8.4+5
   firebase_core: ^0.3.0
   firebase_analytics: ^1.0.4 
-  
+  intl: ^0.15.7
   google_sign_in: ^4.0.1+3
 
 

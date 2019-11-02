@@ -35,7 +35,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void initState() {
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-    List<WorkLog> todaysLogList = getTodaysLog();
+    List<WorkLog> todaysLogList = getDayLog();
   
     menus.forEach((menu) {
       _displayList.add(menu);
@@ -53,7 +53,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     _displayList.add(new AddNewMenu());
   }
 
-  List<WorkLog> getTodaysLog() {
+  List<WorkLog> getDayLog() {
     List<WorkLog>  list = [];
     WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
       list.addAll(workLogs);
