@@ -17,7 +17,7 @@ class WorkLog implements ListForSetSelect {
   String menuCode;
   Timestamp date;
   WorkType workType;
-  List<Map<String, double>> logs;
+  List<Map<String, num>> logs;
 
   static WorkLog of(DocumentSnapshot document) {
     if (!document.exists) {
@@ -33,13 +33,14 @@ class WorkLog implements ListForSetSelect {
     );
   }
 
-  static List<Map<String,double>> _translateToMap(List<dynamic> list){
-    List<Map<String,double>> tranlatedList = new List();
+  static List<Map<String,num>> _translateToMap(List<dynamic> list){
+    List<Map<String,num>> tranlatedList = new List();
+
     list.forEach((document){
-      Map<String,double> map={
-        "reps":double.parse(document["reps"]),
-        "weight":double.parse(document["reps"]),
-        "weightUnit":double.parse(document["weight_unit"]),
+      Map<String,num> map={
+        "reps":document["reps"],
+        "weight":document["weight"],
+        "weightUnit":document["weightUnit"],
       };
       tranlatedList.add(map);
     });
@@ -64,7 +65,7 @@ class WorkLog implements ListForSetSelect {
   // Delete me after using firebase
   static WorkLog createNewLog(String userId, String menuCode,
       List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {
-    List<Map<String, double>> logs = new List();
+    List<Map<String, num>> logs = new List();
     workoutSets.forEach((data) {
       logs.add({
         "reps": data.reps.toDouble(),
