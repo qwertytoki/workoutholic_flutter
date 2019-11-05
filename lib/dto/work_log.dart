@@ -17,7 +17,7 @@ class WorkLog implements ListForSetSelect {
   String menuCode;
   Timestamp date;
   WorkType workType;
-  List<Map<String, Object>> logs;
+  List<Map<String, double>> logs;
 
   static WorkLog of(DocumentSnapshot document) {
     if (!document.exists) {
@@ -29,9 +29,13 @@ class WorkLog implements ListForSetSelect {
       menuCode: document['menu_code'],
       date: document['date'] ?? '',
       workType: WorkType.of(document['work_type']),
-      logs: new List<Map<String, double>>.from(document['logs']),
+      logs: _translateToMap(document['logs']),
     );
   }
+  static List<Map<String,double>> _translateToMap(List<dynamic> list){
+    return null;
+  }
+
 
   bool isEmpty() {
     return this.documentID == '';
