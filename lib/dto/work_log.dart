@@ -32,8 +32,18 @@ class WorkLog implements ListForSetSelect {
       logs: _translateToMap(document['logs']),
     );
   }
+
   static List<Map<String,double>> _translateToMap(List<dynamic> list){
-    return null;
+    List<Map<String,double>> tranlatedList = new List();
+    list.forEach((document){
+      Map<String,double> map={
+        "reps":double.parse(document["reps"]),
+        "weight":double.parse(document["reps"]),
+        "weightUnit":double.parse(document["weight_unit"]),
+      };
+      tranlatedList.add(map);
+    });
+    return tranlatedList;
   }
 
 
@@ -58,7 +68,7 @@ class WorkLog implements ListForSetSelect {
     workoutSets.forEach((data) {
       logs.add({
         "reps": data.reps.toDouble(),
-        "weight": data.weight,
+        "weight": data.weight.toDouble(),
         "unit": data.weightUnit.toDouble()
       });
     });
