@@ -11,16 +11,18 @@ class WorkLogDao {
   }
 
   // 同期処理
-  static List<WorkLog> getLogByUserAndDate(String userId,DateTime date){
+  static List<WorkLog> getLogByUserAndDate(String userId, DateTime date) {
     List<WorkLog> list = [];
-    Stream<QuerySnapshot> snapshots = 
-      Firestore.instance
-      .collection("workLog")
-      .where('user_id', isEqualTo:userId)
-      .orderBy('date').startAt([date])
-      .snapshots();
-    return list;
-        
+    Stream<QuerySnapshot> snapshots = Firestore.instance
+        .collection("workLog")
+        .where('user_id', isEqualTo: userId)
+        .orderBy('date')
+        .startAt([date]).snapshots();
+    snapshots.forEach((snapshot) {
+      list.add(WorkLog.of(snapshot.documents[0]));
+      return list;
+    });
+
     // return Firestore.instance
     //     .collection("workLog")
     //     .where('user_id', isEqualTo: userId)
@@ -33,14 +35,10 @@ class WorkLogDao {
 //         .document(wishID)
 //         .get();
 
-
-
   // Use async because I want to update calendar immediately.
   static Future<void> insertLogs(List<WorkLog> logs) async {
     logs.forEach((log) {
-      Firestore.instance
-      .collection('workLog')
-      .add(WorkLog.toMap(log));
+      Firestore.instance.collection('workLog').add(WorkLog.toMap(log));
     });
   }
 }

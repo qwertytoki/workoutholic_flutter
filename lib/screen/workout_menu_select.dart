@@ -188,7 +188,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   void saveLogs() {
-    // This is O(n^2) but n will not big. so it's acceptable.
+    // This is O(n^2) but n will not be big. so it's acceptable.
     List<WorkLog> workLogList = [];
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
