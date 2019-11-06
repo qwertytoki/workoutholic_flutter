@@ -10,7 +10,8 @@ class WorkLogDao {
         .snapshots();
   }
 
-  static Future<List<WorkLog>> getLogByUserAndDate(String userId,DateTime date)async{
+  // 同期処理
+  static List<WorkLog> getLogByUserAndDate(String userId,DateTime date){
     List<WorkLog> list = [];
     Stream<QuerySnapshot> snapshots = 
       Firestore.instance
@@ -18,10 +19,6 @@ class WorkLogDao {
       .where('user_id', isEqualTo:userId)
       .orderBy('date').startAt([date])
       .snapshots();
-    
-    snapshots.forEach((snapshot){
-      list.add(WorkLog.of(snapshot.documents[0]));
-    });
     return list;
         
     // return Firestore.instance

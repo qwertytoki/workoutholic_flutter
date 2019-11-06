@@ -54,10 +54,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   List<WorkLog> getDayLog() {
-    List<WorkLog>  list = [];
-    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
-      list.addAll(workLogs);
-    });
+    List<WorkLog>  list = WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
+    // WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
+    //   list.addAll(workLogs);
+    // });
     return list;
   }
 
@@ -192,7 +192,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<WorkLog> workLogList = [];
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
-      List<Map<String, Object>> results = [];
+      List<Map<String, num>> results = [];
       
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
@@ -204,7 +204,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }
         if (isDone == false) continue;
         if (item is WorkoutSet) {
-          Map<String, Object> map = {
+          Map<String, num> map = {
             "reps": item.reps,
             "weight": item.weight,
             "weightUnit": item.weightUnit,
