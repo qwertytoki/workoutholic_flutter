@@ -61,4 +61,11 @@ class WorkMenu implements ListForSetSelect {
       workType: workType,
     );
   }
+  static generateDisplayMenu(String code, String nameEn,String nameJa) {
+    return new WorkMenu(
+      code: code,
+      nameEn: nameEn,
+      nameJa: nameJa
+    );
+  }
 }

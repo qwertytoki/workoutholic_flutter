@@ -31,7 +31,16 @@ class WorkPlan implements ListForSetSelect {
         nameEn: document['name_en'],
         nameJa: document['name_ja'],
         note: document['note'] ?? '',
-        menus: new List<Map<String,String>>.from(document['menus']));
+        menus: _translateToMenus(document['menus'])
+    );
+  }
+  static List<WorkMenu> _translateToMenus(List<dynamic> list){
+    List<WorkMenu> menus = new List();
+    list.forEach((document){
+      menus.add(WorkMenu.generateDisplayMenu(document['code'], document['name_en'], document['name_ja']));
+      
+    });
+    return menus;
   }
 
   bool isEmpty() {
@@ -51,7 +60,7 @@ class WorkPlan implements ListForSetSelect {
 
   // Delete me after using firebase
   static WorkPlan createNewSet(String id, String userId, String nameEn,
-      String nameJa, String note, List<Map<String,String>> menus, bool isDefault) {
+      String nameJa, String note, List<WorkMenu> menus, bool isDefault) {
     return new WorkPlan(
       id: id,
       userId: userId,
