@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkMenuDao {
@@ -29,6 +30,10 @@ class WorkMenuDao {
         resultMenus.add(menu);
       }
     });
-    return resultMenus;
+   return resultMenus;
+  }
+  static Stream<QuerySnapshot> getMenus2(){
+    return Firestore.instance
+    .collection('workMenu')
   }
 }

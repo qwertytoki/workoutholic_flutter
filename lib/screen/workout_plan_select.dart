@@ -50,10 +50,10 @@ class WorkoutPlanSelectPage extends StatelessWidget {
       workPlans.add(WorkPlan.of(plan));
     });
 
-    List<ListForSetSelect> displayList = [];
+    List<ListForSetSelect> displayList = new List();
     workPlans.forEach((set) {
       displayList?.add(set);
-      List<WorkMenu> menuList = WorkMenuDao.getMenus(set.menus);
+      List<Map<String,String>> menuList = WorkMenuDao.getMenus(set.menus);
       menuList.forEach((menu) {
         menu.workPlan = set;
         displayList.add(menu);

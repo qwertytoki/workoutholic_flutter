@@ -34,22 +34,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     super.initState();
-    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-
-    menus.forEach((menu) {
-      _displayList.add(menu);
-      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
-      // WorkLog log = menu.getWorkLog();
-      WorkLog log = new WorkLog();
-      if (log.logs.length == 0) {
-        _displayList.addAll(WorkoutSet.getDefaultLogs());
-      } else {
-        _displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-      }
-      _displayList.add(new AddNewSet());
-      _displayList.add(new Separator());
-    });
-    _displayList.add(new AddNewMenu());
+    
   }
 
   Widget build(BuildContext context) {
@@ -88,6 +73,22 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
+    List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
+
+    menus.forEach((menu) {
+      _displayList.add(menu);
+      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // WorkLog log = menu.getWorkLog();
+      WorkLog log = new WorkLog();
+      if (log.logs.length == 0) {
+        _displayList.addAll(WorkoutSet.getDefaultLogs());
+      } else {
+        _displayList.addAll(WorkoutSet.translateFromMap(log.logs));
+      }
+      _displayList.add(new AddNewSet());
+      _displayList.add(new Separator());
+    });
+    _displayList.add(new AddNewMenu());
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,

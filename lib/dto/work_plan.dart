@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
+import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkPlan implements ListForSetSelect {
   WorkPlan({
@@ -17,7 +18,7 @@ class WorkPlan implements ListForSetSelect {
   String nameEn;
   String nameJa;
   String note;
-  List<String> menus;
+  List<WorkMenu> menus;
   bool isDefault;
 
   static WorkPlan of(DocumentSnapshot document) {
@@ -30,7 +31,7 @@ class WorkPlan implements ListForSetSelect {
         nameEn: document['name_en'],
         nameJa: document['name_ja'],
         note: document['note'] ?? '',
-        menus: new List<String>.from(document['menus']));
+        menus: new List<Map<String,String>>.from(document['menus']));
   }
 
   bool isEmpty() {
@@ -50,7 +51,7 @@ class WorkPlan implements ListForSetSelect {
 
   // Delete me after using firebase
   static WorkPlan createNewSet(String id, String userId, String nameEn,
-      String nameJa, String note, List<String> menus, bool isDefault) {
+      String nameJa, String note, List<Map<String,String>> menus, bool isDefault) {
     return new WorkPlan(
       id: id,
       userId: userId,
