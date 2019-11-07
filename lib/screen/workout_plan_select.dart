@@ -5,7 +5,6 @@ import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_plan_dao.dart';
-import 'package:workoutholic/dao/work_menu_dao.dart';
 import 'package:workoutholic/screen/add_set.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/user.dart';
@@ -53,10 +52,9 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     List<ListForSetSelect> displayList = new List();
     workPlans.forEach((plan) {
       displayList?.add(plan);
-      List<Map<String,String>> menuList = plan.menus;
+      List<WorkMenu> menuList = plan.menus;
       menuList.forEach((menu) {
-        // menu.workPlan = plan;
-        displayList.add(menu["code"]);
+        displayList.add(menu);
       });
       displayList.add(new Separator());
     });

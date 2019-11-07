@@ -32,8 +32,8 @@ class WorkMenuDao {
     });
    return resultMenus;
   }
-  static Stream<QuerySnapshot> getMenus2(){
-    return Firestore.instance
-    .collection('workMenu')
-  }
+  // static Stream<QuerySnapshot> getMenus2(){
+  //   return Firestore.instance
+  //   .collection('workMenu')
+  // }
 }
