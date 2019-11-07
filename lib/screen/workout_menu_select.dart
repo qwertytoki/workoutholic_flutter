@@ -28,12 +28,11 @@ class WorkoutMenuSelect extends StatefulWidget {
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<ListForSetSelect> _displayList = [];
+  List<ListForSetSelect> _displayList = new List();
 
   @override
   void initState() {
     super.initState();
-    
   }
 
   Widget build(BuildContext context) {
@@ -72,8 +71,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
+    _displayList = new List();
     List<WorkMenu> menus = widget.workPlan.menus;
-
     menus.forEach((menu) {
       _displayList.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
