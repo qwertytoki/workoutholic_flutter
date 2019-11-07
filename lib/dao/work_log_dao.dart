@@ -10,30 +10,29 @@ class WorkLogDao {
         .snapshots();
   }
 
-  // 同期処理
-  static List<WorkLog> getLogByUserAndDate(String userId, DateTime date) {
-    List<WorkLog> list = [];
-    Stream<QuerySnapshot> snapshots = Firestore.instance
+  // // 同期処理
+  // static Future<List<WorkLog>> getLogByUserAndDate(
+  //     String userId, DateTime date) async {
+  //   QuerySnapshot snapshot = await Firestore.instance
+  //       .collection("workLog")
+  //       .where('user_id', isEqualTo: userId)
+  //       .orderBy('date')
+  //       .startAt([date]).getDocuments();
+  //   List<WorkLog> list = new List();
+  //   snapshot.documents.forEach((doc) {
+  //     list.add(WorkLog.of(snapshot.documents[0]));
+  //   });
+  //   return list;
+  // }
+
+  static Stream<QuerySnapshot> getLogByUserAndDate(
+      String userId, DateTime date) {
+    return Firestore.instance
         .collection("workLog")
         .where('user_id', isEqualTo: userId)
         .orderBy('date')
         .startAt([date]).snapshots();
-    snapshots.forEach((snapshot) {
-      list.add(WorkLog.of(snapshot.documents[0]));
-      return list;
-    });
-
-    // return Firestore.instance
-    //     .collection("workLog")
-    //     .where('user_id', isEqualTo: userId)
-    //     .where('date',isEqualTo: date)
-    //     .snapshots();
   }
-
-// DocumentSnapshot snapshot = await Firestore.instance
-//         .collection(COLLECTION_WISHES)
-//         .document(wishID)
-//         .get();
 
   // Use async because I want to update calendar immediately.
   static Future<void> insertLogs(List<WorkLog> logs) async {

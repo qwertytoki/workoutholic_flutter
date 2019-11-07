@@ -45,7 +45,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     if (!snapshot.hasData) {
       return CircularLoad();
     }
-    List<WorkPlan> workPlans = [];
+    List<WorkPlan> workPlans = new List();
     snapshot.data.documents.forEach((plan) {
       workPlans.add(WorkPlan.of(plan));
     });

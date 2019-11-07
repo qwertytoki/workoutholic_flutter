@@ -35,30 +35,21 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void initState() {
     super.initState();
     List<WorkMenu> menus = WorkMenuDao.getMenus(widget.workPlan.menus);
-    List<WorkLog> todaysLogList = getDayLog();
-  
+
     menus.forEach((menu) {
       _displayList.add(menu);
-      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する 
+      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
       // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
       if (log.logs.length == 0) {
         _displayList.addAll(WorkoutSet.getDefaultLogs());
       } else {
         _displayList.addAll(WorkoutSet.translateFromMap(log.logs));
-      }   
+      }
       _displayList.add(new AddNewSet());
       _displayList.add(new Separator());
     });
     _displayList.add(new AddNewMenu());
-  }
-
-  List<WorkLog> getDayLog() {
-    List<WorkLog>  list = WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date);
-    // WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((workLogs){
-    //   list.addAll(workLogs);
-    // });
-    return list;
   }
 
   Widget build(BuildContext context) {
@@ -88,6 +79,15 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildBody(BuildContext context) {
+    return StreamBuilder(
+      stream: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
+      builder: (context, snapshot) {
+        return _buildList(context, snapshot);
+      },
+    );
+  }
+
+  Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
@@ -193,7 +193,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
       List<Map<String, num>> results = [];
-      
+
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
         if (item is WorkMenu && item.code == done.code) {
