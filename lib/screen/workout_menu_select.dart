@@ -71,6 +71,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
+    // FIXME ここでリストクリアしちゃうと、重さとか変えたときの変更が反映されない
     _displayList = new List();
     List<WorkMenu> menus = widget.workPlan.menus;
     menus.forEach((menu) {
