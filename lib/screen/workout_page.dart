@@ -32,8 +32,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   @override
   void initState() {
     super.initState();
-    DateTime _now = DateTime.now();
-    _selectedDay = DateTime(_now.year,_now.month,_now.day);
+    _selectedDay = DateTime.now();
     _events = {
       _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
       _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],

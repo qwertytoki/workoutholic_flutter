@@ -189,6 +189,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void saveLogs() {
     // This is O(n^2) but n will not be big. so it's acceptable.
     List<WorkLog> workLogList = [];
+    DateTime date = DateTime(widget.date.year,widget.date.month,widget.date.day);
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
       List<Map<String, num>> results = [];
@@ -197,7 +198,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       for (ListForSetSelect item in this._displayList) {
         if (item is WorkMenu && item.code == done.code) {
           workLog = WorkLog.createNewLog(widget.user.uid, done.code, [],
-              Timestamp.fromDate(widget.date), WorkType.of(done.workType));
+              Timestamp.fromDate(date), WorkType.of(done.workType));
           isDone = true;
           continue;
         }
