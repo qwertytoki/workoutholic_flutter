@@ -102,6 +102,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       _displayList.forEach((item){
         if(item is WorkMenu){
           //menucode比較して同じなら置き換え
+          
         }
       });
     }
