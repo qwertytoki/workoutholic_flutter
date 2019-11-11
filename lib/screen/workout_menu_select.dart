@@ -98,10 +98,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       existLogs.add(WorkLog.of(doc));
     });
     if (existLogs.length > 0) {
+      List<ListForSetSelect> _replaceList = new List();
       _displayList.forEach((item) {
         if (item is WorkMenu) {
           //menucode比較して同じなら置き換え
-          
+          existLogs.forEach((log){
+            
+          });
         }
       });
     }
