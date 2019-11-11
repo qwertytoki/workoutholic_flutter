@@ -93,9 +93,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
-    if(snapshot.data.documents.length()!=0){
+    
       //データ取得できてたら置き換え
-      List<WorkLog> existLogs =  new List();
+      List<WorkLog> existLogs =  new List(); 
       snapshot.data.documents.forEach((doc){
         existLogs.add(WorkLog.of(doc));
       });
@@ -105,7 +105,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           
         }
       });
-    }
+    
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
