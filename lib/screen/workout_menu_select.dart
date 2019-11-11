@@ -36,7 +36,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     _displayList = _generateDisplayList();
   }
 
-  List<ListForSetSelect> _generateDisplayList(){
+  List<ListForSetSelect> _generateDisplayList() {
     List<WorkMenu> menus = widget.workPlan.menus;
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
@@ -55,7 +55,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     _list.add(new AddNewMenu());
     return _list;
   }
-  
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,19 +92,20 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
-    
-      //データ取得できてたら置き換え
-      List<WorkLog> existLogs =  new List(); 
-      snapshot.data.documents.forEach((doc){
-        existLogs.add(WorkLog.of(doc));
-      });
-      _displayList.forEach((item){
-        if(item is WorkMenu){
+    //データ取得できてたら置き換え
+    List<WorkLog> existLogs = new List();
+    snapshot.data.documents.forEach((doc) {
+      existLogs.add(WorkLog.of(doc));
+    });
+    if (existLogs.length > 0) {
+      _displayList.forEach((item) {
+        if (item is WorkMenu) {
           //menucode比較して同じなら置き換え
           
         }
       });
-    
+    }
+
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
@@ -208,7 +208,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   void saveLogs() {
     // This is O(n^2) but n will not be big. so it's acceptable.
     List<WorkLog> workLogList = [];
-    DateTime date = DateTime(widget.date.year,widget.date.month,widget.date.day);
+    DateTime date =
+        DateTime(widget.date.year, widget.date.month, widget.date.day);
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
       List<Map<String, num>> results = [];
