@@ -187,7 +187,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         hideHeader: true,
         title: Text("結果を入力"),
         // 初期値
-        selecteds: [getWeightForPicker(rowData.weight), 0, rowData.reps, 0],
+        selecteds: [getWeightForPicker(rowData.weight), 0, rowData.reps.toInt(), 0],
         onConfirm: (Picker picker, List value) {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
@@ -200,7 +200,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }).showDialog(context);
   }
 
-  int getWeightForPicker(double weight) {
+  int getWeightForPicker(num weight) {
     if (weight <= 40) {
       return weight.round() - 1;
     }
