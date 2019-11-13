@@ -15,7 +15,6 @@ import 'package:uuid/uuid.dart';
 import 'package:workoutholic/screen/home_page.dart';
 import 'package:workoutholic/dto/user.dart';
 
-
 class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
   final User user;
@@ -35,11 +34,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     super.initState();
-    _displayList = _generateDisplayList();
   }
 
   List<ListForSetSelect> _generateDisplayList([List<WorkLog> existLogs]) {
-    if(existLogs == null){
+    if (existLogs == null) {
       existLogs = new List();
     }
     List<WorkMenu> menus = widget.workPlan.menus;
@@ -48,8 +46,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       _list.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
       WorkLog log = new WorkLog();
-      existLogs.forEach((l){
-        if(l.menuCode == menu.code){
+      existLogs.forEach((l) {
+        if (l.menuCode == menu.code) {
           log = l;
         }
       });
@@ -92,8 +90,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return StreamBuilder(
-      stream: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
+    return FutureBuilder(
+      future: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
       builder: (context, snapshot) {
         return _buildList(context, snapshot);
       },
@@ -101,19 +99,20 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
-    //データ取得できてたら置き換え
     if (!snapshot.hasData) {
       return CircularLoad();
     }
     List<WorkLog> existLogs = new List();
-    if (snapshot.data != null) {
-      snapshot.data.documents.forEach((doc) {
-        existLogs.add(WorkLog.of(doc));
-      });
-      if (existLogs.length > 0) {
-        _displayList = _generateDisplayList(existLogs);
-      }
+
+    snapshot.data.documents.forEach((doc) {
+      existLogs.add(WorkLog.of(doc));
+    });
+    if (existLogs.length > 0) {
+      _displayList = _generateDisplayList(existLogs);
     }
+    // }else{
+    //   _displayList = _generateDisplayList();
+    // }
 
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -192,7 +191,12 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         hideHeader: true,
         title: Text("結果を入力"),
         // 初期値
-        selecteds: [getWeightForPicker(rowData.weight), 0, rowData.reps.toInt(), 0],
+        selecteds: [
+          getWeightForPicker(rowData.weight),
+          0,
+          rowData.reps.toInt(),
+          0
+        ],
         onConfirm: (Picker picker, List value) {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
