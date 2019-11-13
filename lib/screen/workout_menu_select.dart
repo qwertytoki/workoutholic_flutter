@@ -94,19 +94,19 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
     //データ取得できてたら置き換え
     List<WorkLog> existLogs = new List();
-    snapshot.data.documents.forEach((doc) {
-      existLogs.add(WorkLog.of(doc));
-    });
-    if (existLogs.length > 0) {
-      List<ListForSetSelect> _replaceList = new List();
-      _displayList.forEach((item) {
-        if (item is WorkMenu) {
-          //menucode比較して同じなら置き換え
-          existLogs.forEach((log){
-            
-          });
-        }
+    if (snapshot.data != null) {
+      snapshot.data.documents.forEach((doc) {
+        existLogs.add(WorkLog.of(doc));
       });
+      if (existLogs.length > 0) {
+        List<ListForSetSelect> _replaceList = new List();
+        _displayList.forEach((item) {
+          if (item is WorkMenu) {
+            //menucode比較して同じなら置き換え
+            existLogs.forEach((log) {});
+          }
+        });
+      }
     }
 
     return ListView.builder(
