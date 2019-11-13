@@ -36,14 +36,18 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     _displayList = _generateDisplayList();
   }
 
-  List<ListForSetSelect> _generateDisplayList() {
+  List<ListForSetSelect> _generateDisplayList([List<WorkLog> existLogs]) {
     List<WorkMenu> menus = widget.workPlan.menus;
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
       _list.add(menu);
       // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
-      // WorkLog log = menu.getWorkLog();
       WorkLog log = new WorkLog();
+      existLogs.forEach((l){
+        if(l.menuCode == menu.code){
+          log = l;
+        }
+      });
       if (log.logs.length == 0) {
         _list.addAll(WorkoutSet.getDefaultLogs());
       } else {
