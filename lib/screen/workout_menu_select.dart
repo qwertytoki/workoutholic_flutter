@@ -37,6 +37,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   List<ListForSetSelect> _generateDisplayList([List<WorkLog> existLogs]) {
+    if(existLogs == null){
+      existLogs = new List();
+    }
     List<WorkMenu> menus = widget.workPlan.menus;
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
@@ -103,13 +106,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         existLogs.add(WorkLog.of(doc));
       });
       if (existLogs.length > 0) {
-        List<ListForSetSelect> _replaceList = new List();
-        _displayList.forEach((item) {
-          if (item is WorkMenu) {
-            //menucode比較して同じなら置き換え
-            existLogs.forEach((log) {});
-          }
-        });
+        _displayList = _generateDisplayList(existLogs);
       }
     }
 
