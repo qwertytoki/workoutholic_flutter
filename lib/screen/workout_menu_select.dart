@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
+import 'package:workoutholic/widget/circular_load.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
@@ -13,6 +14,7 @@ import 'dart:convert';
 import 'package:uuid/uuid.dart';
 import 'package:workoutholic/screen/home_page.dart';
 import 'package:workoutholic/dto/user.dart';
+
 
 class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
@@ -100,6 +102,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
     //データ取得できてたら置き換え
+    if (!snapshot.hasData) {
+      return CircularLoad();
+    }
     List<WorkLog> existLogs = new List();
     if (snapshot.data != null) {
       snapshot.data.documents.forEach((doc) {
