@@ -30,10 +30,18 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = new List();
+  List<WorkLog> _existLogs = new List();
 
   @override
   void initState() {
     super.initState();
+    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date)
+        .then<List<WorkLog>>((list) {
+      setState(() {
+        // _existLogs = list;
+        _displayList = _generateDisplayList(list);
+      });
+    });
   }
 
   List<ListForSetSelect> _generateDisplayList([List<WorkLog> existLogs]) {
@@ -102,18 +110,19 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     if (!snapshot.hasData) {
       return CircularLoad();
     }
-    List<WorkLog> existLogs = new List();
+    // List<WorkLog> existLogs = new List();
 
-    snapshot.data.documents.forEach((doc) {
-      existLogs.add(WorkLog.of(doc));
-    });
-    if (existLogs.length > 0) {
-      _displayList = _generateDisplayList(existLogs);
-    }
-    // }else{
+    // snapshot.data.documents.forEach((doc) {
+    //   existLogs.add(WorkLog.of(doc));
+    // });
+    // if (_existLogs.length > 0) {
+    //   _displayList = _generateDisplayList(_existLogs);
+    // }
+    // else{
     //   _displayList = _generateDisplayList();
     // }
 
+    
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
