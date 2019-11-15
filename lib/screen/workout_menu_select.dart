@@ -35,8 +35,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     super.initState();
-    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date)
-        .then((list) {
+    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((list) {
       setState(() {
         _existLogs = list;
         _displayList = _generateDisplayList(_existLogs);
@@ -248,7 +247,19 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           isDone = false;
         }
       }
-      insertList.add(workLog);
+      // existLogsに同じコードのデータあったらupsert行きにする。
+      // FIXME 今はいいけどlogの直近データ取る対応済んだらここの実装買えないと行けない
+      bool isExist = false;
+      _existLogs.forEach((l) {
+        if (l.menuCode == workLog.menuCode) {
+          l.logs = workLog.logs;
+          updateList.add(l);
+          isExist = true;
+        }
+      });
+      if (isExist == false) {
+        insertList.add(workLog);
+      }
     }
     WorkLogDao.insertLogs(insertList);
     WorkLogDao.updateLogs(updateList);
