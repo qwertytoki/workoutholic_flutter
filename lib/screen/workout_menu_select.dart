@@ -108,17 +108,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     if (!snapshot.hasData) {
       return CircularLoad();
     }
-    // List<WorkLog> existLogs = new List();
-
-    // snapshot.data.documents.forEach((doc) {
-    //   existLogs.add(WorkLog.of(doc));
-    // });
-    // if (_existLogs.length > 0) {
-    //   _displayList = _generateDisplayList(_existLogs);
-    // }
-    // else{
-    //   _displayList = _generateDisplayList();
-    // }
 
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -210,7 +199,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             _displayList[indexOfList] = WorkoutSet.newData(
                 double.parse(selectedVals[0]),
                 weightUnit,
-                double.parse(selectedVals[2]));
+                int.parse(selectedVals[2]));
           });
         }).showDialog(context);
   }
