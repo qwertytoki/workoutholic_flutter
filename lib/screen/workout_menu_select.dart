@@ -30,15 +30,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = new List();
-  List<WorkLog> _existLogs = new List();
 
   @override
   void initState() {
     super.initState();
     WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date)
-        .then<List<WorkLog>>((list) {
+        .then((list) {
       setState(() {
-        // _existLogs = list;
         _displayList = _generateDisplayList(list);
       });
     });
@@ -122,7 +120,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     //   _displayList = _generateDisplayList();
     // }
 
-    
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
