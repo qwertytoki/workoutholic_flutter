@@ -15,7 +15,7 @@ class WorkoutSet implements ListForSetSelect {
   static List<WorkoutSet> translateFromMap(List<Map<String,num>> logs) {
     List<WorkoutSet> list = new List();
     logs.forEach((log) {
-      list.add(newData(log["weight"], log["unit"], log["reps"]));
+      list.add(newData(log["weight"], log["weightUnit"], log["reps"]));
     });
     return list;
   }
