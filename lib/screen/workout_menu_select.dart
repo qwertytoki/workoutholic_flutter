@@ -30,6 +30,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = new List();
+  List<WorkLog> _existLogs = new List();
 
   @override
   void initState() {
@@ -37,7 +38,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date)
         .then((list) {
       setState(() {
-        _displayList = _generateDisplayList(list);
+        _existLogs = list;
+        _displayList = _generateDisplayList(_existLogs);
       });
     });
   }
@@ -215,12 +217,13 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   void saveLogs() {
     // This is O(n^2) but n will not be big. so it's acceptable.
-    List<WorkLog> workLogList = [];
+    List<WorkLog> insertList = new List();
+    List<WorkLog> updateList = new List();
     DateTime date =
         DateTime(widget.date.year, widget.date.month, widget.date.day);
     for (WorkMenu done in this._done) {
       WorkLog workLog = new WorkLog();
-      List<Map<String, num>> results = [];
+      List<Map<String, num>> results = new List();
 
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
@@ -245,8 +248,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           isDone = false;
         }
       }
-      workLogList.add(workLog);
+      insertList.add(workLog);
     }
-    WorkLogDao.insertLogs(workLogList);
+    WorkLogDao.insertLogs(insertList);
+    WorkLogDao.updateLogs(updateList);
   }
 }
