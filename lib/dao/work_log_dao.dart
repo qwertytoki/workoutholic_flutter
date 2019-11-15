@@ -50,10 +50,18 @@ class WorkLogDao {
     return list;
   }
 
-  // Use async because I want to update calendar immediately.
   static Future<void> insertLogs(List<WorkLog> logs) async {
     logs.forEach((log) {
       Firestore.instance.collection('workLog').add(WorkLog.toMap(log));
+    });
+  }
+
+  static Future<void> updateLogs(List<WorkLog> logs) async{
+    logs.forEach((log){
+      Firestore.instance
+        .collection('workLog')
+        .document(log.documentID)
+        .updateData({'logs': log.logs});
     });
   }
 }
