@@ -34,9 +34,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     super.initState();
     _selectedDay = DateTime.now();
     _events = {
-      _selectedDay.subtract(Duration(days: 5)): ['Bench Press', 'Squat'],
-      _selectedDay.subtract(Duration(days: 2)): ['Bench Press', 'Squat'],
-      _selectedDay: ['Bench Press', 'Squat', 'Dead Lift', 'Chinning', 'Plunk'],
+      _selectedDay.subtract(Duration(days: 5)): ['ベンチプレス', 'スクワット'],
+      _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
+      _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
