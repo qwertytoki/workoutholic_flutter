@@ -17,8 +17,10 @@ class WorkLogDao {
     QuerySnapshot snapshot  = await Firestore.instance
         .collection("workLog")
         .where('user_id', isEqualTo: userId)
-        .orderBy('date')
-        .startAt([date]).getDocuments();
+        .where('date', isGreaterThanOrEqualTo: date)
+        // .orderBy('date')
+        // .startAt([date])
+        .getDocuments();
     snapshot.documents.forEach((s){
       list.add(WorkLog.of(s));
     });

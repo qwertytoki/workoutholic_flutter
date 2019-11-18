@@ -33,11 +33,12 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void initState() {
     super.initState();
     _selectedDay = DateTime.now();
-    _events = {
-      _selectedDay.subtract(Duration(days: 5)): ['ベンチプレス', 'スクワット'],
-      _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
-      _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
-    };
+    // _events = {
+    //   _selectedDay.subtract(Duration(days: 5)): ['ベンチプレス', 'スクワット'],
+    //   _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
+    //   _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
+    // };
+    
     _events = _getWorkLog(_selectedDay);
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -57,6 +58,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
      * 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
      */
     Map<DateTime, List<String>> map = new Map();
+    
     return map;
   } 
 
