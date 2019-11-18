@@ -38,6 +38,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
       _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
     };
+    _events = _getWorkLog(_selectedDay);
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _visibleEvents = _events;
@@ -49,6 +50,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
 
     _controller.forward();
   }
+  Map<DateTime, List<String>> _getWorkLog(DateTime date){
+    /**
+     * 表示されている月のWorkLogを全件Listで取得する
+     * DateごとにMapにセットする
+     * 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
+     */
+    Map<DateTime, List<String>> map = new Map();
+    return map;
+  } 
 
   @override
   Widget build(BuildContext context) {
