@@ -3,6 +3,8 @@ import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
 import 'package:workoutholic/dto/user.dart';
+import 'package:workoutholic/dto/work_log.dart';
+import 'package:workoutholic/dao/work_log_dao.dart';
 
 class WorkoutPage extends StatefulWidget {
   final User user;
@@ -38,7 +40,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     //   _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
     //   _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
     // };
-    
+
+    // Future戻してあげる
     _events = _getWorkLog(_selectedDay);
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -51,16 +54,29 @@ class _MyWorkoutPageState extends State<WorkoutPage>
 
     _controller.forward();
   }
-  Map<DateTime, List<String>> _getWorkLog(DateTime date){
+
+  Future<Map<DateTime, List<String>>> _getWorkLog(DateTime date) async {
     /**
-     * 表示されている月のWorkLogを全件Listで取得する
+     * 済 表示されている月のWorkLogを全件Listで取得する
      * DateごとにMapにセットする
      * 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
      */
+
     Map<DateTime, List<String>> map = new Map();
-    
+    List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
+    logs.forEach((l){
+      if(map.containsKey(l.date)){
+        List<String> list = map[l.date];
+        //FIXME menuCodeじゃなくてNameがほしい
+        list.add(l.menuCode);
+      }else{
+        List<String> list = new List();
+        list.add(l.menuCode);
+        map.putIfAbsent(date, ()=>list);
+      }
+    });
     return map;
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +104,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => WorkoutPlanSelectPage(user: widget.user,date:_selectedDay)),
+          builder: (context) =>
+              WorkoutPlanSelectPage(user: widget.user, date: _selectedDay)),
     );
   }
 
