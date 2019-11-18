@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -42,11 +43,13 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     // };
 
     // Future戻してあげる
-    _events = _getWorkLog(_selectedDay);
+    _getWorkLog(_selectedDay).then((monthlyLogsMap) {
+      _events = monthlyLogsMap;
+      _selectedEvents = _events[_selectedDay] ?? [];
+      _visibleEvents = _events;
+      _visibleHolidays = _holidays;
+    });
 
-    _selectedEvents = _events[_selectedDay] ?? [];
-    _visibleEvents = _events;
-    _visibleHolidays = _holidays;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -58,21 +61,21 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   Future<Map<DateTime, List<String>>> _getWorkLog(DateTime date) async {
     /**
      * 済 表示されている月のWorkLogを全件Listで取得する
-     * DateごとにMapにセットする
+     * 済 DateごとにMapにセットする
      * 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
      */
 
     Map<DateTime, List<String>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
-    logs.forEach((l){
-      if(map.containsKey(l.date)){
+    logs.forEach((l) {
+      if (map.containsKey(l.date)) {
         List<String> list = map[l.date];
         //FIXME menuCodeじゃなくてNameがほしい
         list.add(l.menuCode);
-      }else{
+      } else {
         List<String> list = new List();
         list.add(l.menuCode);
-        map.putIfAbsent(date, ()=>list);
+        map.putIfAbsent(date, () => list);
       }
     });
     return map;
