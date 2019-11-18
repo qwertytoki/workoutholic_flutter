@@ -11,17 +11,35 @@ class WorkLogDao {
   }
 
   static Future<List<WorkLog>> getLogByUserAndDate(
-      String userId, DateTime date) async{
+      String userId, DateTime date) async {
     List<WorkLog> list = new List();
-    date = new DateTime(date.year,date.month,date.day);
-    QuerySnapshot snapshot  = await Firestore.instance
+    date = new DateTime(date.year, date.month, date.day);
+    QuerySnapshot snapshot = await Firestore.instance
         .collection("workLog")
         .where('user_id', isEqualTo: userId)
-        .where('date', isGreaterThanOrEqualTo: date)
-        // .orderBy('date')
-        // .startAt([date])
+        // .where('date', isGreaterThanOrEqualTo: date)
+        .orderBy('date')
+        .startAt([date]).getDocuments();
+    snapshot.documents.forEach((s) {
+      list.add(WorkLog.of(s));
+    });
+    return list;
+  }
+
+  static Future<List<WorkLog>> getLogByMonth(DateTime date) async {
+    //今月分のデータ全部取得する
+
+    DateTime firstDate = new DateTime(date.year, date.month, 1);
+    //FIXME 12月のときバグるよ
+    DateTime lastDate = new DateTime(date.year, date.month + 1, 1);
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection("workLog")
+        .where("date", isGreaterThanOrEqualTo: firstDate)
+        .where("date", isLessThan: lastDate)
+        .orderBy("date")
         .getDocuments();
-    snapshot.documents.forEach((s){
+    List<WorkLog> list = new List();
+    snapshot.documents.forEach((s) {
       list.add(WorkLog.of(s));
     });
     return list;
@@ -33,12 +51,12 @@ class WorkLogDao {
     });
   }
 
-  static Future<void> updateLogs(List<WorkLog> logs) async{
-    logs.forEach((log){
+  static Future<void> updateLogs(List<WorkLog> logs) async {
+    logs.forEach((log) {
       Firestore.instance
-        .collection('workLog')
-        .document(log.documentID)
-        .updateData({'logs': log.logs});
+          .collection('workLog')
+          .document(log.documentID)
+          .updateData({'logs': log.logs});
     });
   }
 }
