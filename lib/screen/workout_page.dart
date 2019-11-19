@@ -36,18 +36,24 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void initState() {
     super.initState();
     _selectedDay = DateTime.now();
-    // _events = {
-    //   _selectedDay.subtract(Duration(days: 5)): ['ベンチプレス', 'スクワット'],
-    //   _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
-    //   _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
-    // };
+    _events = {};
+    _events = {
+      // _selectedDay.subtract(Duration(days: 5)): ['ベンチプレス', 'スクワット'],
+      // _selectedDay.subtract(Duration(days: 2)): ['ベンチプレス', 'スクワット'],
+      // _selectedDay: ['ベンチプレス', 'スクワット', 'デッドリフト', 'チンニング(懸垂)', 'プランク'],
+    };
+    _selectedEvents = _events[_selectedDay] ?? [];
+    _visibleEvents = _events;
+    _visibleHolidays = _holidays;
 
     // Future戻してあげる
     _getWorkLog(_selectedDay).then((monthlyLogsMap) {
-      _events = monthlyLogsMap;
-      _selectedEvents = _events[_selectedDay] ?? [];
-      _visibleEvents = _events;
-      _visibleHolidays = _holidays;
+      setState(() {
+        _events = monthlyLogsMap;
+        _selectedEvents = _events[_selectedDay] ?? [];
+        _visibleEvents = _events;
+        _visibleHolidays = _holidays;
+      });
     });
 
     _controller = AnimationController(
@@ -59,11 +65,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   Future<Map<DateTime, List<String>>> _getWorkLog(DateTime date) async {
-    /**
-     * 済 表示されている月のWorkLogを全件Listで取得する
-     * 済 DateごとにMapにセットする
-     * 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
-     */
+    // TODO 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
 
     Map<DateTime, List<String>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
