@@ -31,6 +31,8 @@ class WorkLog implements ListForSetSelect {
       documentID: document.documentID,
       userId: document['user_id'],
       menuCode: document['menu_code'],
+      menuNameJa: document['menu_name_ja'],
+      menuNameEn: document['menu_name_en'],
       date: document['date'] ?? '',
       workType: WorkType.of(document['work_type']),
       logs: _translateToMap(document['logs']),

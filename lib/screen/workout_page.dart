@@ -73,11 +73,10 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       DateTime dt  = new DateTime.fromMicrosecondsSinceEpoch(l.date.microsecondsSinceEpoch);
       if (map.containsKey(dt)) {
         List<String> list = map[dt];
-        //FIXME menuCodeじゃなくてNameがほしい
-        list.add(l.menuCode);
+        list.add(l.menuNameJa);
       } else {
         List<String> list = new List();
-        list.add(l.menuCode);
+        list.add(l.menuNameJa);
         map.putIfAbsent(dt, () => list);
       }
     });
