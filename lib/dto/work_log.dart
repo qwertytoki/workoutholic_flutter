@@ -8,6 +8,8 @@ class WorkLog implements ListForSetSelect {
       {this.documentID = '',
       this.userId = '',
       this.menuCode = '',
+      this.menuNameJa = '',
+      this.menuNameEn = '',
       this.date,
       this.workType = WorkType.LIFT,
       this.logs = const []});
@@ -15,6 +17,8 @@ class WorkLog implements ListForSetSelect {
   String documentID;
   String userId;
   String menuCode;
+  String menuNameJa;
+  String menuNameEn;
   Timestamp date;
   WorkType workType;
   List<Map<String, num>> logs;
@@ -33,20 +37,19 @@ class WorkLog implements ListForSetSelect {
     );
   }
 
-  static List<Map<String,num>> _translateToMap(List<dynamic> list){
-    List<Map<String,num>> tranlatedList = new List();
+  static List<Map<String, num>> _translateToMap(List<dynamic> list) {
+    List<Map<String, num>> tranlatedList = new List();
 
-    list.forEach((document){
-      Map<String,num> map={
-        "reps":document["reps"],
-        "weight":document["weight"],
-        "weightUnit":document["weightUnit"],
+    list.forEach((document) {
+      Map<String, num> map = {
+        "reps": document["reps"],
+        "weight": document["weight"],
+        "weightUnit": document["weightUnit"],
       };
       tranlatedList.add(map);
     });
     return tranlatedList;
   }
-
 
   bool isEmpty() {
     return this.documentID == '';
@@ -59,12 +62,20 @@ class WorkLog implements ListForSetSelect {
     data.putIfAbsent('logs', () => log.logs);
     data.putIfAbsent('work_type', () => log.workType.value);
     data.putIfAbsent('menu_code', () => log.menuCode);
+    data.putIfAbsent('menu_name_ja', () => log.menuNameJa);
+    data.putIfAbsent('menu_name_en', () => log.menuNameEn);
     return data;
   }
 
   // Delete me after using firebase
-  static WorkLog createNewLog(String userId, String menuCode,
-      List<WorkoutSet> workoutSets, Timestamp date, WorkType workType) {
+  static WorkLog createNewLog(
+      String userId,
+      String menuCode,
+      String menuNameJa,
+      String menuNameEn,
+      List<WorkoutSet> workoutSets,
+      Timestamp date,
+      WorkType workType) {
     List<Map<String, num>> logs = new List();
     workoutSets.forEach((data) {
       logs.add({
@@ -76,6 +87,8 @@ class WorkLog implements ListForSetSelect {
     return new WorkLog(
       userId: userId,
       menuCode: menuCode,
+      menuNameJa: menuNameJa,
+      menuNameEn: menuNameEn,
       logs: logs,
       date: date,
       workType: workType,
