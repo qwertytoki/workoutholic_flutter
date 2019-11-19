@@ -56,4 +56,13 @@ class WorkLogDao {
           .updateData({'logs': log.logs});
     });
   }
+
+  static Future<void> deleteLogs(List<WorkLog> logs) async {
+    logs.forEach((log) {
+      Firestore.instance
+          .collection("workLog")
+          .document(log.documentID)
+          .delete();
+    });
+  }
 }
