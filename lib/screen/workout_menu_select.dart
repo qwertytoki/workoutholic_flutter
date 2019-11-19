@@ -51,7 +51,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
       _list.add(menu);
-      // TODO ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // TODO ワークアウト履歴があればそれを、なければ直近のデータを表示する
       WorkLog log = new WorkLog();
       existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
@@ -263,7 +263,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }
       });
       if (isExist == false) {
-        insertList.add(workLog);
+        if(workLog.logs.length>0){
+          insertList.add(workLog);
+        }
       }
     }
     WorkLogDao.insertLogs(insertList);
