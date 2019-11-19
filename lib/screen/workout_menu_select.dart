@@ -218,6 +218,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     // This is O(n^2) but n will not be big. so it's acceptable.
     List<WorkLog> insertList = new List();
     List<WorkLog> updateList = new List();
+    List<WorkLog> deleteList = new List();
     DateTime date =
         DateTime(widget.date.year, widget.date.month, widget.date.day);
     for (WorkMenu done in this._done) {
@@ -258,7 +259,11 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       _existLogs.forEach((l) {
         if (l.menuCode == workLog.menuCode) {
           l.logs = workLog.logs;
-          updateList.add(l);
+          if(l.logs.length==0){
+            deleteList.add(l);
+          }else{
+            updateList.add(l);
+          }
           isExist = true;
         }
       });
@@ -270,5 +275,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     }
     WorkLogDao.insertLogs(insertList);
     WorkLogDao.updateLogs(updateList);
+    WorkLogDao.deleteLogs(deleteList);
   }
 }
