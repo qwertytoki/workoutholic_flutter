@@ -70,14 +70,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     Map<DateTime, List<String>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
     logs.forEach((l) {
-      if (map.containsKey(l.date)) {
-        List<String> list = map[l.date];
+      DateTime dt  = new DateTime.fromMicrosecondsSinceEpoch(l.date.microsecondsSinceEpoch);
+      if (map.containsKey(dt)) {
+        List<String> list = map[dt];
         //FIXME menuCodeじゃなくてNameがほしい
         list.add(l.menuCode);
       } else {
         List<String> list = new List();
         list.add(l.menuCode);
-        map.putIfAbsent(date, () => list);
+        map.putIfAbsent(dt, () => list);
       }
     });
     return map;
