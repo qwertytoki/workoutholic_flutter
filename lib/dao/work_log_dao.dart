@@ -26,9 +26,8 @@ class WorkLogDao {
   }
 
   static Future<List<WorkLog>> getLogByMonth(DateTime date) async {
-
     DateTime firstDate = new DateTime(date.year, date.month, 1);
-    //FIXME 12月のときバグるよ
+    //TODO 12月のときバグるよ
     DateTime lastDate = new DateTime(date.year, date.month + 1, 1);
     QuerySnapshot snapshot = await Firestore.instance
         .collection("workLog")

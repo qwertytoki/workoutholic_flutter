@@ -51,7 +51,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
       _list.add(menu);
-      // FIXME ワークアウト履歴があればそれを、なければデフォルトを表示する
+      // TODO ワークアウト履歴があればそれを、なければデフォルトを表示する
       WorkLog log = new WorkLog();
       existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
@@ -253,8 +253,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           isDone = false;
         }
       }
-      // existLogsに同じコードのデータあったらupsert行きにする。
-      // FIXME 今はいいけどlogの直近データ取る対応済んだらここの実装買えないと行けない
+      // TODO 今はいいけどlogの直近データ取る対応済んだらここの実装買えないと行けない
       bool isExist = false;
       _existLogs.forEach((l) {
         if (l.menuCode == workLog.menuCode) {
