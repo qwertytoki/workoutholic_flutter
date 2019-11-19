@@ -227,8 +227,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       bool isDone = false;
       for (ListForSetSelect item in this._displayList) {
         if (item is WorkMenu && item.code == done.code) {
-          workLog = WorkLog.createNewLog(widget.user.uid, done.code, [],
-              Timestamp.fromDate(date), WorkType.of(done.workType));
+          workLog = WorkLog.createNewLog(
+              widget.user.uid,
+              done.code,
+              done.nameJa,
+              done.nameEn,
+              [],
+              Timestamp.fromDate(date),
+              WorkType.of(done.workType));
           isDone = true;
           continue;
         }
