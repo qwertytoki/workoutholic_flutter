@@ -17,9 +17,8 @@ class WorkLogDao {
     QuerySnapshot snapshot = await Firestore.instance
         .collection("workLog")
         .where('user_id', isEqualTo: userId)
-        // .where('date', isGreaterThanOrEqualTo: date)
-        .orderBy('date')
-        .startAt([date]).getDocuments();
+        .where('date', isEqualTo: date)
+        .getDocuments();
     snapshot.documents.forEach((s) {
       list.add(WorkLog.of(s));
     });
@@ -27,7 +26,6 @@ class WorkLogDao {
   }
 
   static Future<List<WorkLog>> getLogByMonth(DateTime date) async {
-    //今月分のデータ全部取得する
 
     DateTime firstDate = new DateTime(date.year, date.month, 1);
     //FIXME 12月のときバグるよ
