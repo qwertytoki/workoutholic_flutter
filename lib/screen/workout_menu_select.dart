@@ -153,6 +153,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                   if (_displayList.contains(item)) {
                     setState(() {
                       _displayList.remove(item);
+                      _addToDone(item.menuCode);
                     });
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text("削除しました")));
@@ -208,23 +209,20 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
                 weightUnit,
                 int.parse(selectedVals[2]),
                 rowData.menuCode);
-            WorkMenu menu = _getMenuFromCode(rowData.menuCode);
-            if (menu != null) {
-              _done.add(menu);
-            }
+            _addToDone(rowData.menuCode);
           });
         }).showDialog(context);
   }
 
-  WorkMenu _getMenuFromCode(String menuCode) {
+  void _addToDone(String menuCode) {
     for (ListForSetSelect l in _displayList) {
       if (l is WorkMenu) {
         if (l.code == menuCode) {
-          return l;
+          _done.add(l);
+          break;
         }
       }
     }
-    return null;
   }
 
   int getWeightForPicker(num weight) {
