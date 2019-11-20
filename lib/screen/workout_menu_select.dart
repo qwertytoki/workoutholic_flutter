@@ -56,6 +56,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
           log = l;
+        }else{
+          log.menuCode = menu.code;
         }
       });
       List<WorkoutSet> _logs = new List();
@@ -114,7 +116,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     if (!snapshot.hasData) {
       return CircularLoad();
     }
-
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
