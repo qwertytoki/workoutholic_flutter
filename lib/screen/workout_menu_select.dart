@@ -179,6 +179,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           } else {
             return ListTile(
                 title: Text("メニューを追加", textAlign: TextAlign.center),
+                //TODO メニューを追加
                 onTap: () => print("hoge"));
           }
         });
@@ -202,10 +203,12 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           setState(() {
             List<String> selectedVals = picker.getSelectedValues();
             double weightUnit = selectedVals[1] == 'kg' ? 0 : 1;
-            _displayList[indexOfList] = WorkoutSet.newData(
+            _displayList[indexOfList] = WorkoutSet.of(
                 double.parse(selectedVals[0]),
                 weightUnit,
-                int.parse(selectedVals[2]));
+                int.parse(selectedVals[2]),
+                rowData.menuCode
+                );
           });
         }).showDialog(context);
   }
