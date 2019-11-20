@@ -170,13 +170,21 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return Divider(color: Colors.black38);
           } else if (item is AddNewSet) {
             return ListTile(
-                title: Text("セットを追加"),
-                onTap: () => {
-                      setState(() {
-                        _displayList.insert(
-                            index, WorkoutSet.newData(60, 0, 10));
-                      }),
-                    });
+              title: Text("セットを追加"),
+              onTap: () => setState(() {
+                // this -1 is always SAFE.
+                ListForSetSelect preItem = _displayList[index - 1];
+                WorkoutSet set;
+                if (preItem is WorkMenu) {
+                  set = WorkoutSet.of(60, 0, 10, preItem.code);
+                } else if (preItem is WorkoutSet) {
+                  set = WorkoutSet.of(preItem.weight, preItem.weightUnit,
+                      preItem.reps, preItem.menuCode);
+                }
+                _displayList.insert(index, set);
+                _addToDone(set.menuCode);
+              }),
+            );
           } else {
             return ListTile(
                 title: Text("メニューを追加", textAlign: TextAlign.center),
