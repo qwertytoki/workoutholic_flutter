@@ -58,11 +58,16 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           log = l;
         }
       });
+      List<WorkoutSet> _logs = new List();
       if (log.logs.length == 0) {
-        _list.addAll(WorkoutSet.getDefaultLogs());
+        _logs = WorkoutSet.getDefaultLogs();
       } else {
-        _list.addAll(WorkoutSet.translateFromMap(log.logs));
+        _logs = WorkoutSet.translateFromMap(log.logs);
       }
+      _logs.forEach((_l) {
+        _l.menuCode = log.menuCode;
+      });
+      _list.addAll(_logs);
       _list.add(new AddNewSet());
       _list.add(new Separator());
     });
@@ -259,16 +264,16 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       _existLogs.forEach((l) {
         if (l.menuCode == workLog.menuCode) {
           l.logs = workLog.logs;
-          if(l.logs.length==0){
+          if (l.logs.length == 0) {
             deleteList.add(l);
-          }else{
+          } else {
             updateList.add(l);
           }
           isExist = true;
         }
       });
       if (isExist == false) {
-        if(workLog.logs.length>0){
+        if (workLog.logs.length > 0) {
           insertList.add(workLog);
         }
       }
