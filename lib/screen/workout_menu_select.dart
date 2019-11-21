@@ -57,9 +57,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   List<ListForSetSelect> _generateDisplayList() {
-    if (_existLogs == null) {
-      _existLogs = new List();
-    }
     List<WorkMenu> menus = widget.workPlan.menus;
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
@@ -77,7 +74,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         if(_latestLog == null){
           _logs = WorkoutSet.getDefaultLogs();
         }else{
-          _logs = WorkoutSet.translateFromMap(log.logs);
+          _logs = WorkoutSet.translateFromMap(_latestLog.logs);
         }
       } else {
         _logs = WorkoutSet.translateFromMap(log.logs);
