@@ -78,7 +78,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       log.menuCode = menu.code;
       List<WorkoutSet> _logs = new List();
       if (log.logs.length == 0) {
-        LatestWorkLog _latestLog = _getLatestFromLog(log.menuCode);
+        LatestWorkLog _latestLog = _getLatestFromMenuCode(log.menuCode);
         if(_latestLog == null){
           _logs = WorkoutSet.getDefaultLogs();
         }else{
