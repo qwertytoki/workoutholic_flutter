@@ -49,8 +49,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     ]).then((values) {
       setState(() {
         _existLogs = values[0];
-        _displayList = _generateDisplayList();
         _latestWorkLogs = values[1];
+        _displayList = _generateDisplayList();
+        
       });
     });
   }

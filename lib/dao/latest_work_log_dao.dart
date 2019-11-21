@@ -7,7 +7,7 @@ class LatestWorkLogDao {
       List<String> menuCodeList) async {
     QuerySnapshot snapshot = await Firestore.instance
         .collection("latestWorkLog")
-        .where('menu_code', arrayContains: menuCodeList)
+        //FIXME OR conditions can not use in FireStore now.
         .getDocuments();
     List<LatestWorkLog> list = new List();
     snapshot.documents.forEach((s) {
