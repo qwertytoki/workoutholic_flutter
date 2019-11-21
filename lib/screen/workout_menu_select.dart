@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:workoutholic/dto/latest_work_log.dart';
+import 'package:workoutholic/dao/latest_work_log_dao.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/widget/circular_load.dart';
@@ -31,21 +33,30 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = new List();
   List<WorkLog> _existLogs = new List();
+  List<LatestWorkLog> _latestWorkLogs = new List();
 
   @override
   void initState() {
+    List<String> menuCodeList = new List();
+    widget.workPlan.menus.forEach((m){
+      menuCodeList.add(m.code);
+    });
     super.initState();
-    WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date).then((list) {
+    Future.wait([
+      WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
+      LatestWorkLogDao.getLogByCodes(menuCodeList)
+    ]).then((values){
       setState(() {
-        _existLogs = list;
-        _displayList = _generateDisplayList(_existLogs);
+        _existLogs =values[0];
+        _displayList = _generateDisplayList();
+        _latestWorkLogs = values[1];
       });
     });
   }
 
-  List<ListForSetSelect> _generateDisplayList([List<WorkLog> existLogs]) {
-    if (existLogs == null) {
-      existLogs = new List();
+  List<ListForSetSelect> _generateDisplayList() {
+    if (_existLogs == null) {
+      _existLogs = new List();
     }
     List<WorkMenu> menus = widget.workPlan.menus;
     List<ListForSetSelect> _list = new List();
@@ -58,7 +69,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       // 3 取得したLatestUpdateとあらかじめ取得してるexistLogsをもとに、
       // 該当のmenuにexistLogsがなければlatestUpdateのログを加える とする。
       WorkLog log = new WorkLog();
-      existLogs.forEach((l) {
+      _existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
           log = l;
         }
