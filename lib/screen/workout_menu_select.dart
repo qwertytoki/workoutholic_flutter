@@ -56,10 +56,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
           log = l;
-        }else{
-          log.menuCode = menu.code;
         }
       });
+      log.menuCode = menu.code;
       List<WorkoutSet> _logs = new List();
       if (log.logs.length == 0) {
         _logs = WorkoutSet.getDefaultLogs();
