@@ -42,8 +42,15 @@ class LatestWorkLog implements ListForSetSelect {
     );
   }
   static LatestWorkLog translateFromLog(WorkLog log){
-    LatestWorkLog latestLog = createNewLog(log.userId, log.menuCode, log.menuNameJa, log.menuNameEn, log.logs, log.date, log.workType) 
-    return latestLog;
+    return new LatestWorkLog(
+      userId: log.userId,
+      menuCode: log.menuCode,
+      menuNameJa: log.menuNameJa,
+      menuNameEn: log.menuNameEn,
+      logs: log.logs,
+      date: log.date,
+      workType: log.workType,
+    );
   }
 
   static List<Map<String, num>> _translateToMap(List<dynamic> list) {
