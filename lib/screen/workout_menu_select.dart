@@ -39,16 +39,16 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     List<String> menuCodeList = new List();
-    widget.workPlan.menus.forEach((m){
+    widget.workPlan.menus.forEach((m) {
       menuCodeList.add(m.code);
     });
     super.initState();
     Future.wait([
       WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
       LatestWorkLogDao.getLogByCodes(menuCodeList)
-    ]).then((values){
+    ]).then((values) {
       setState(() {
-        _existLogs =values[0];
+        _existLogs = values[0];
         _displayList = _generateDisplayList();
         _latestWorkLogs = values[1];
       });
@@ -78,7 +78,12 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       log.menuCode = menu.code;
       List<WorkoutSet> _logs = new List();
       if (log.logs.length == 0) {
-        _logs = WorkoutSet.getDefaultLogs();
+        LatestWorkLog _latestLog = _getLatestFromLog(log.menuCode);
+        if(_latestLog == null){
+          _logs = WorkoutSet.getDefaultLogs();
+        }else{
+          _logs = WorkoutSet.translateFromMap(log.logs);
+        }
       } else {
         _logs = WorkoutSet.translateFromMap(log.logs);
       }
@@ -99,6 +104,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
+  }
+  LatestWorkLog _getLatestFromMenuCode(String menuCode){
+    for(LatestWorkLog _l in _latestWorkLogs){
+      if(_l.menuCode== menuCode){
+        return _l;
+      }
+    }
+    return null;
   }
 
   Widget _buildAppBar(BuildContext context) {
@@ -318,34 +331,34 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }
       }
     }
-    _addToLatestLog(insertList,updateList);
+    _addToLatestLog(insertList, updateList);
     WorkLogDao.insertLogs(insertList);
     WorkLogDao.updateLogs(updateList);
     WorkLogDao.deleteLogs(deleteList);
   }
-  _addToLatestLog(List<WorkLog> insertList,List<WorkLog>updateList){
+
+  _addToLatestLog(List<WorkLog> insertList, List<WorkLog> updateList) {
     List<LatestWorkLog> latestInsert = new List();
     List<LatestWorkLog> latestUpdate = new List();
 
-    insertList.forEach((log){
+    insertList.forEach((log) {
       LatestWorkLog ll = LatestWorkLog.translateFromLog(log);
-      if(_latestWorkLogs.contains(ll)){
+      if (_latestWorkLogs.contains(ll)) {
         latestUpdate.add(ll);
-      }else{
+      } else {
         latestInsert.add(ll);
       }
     });
-    updateList.forEach((log){
+    updateList.forEach((log) {
       LatestWorkLog ll = LatestWorkLog.translateFromLog(log);
-      if(_latestWorkLogs.contains(ll)){
+      if (_latestWorkLogs.contains(ll)) {
         latestUpdate.add(ll);
-      }else{
+      } else {
         latestInsert.add(ll);
       }
     });
-    
+
     LatestWorkLogDao.insertLogs(latestInsert);
     LatestWorkLogDao.updateLogs(latestUpdate);
-
   }
 }
