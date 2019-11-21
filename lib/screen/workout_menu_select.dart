@@ -318,8 +318,22 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         }
       }
     }
+    _addToLatestLog(insertList,updateList);
     WorkLogDao.insertLogs(insertList);
     WorkLogDao.updateLogs(updateList);
     WorkLogDao.deleteLogs(deleteList);
+  }
+  _addToLatestLog(List<WorkLog> insertList,List<WorkLog>updateList){
+    List<LatestWorkLog> latestInsert = new List();
+    List<LatestWorkLog> latestUpdate = new List();
+    // latestLogsにデータがあればupdate
+    // なければinsert
+    insertList.forEach((log){
+      LatestWorkLog ll = LatestWorkLog.of()
+    });
+
+    LatestWorkLogDao.insertLogs(latestInsert);
+    LatestWorkLogDao.updateLogs(latestUpdate);
+
   }
 }
