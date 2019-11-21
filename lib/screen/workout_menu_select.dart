@@ -52,6 +52,11 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     menus.forEach((menu) {
       _list.add(menu);
       // TODO ワークアウト履歴があればそれを、なければ直近のデータを表示する
+      // 1 入力画面でlatestUpdate取得する
+      // 2 workLog登録時にlatestUpdateに登録する
+      // latestUpdateは1の作業で取得してるので、そんざいしなければinsertしてればUpdateにする
+      // 3 取得したLatestUpdateとあらかじめ取得してるexistLogsをもとに、
+      // 該当のmenuにexistLogsがなければlatestUpdateのログを加える とする。
       WorkLog log = new WorkLog();
       existLogs.forEach((l) {
         if (l.menuCode == menu.code) {
