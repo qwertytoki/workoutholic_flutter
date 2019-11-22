@@ -334,14 +334,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<LatestWorkLog> latestUpdate = new List();
     updateList.addAll(insertList);
     updateList.forEach((log) {
-      LatestWorkLog ll = LatestWorkLog.translateFromLog(log);
-      for(LatestWorkLog _l in _latestWorkLogs){
-        if(_l.menuCode == ll.menuCode){
-          _l.logs = ll.logs;
-          latestUpdate.add(_l);
+      LatestWorkLog newLatestLog = LatestWorkLog.translateFromLog(log);
+      for(LatestWorkLog preLatestLog in _latestWorkLogs){
+        if(newLatestLog.menuCode == preLatestLog.menuCode){
+          newLatestLog.documentID = preLatestLog.documentID;
+          latestUpdate.add(newLatestLog);
           break;
         }
-        latestInsert.add(ll);
+        latestInsert.add(newLatestLog);
       }
     });
 
