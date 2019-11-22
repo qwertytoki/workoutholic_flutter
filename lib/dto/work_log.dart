@@ -7,6 +7,7 @@ class WorkLog implements ListForSetSelect {
   WorkLog(
       {this.documentID = '',
       this.userId = '',
+      this.planCode = '',
       this.menuCode = '',
       this.menuNameJa = '',
       this.menuNameEn = '',
@@ -16,6 +17,7 @@ class WorkLog implements ListForSetSelect {
 
   String documentID;
   String userId;
+  String planCode;
   String menuCode;
   String menuNameJa;
   String menuNameEn;
@@ -30,6 +32,7 @@ class WorkLog implements ListForSetSelect {
     return new WorkLog(
       documentID: document.documentID,
       userId: document['user_id'],
+      planCode: document['plan_code'],
       menuCode: document['menu_code'],
       menuNameJa: document['menu_name_ja'],
       menuNameEn: document['menu_name_en'],
@@ -63,6 +66,7 @@ class WorkLog implements ListForSetSelect {
     data.putIfAbsent('date', () => log.date);
     data.putIfAbsent('logs', () => log.logs);
     data.putIfAbsent('work_type', () => log.workType.value);
+    data.putIfAbsent('plan_code', () => log.planCode);
     data.putIfAbsent('menu_code', () => log.menuCode);
     data.putIfAbsent('menu_name_ja', () => log.menuNameJa);
     data.putIfAbsent('menu_name_en', () => log.menuNameEn);
@@ -72,6 +76,7 @@ class WorkLog implements ListForSetSelect {
   // Delete me after using firebase
   static WorkLog createNewLog(
       String userId,
+      String planCode,
       String menuCode,
       String menuNameJa,
       String menuNameEn,
@@ -88,6 +93,7 @@ class WorkLog implements ListForSetSelect {
     });
     return new WorkLog(
       userId: userId,
+      planCode: planCode,
       menuCode: menuCode,
       menuNameJa: menuNameJa,
       menuNameEn: menuNameEn,
