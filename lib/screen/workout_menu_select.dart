@@ -280,6 +280,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         if (item is WorkMenu && item.code == done.code) {
           workLog = WorkLog.createNewLog(
               widget.user.uid,
+              widget.workPlan.
               done.code,
               done.nameJa,
               done.nameEn,

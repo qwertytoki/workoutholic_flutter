@@ -6,6 +6,7 @@ class WorkPlan implements ListForSetSelect {
   WorkPlan({
     this.id = '',
     this.userId = '',
+    this.code = '',
     this.nameEn = '',
     this.nameJa = '',
     this.note = '',
@@ -15,6 +16,7 @@ class WorkPlan implements ListForSetSelect {
 
   String id;
   String userId;
+  String code;
   String nameEn;
   String nameJa;
   String note;
@@ -28,6 +30,7 @@ class WorkPlan implements ListForSetSelect {
     return new WorkPlan(
         id: document.documentID,
         userId: document['user_id'],
+        code: document['code'],
         nameEn: document['name_en'],
         nameJa: document['name_ja'],
         note: document['note'] ?? '',
@@ -50,6 +53,7 @@ class WorkPlan implements ListForSetSelect {
   Map<String, Object> toMapForSet() {
     Map<String, Object> data = new Map();
     data.putIfAbsent('user_id', () => userId);
+    data.putIfAbsent('code', () => code);
     data.putIfAbsent('name_en', () => nameEn);
     data.putIfAbsent('name_ja', () => nameJa);
     data.putIfAbsent('note', () => note);
@@ -59,11 +63,12 @@ class WorkPlan implements ListForSetSelect {
   }
 
   // Delete me after using firebase
-  static WorkPlan createNewSet(String id, String userId, String nameEn,
+  static WorkPlan createNewSet(String id, String userId, String code, String nameEn,
       String nameJa, String note, List<WorkMenu> menus, bool isDefault) {
     return new WorkPlan(
       id: id,
       userId: userId,
+      code: code,
       nameEn: nameEn,
       nameJa: nameJa,
       note: note,
