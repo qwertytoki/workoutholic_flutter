@@ -122,7 +122,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       DateTime first, DateTime last, CalendarFormat format) {
     _getWorkLog(first).then((monthlyLogsMap) {
       setState(() {
-        _events = monthlyLogsMap;
+        _events.addAll(monthlyLogsMap);
         _selectedEvents = _events[_selectedDay] ?? [];
         _visibleEvents = _events;
         _visibleEvents = Map.fromEntries(
