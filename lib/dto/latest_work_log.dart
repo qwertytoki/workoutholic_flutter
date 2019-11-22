@@ -9,6 +9,7 @@ class LatestWorkLog implements ListForSetSelect {
   LatestWorkLog(
       {this.documentID = '',
       this.userId = '',
+      this.planCode = '',
       this.menuCode = '',
       this.menuNameJa = '',
       this.menuNameEn = '',
@@ -18,6 +19,7 @@ class LatestWorkLog implements ListForSetSelect {
 
   String documentID;
   String userId;
+  String planCode;
   String menuCode;
   String menuNameJa;
   String menuNameEn;
@@ -32,6 +34,7 @@ class LatestWorkLog implements ListForSetSelect {
     return new LatestWorkLog(
       documentID: document.documentID,
       userId: document['user_id'],
+      planCode: document['plan_code'],
       menuCode: document['menu_code'],
       menuNameJa: document['menu_name_ja'],
       menuNameEn: document['menu_name_en'],
@@ -43,6 +46,7 @@ class LatestWorkLog implements ListForSetSelect {
   static LatestWorkLog translateFromLog(WorkLog log){
     return new LatestWorkLog(
       userId: log.userId,
+      planCode: log.planCode,
       menuCode: log.menuCode,
       menuNameJa: log.menuNameJa,
       menuNameEn: log.menuNameEn,
@@ -76,6 +80,7 @@ class LatestWorkLog implements ListForSetSelect {
     data.putIfAbsent('date', () => log.date);
     data.putIfAbsent('logs', () => log.logs);
     data.putIfAbsent('work_type', () => log.workType.value);
+    data.putIfAbsent('plan_code', () => log.planCode);
     data.putIfAbsent('menu_code', () => log.menuCode);
     data.putIfAbsent('menu_name_ja', () => log.menuNameJa);
     data.putIfAbsent('menu_name_en', () => log.menuNameEn);
@@ -85,6 +90,7 @@ class LatestWorkLog implements ListForSetSelect {
   // Delete me after using firebase
   static LatestWorkLog createNewLog(
       String userId,
+      String planCode,
       String menuCode,
       String menuNameJa,
       String menuNameEn,
@@ -101,6 +107,7 @@ class LatestWorkLog implements ListForSetSelect {
     });
     return new LatestWorkLog(
       userId: userId,
+      planCode: planCode,
       menuCode: menuCode,
       menuNameJa: menuNameJa,
       menuNameEn: menuNameEn,
