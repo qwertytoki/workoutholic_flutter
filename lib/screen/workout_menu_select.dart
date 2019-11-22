@@ -51,7 +51,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
         _existLogs = values[0];
         _latestWorkLogs = values[1];
         _displayList = _generateDisplayList();
-        
       });
     });
   }
@@ -71,9 +70,9 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       List<WorkoutSet> _logs = new List();
       if (log.logs.length == 0) {
         LatestWorkLog _latestLog = _getLatestFromMenuCode(log.menuCode);
-        if(_latestLog == null){
+        if (_latestLog == null) {
           _logs = WorkoutSet.getDefaultLogs();
-        }else{
+        } else {
           _logs = WorkoutSet.translateFromMap(_latestLog.logs);
         }
       } else {
@@ -97,9 +96,10 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       body: _buildBody(context),
     );
   }
-  LatestWorkLog _getLatestFromMenuCode(String menuCode){
-    for(LatestWorkLog _l in _latestWorkLogs){
-      if(_l.menuCode== menuCode){
+
+  LatestWorkLog _getLatestFromMenuCode(String menuCode) {
+    for (LatestWorkLog _l in _latestWorkLogs) {
+      if (_l.menuCode == menuCode) {
         return _l;
       }
     }
@@ -334,13 +334,16 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     List<LatestWorkLog> latestUpdate = new List();
     updateList.addAll(insertList);
     updateList.forEach((log) {
+      bool isNew = true;
       LatestWorkLog newLatestLog = LatestWorkLog.translateFromLog(log);
-      for(LatestWorkLog preLatestLog in _latestWorkLogs){
-        if(newLatestLog.menuCode == preLatestLog.menuCode){
+      for (LatestWorkLog preLatestLog in _latestWorkLogs) {
+        if (newLatestLog.menuCode == preLatestLog.menuCode) {
           newLatestLog.documentID = preLatestLog.documentID;
           latestUpdate.add(newLatestLog);
-          break;
+          isNew = false;
         }
+      }
+      if (isNew) {
         latestInsert.add(newLatestLog);
       }
     });
