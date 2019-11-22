@@ -36,7 +36,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    _selectedDay = new DateTime(now.year,now.month,now.day);
+    _selectedDay = new DateTime(now.year, now.month, now.day);
     _events = {};
     _selectedEvents = _events[_selectedDay] ?? [];
     _visibleEvents = _events;
@@ -66,7 +66,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     Map<DateTime, List<String>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
     logs.forEach((l) {
-      DateTime dt  = new DateTime.fromMicrosecondsSinceEpoch(l.date.microsecondsSinceEpoch);
+      DateTime dt = new DateTime.fromMicrosecondsSinceEpoch(
+          l.date.microsecondsSinceEpoch);
       if (map.containsKey(dt)) {
         List<String> list = map[dt];
         list.add(l.menuNameJa);
@@ -119,22 +120,27 @@ class _MyWorkoutPageState extends State<WorkoutPage>
 
   void _onVisibleDaysChanged(
       DateTime first, DateTime last, CalendarFormat format) {
-    setState(() {
-      _visibleEvents = Map.fromEntries(
-        _events.entries.where(
-          (entry) =>
-              entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-              entry.key.isBefore(last.add(const Duration(days: 1))),
-        ),
-      );
+    _getWorkLog(first).then((monthlyLogsMap) {
+      setState(() {
+        _events = monthlyLogsMap;
+        _selectedEvents = _events[_selectedDay] ?? [];
+        _visibleEvents = _events;
+        _visibleEvents = Map.fromEntries(
+          _events.entries.where(
+            (entry) =>
+                entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
+                entry.key.isBefore(last.add(const Duration(days: 1))),
+          ),
+        );
 
-      _visibleHolidays = Map.fromEntries(
-        _holidays.entries.where(
-          (entry) =>
-              entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-              entry.key.isBefore(last.add(const Duration(days: 1))),
-        ),
-      );
+        _visibleHolidays = Map.fromEntries(
+          _holidays.entries.where(
+            (entry) =>
+                entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
+                entry.key.isBefore(last.add(const Duration(days: 1))),
+          ),
+        );
+      });
     });
   }
 
