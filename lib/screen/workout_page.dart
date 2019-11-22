@@ -14,21 +14,12 @@ class WorkoutPage extends StatefulWidget {
   _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
 
-final Map<DateTime, List> _holidays = {
-  DateTime(2019, 1, 1): ['New Year\'s Day'],
-  DateTime(2019, 1, 6): ['Epiphany'],
-  DateTime(2019, 2, 14): ['Valentine\'s Day'],
-  DateTime(2019, 4, 21): ['Easter Sunday'],
-  DateTime(2019, 4, 22): ['Easter Monday'],
-};
-
 class _MyWorkoutPageState extends State<WorkoutPage>
     with TickerProviderStateMixin {
   _MyWorkoutPageState();
   DateTime _selectedDay;
   Map<DateTime, List> _events;
   Map<DateTime, List> _visibleEvents;
-  Map<DateTime, List> _visibleHolidays;
   List _selectedEvents;
   AnimationController _controller;
 
@@ -40,7 +31,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _events = {};
     _selectedEvents = _events[_selectedDay] ?? [];
     _visibleEvents = _events;
-    _visibleHolidays = _holidays;
 
     // Future戻してあげる
     _getWorkLog(_selectedDay).then((monthlyLogsMap) {
@@ -48,7 +38,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         _events = monthlyLogsMap;
         _selectedEvents = _events[_selectedDay] ?? [];
         _visibleEvents = _events;
-        _visibleHolidays = _holidays;
       });
     });
 
@@ -132,14 +121,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                 entry.key.isBefore(last.add(const Duration(days: 1))),
           ),
         );
-
-        _visibleHolidays = Map.fromEntries(
-          _holidays.entries.where(
-            (entry) =>
-                entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-                entry.key.isBefore(last.add(const Duration(days: 1))),
-          ),
-        );
       });
     });
   }
@@ -149,7 +130,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     return TableCalendar(
       locale: 'en_US',
       events: _visibleEvents,
-      holidays: _visibleHolidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -267,6 +247,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     // TODO 入力画面に遷移する
     // TODO 右下のフローター選択時、すでに今日にログがある場合はset選択させずに直接入力画面に遷移する
     // TODO そのメニューにフォーカスが移って、フラッシュさせたい
-    
+
   }
 }
