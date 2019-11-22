@@ -114,7 +114,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             child: Text('完了',
                 style: TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: () {
-              saveLogs();
+              _saveLogs();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -264,7 +264,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     return returnNum + 39;
   }
 
-  void saveLogs() {
+  void _saveLogs() {
     // This is O(n^2) but n will not be big. so it's acceptable.
     List<WorkLog> insertList = new List();
     List<WorkLog> updateList = new List();
@@ -337,7 +337,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
       LatestWorkLog ll = LatestWorkLog.translateFromLog(log);
       for(LatestWorkLog _l in _latestWorkLogs){
         if(_l.menuCode == ll.menuCode){
-          latestUpdate.add(ll);
+          _l.logs = ll.logs;
+          latestUpdate.add(_l);
           break;
         }
         latestInsert.add(ll);
