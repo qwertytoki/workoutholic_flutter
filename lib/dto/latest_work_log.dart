@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/const/work_type.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
-import 'package:workoutholic/dao/latest_work_log_dao.dart';
 import 'package:workoutholic/dto/workout_set.dart';
 import 'package:workoutholic/dto/work_log.dart';
 

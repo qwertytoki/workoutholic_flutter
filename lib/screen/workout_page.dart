@@ -264,7 +264,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   void moveToMenu(DateTime _date) {
-    // TODO ここもな。 入力画面まで行きたいぞ
-    print("pressed");
+    // TODO 入力画面に遷移する
+    // TODO 右下のフローター選択時、すでに今日にログがある場合はset選択させずに直接入力画面に遷移する
+    // TODO そのメニューにフォーカスが移って、フラッシュさせたい
+    
   }
 }
