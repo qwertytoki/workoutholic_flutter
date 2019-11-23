@@ -50,10 +50,10 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _controller.forward();
   }
 
-  Future<Map<DateTime, WorkLog>> _getWorkLog(DateTime date) async {
+  Future<Map<DateTime, List<WorkLog>>> _getWorkLog(DateTime date) async {
     // TODO 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
 
-    Map<DateTime, WorkLog> map = new Map();
+    Map<DateTime, List<WorkLog>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
     logs.forEach((l) {
       DateTime dt = new DateTime.fromMicrosecondsSinceEpoch(
@@ -64,7 +64,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       // } else {
       //   List<String> list = new List();
       //   list.add(l.menuNameJa);
-      map.putIfAbsent(dt, () => l);
+      map.putIfAbsent(dt, () => [l]);
       // }
     });
     return map;
@@ -101,10 +101,10 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
-  void _onDaySelected(DateTime day, List events) {
+  void _onDaySelected(DateTime day, List<WorkLog> event) {
     setState(() {
       _selectedDay = day;
-      _selectedEvents = events;
+      _selectedEvents = event;
     });
   }
 
@@ -219,7 +219,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       height: 16.0,
       child: Center(
         child: Text(
-          '${events.length}',
+          // これindexOutOfBoundsエラー起きそう
+          // '${events.length}',
+          '${events[0].logs.length}',
           style: TextStyle().copyWith(
             color: Colors.white,
             fontSize: 12.0,
@@ -236,14 +238,14 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                    title: Text(event.toString()),
+                    title: Text(event.logs[0].menuNameJa),
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => WorkoutMenuSelect(
                                   user: widget.user,
-                                  workPlan: item.workPlan,
-                                  date: this.date)),
+                                  workPlan: event.planCode,
+                                  date: _selectedDay)),
                         )),
               ))
           .toList(),
