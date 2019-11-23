@@ -237,12 +237,11 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
-                  // onTap: () => moveToMenu(_selectedDay),
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => WorkoutMenuSelect(
-                              user: this.user,
+                              user: widget.user,
                               workPlan: item.workPlan,
                               date: this.date)),
                   )
@@ -250,12 +249,5 @@ class _MyWorkoutPageState extends State<WorkoutPage>
               ))
           .toList(),
     );
-  }
-
-  void moveToMenu(DateTime _date) {
-    // TODO 入力画面に遷移する
-    // TODO 右下のフローター選択時、すでに今日にログがある場合はset選択させずに直接入力画面に遷移する
-    // TODO そのメニューにフォーカスが移って、フラッシュさせたい
-    
   }
 }
