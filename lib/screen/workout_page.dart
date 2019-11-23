@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
+import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
@@ -236,7 +237,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
-                  onTap: () => moveToMenu(_selectedDay),
+                  // onTap: () => moveToMenu(_selectedDay),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkoutMenuSelect(
+                              user: this.user,
+                              workPlan: item.workPlan,
+                              date: this.date)),
+                  )
                 ),
               ))
           .toList(),
