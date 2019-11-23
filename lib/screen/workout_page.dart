@@ -7,6 +7,8 @@ import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
+import 'package:workoutholic/dto/work_plan.dart';
+import 'package:workoutholic/dao/work_plan_dao.dart';
 
 class WorkoutPage extends StatefulWidget {
   final User user;
@@ -19,11 +21,12 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     with TickerProviderStateMixin {
   _MyWorkoutPageState();
   DateTime _selectedDay;
-  
+
   Map<DateTime, List> _events;
   Map<DateTime, List> _visibleEvents;
   List _selectedEvents;
   AnimationController _controller;
+  List<WorkPlan> _plans = new List();
 
   @override
   void initState() {
@@ -35,11 +38,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _visibleEvents = _events;
 
     // Future戻してあげる
-    _getWorkLog(_selectedDay).then((monthlyLogsMap) {
+    Future.wait([
+      _getWorkLog(_selectedDay), 
+      WorkPlanDao.getPlans(widget.user.uid)
+    ]).then((values) {
       setState(() {
-        _events = monthlyLogsMap;
+        _events = values[0];
         _selectedEvents = _events[_selectedDay] ?? [];
         _visibleEvents = _events;
+        _plans = values[1];
       });
     });
 
@@ -245,11 +252,20 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                           MaterialPageRoute(
                               builder: (context) => WorkoutMenuSelect(
                                   user: widget.user,
-                                  workPlan: event.planCode,
+                                  workPlan: _getPlan(event.planCode),
                                   date: _selectedDay)),
                         )),
               ))
           .toList(),
     );
+  }
+  WorkPlan _getPlan(String planCode){
+    for(WorkPlan plan in _plans){
+      if(planCode == plan.code){
+        return plan;
+      }
+    }
+    // TODO エラーハンドリング
+    return null;
   }
 }
