@@ -50,22 +50,22 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _controller.forward();
   }
 
-  Future<Map<DateTime, List<String>>> _getWorkLog(DateTime date) async {
+  Future<Map<DateTime, WorkLog>> _getWorkLog(DateTime date) async {
     // TODO 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
 
-    Map<DateTime, List<String>> map = new Map();
+    Map<DateTime, WorkLog> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
     logs.forEach((l) {
       DateTime dt = new DateTime.fromMicrosecondsSinceEpoch(
           l.date.microsecondsSinceEpoch);
-      if (map.containsKey(dt)) {
-        List<String> list = map[dt];
-        list.add(l.menuNameJa);
-      } else {
-        List<String> list = new List();
-        list.add(l.menuNameJa);
-        map.putIfAbsent(dt, () => list);
-      }
+      // if (map.containsKey(dt)) {
+      //   List<String> list = map[dt];
+      //   list.add(l.menuNameJa);
+      // } else {
+      //   List<String> list = new List();
+      //   list.add(l.menuNameJa);
+      map.putIfAbsent(dt, () => l);
+      // }
     });
     return map;
   }
@@ -236,16 +236,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                  title: Text(event.toString()),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WorkoutMenuSelect(
-                              user: widget.user,
-                              workPlan: item.workPlan,
-                              date: this.date)),
-                  )
-                ),
+                    title: Text(event.toString()),
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WorkoutMenuSelect(
+                                  user: widget.user,
+                                  workPlan: item.workPlan,
+                                  date: this.date)),
+                        )),
               ))
           .toList(),
     );
