@@ -22,10 +22,9 @@ class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
   final User user;
   final DateTime date;
-  final String planCode;
   @override
   WorkoutMenuSelect(
-      {@required this.user,@required this.date, this.workPlan, this.planCode });
+      {@required this.user, @required this.date, @required this.workPlan});
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -40,9 +39,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   @override
   void initState() {
     super.initState();
-    if(widget.workPlan == null){
-      
-    }
     List<String> menuCodeList = new List();
     widget.workPlan.menus.forEach((m) {
       menuCodeList.add(m.code);

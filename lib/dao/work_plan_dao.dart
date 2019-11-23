@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 class WorkPlanDao {
-  static Stream<QuerySnapshot> getPlansByUser(String userId) {
+  static Stream<QuerySnapshot> getPlansStream(String userId) {
     return  Firestore.instance
     .collection('workPlan')
     .where('user_id',isEqualTo: userId)
@@ -20,5 +20,16 @@ class WorkPlanDao {
       plan = WorkPlan.of(s);
     });
     return plan;
+  }
+  static Future<List<WorkPlan>> getPlans(String userId)async{
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection('workPlan')
+        .where('user_id',isEqualTo: userId)
+        .getDocuments();
+    List<WorkPlan> plans = new List();
+    snapshot.documents.forEach((s){
+      plans.add(WorkPlan.of(s));
+    });
+    return plans;
   }
 }

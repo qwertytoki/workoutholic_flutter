@@ -33,7 +33,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
           ],
         ),
         body: StreamBuilder(
-          stream: WorkPlanDao.getPlansByUser(user.uid),
+          stream: WorkPlanDao.getPlansStream(user.uid),
           builder: (context, snapshot) {
             return _buildList(context, snapshot);
           },

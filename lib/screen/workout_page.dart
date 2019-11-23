@@ -19,6 +19,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     with TickerProviderStateMixin {
   _MyWorkoutPageState();
   DateTime _selectedDay;
+  
   Map<DateTime, List> _events;
   Map<DateTime, List> _visibleEvents;
   List _selectedEvents;
