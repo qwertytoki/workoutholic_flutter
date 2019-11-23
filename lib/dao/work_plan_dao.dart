@@ -1,4 +1,4 @@
-//import 'package:workoutholic/dto/work_plan.dart';
+import 'package:workoutholic/dto/work_plan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
@@ -8,5 +8,17 @@ class WorkPlanDao {
     .collection('workPlan')
     .where('user_id',isEqualTo: userId)
     .snapshots();
+  }
+  static Future<WorkPlan> getPlanByCode(String planCode,String userId)async{
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection('workPlan')
+        .where('user_id',isEqualTo: userId)
+        .where('planCode',isEqualTo: planCode)
+        .getDocuments();
+    WorkPlan plan;
+    snapshot.documents.forEach((s){
+      plan = WorkPlan.of(s);
+    });
+    return plan;
   }
 }

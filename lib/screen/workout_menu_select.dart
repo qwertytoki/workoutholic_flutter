@@ -22,9 +22,10 @@ class WorkoutMenuSelect extends StatefulWidget {
   final WorkPlan workPlan;
   final User user;
   final DateTime date;
+  final String planCode;
   @override
   WorkoutMenuSelect(
-      {@required this.user, @required this.workPlan, @required this.date});
+      {@required this.user,@required this.date, this.workPlan, this.planCode });
 
   _WorkoutMenuSelectState createState() => _WorkoutMenuSelectState();
 }
@@ -38,11 +39,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   @override
   void initState() {
+    super.initState();
+    if(widget.workPlan == null){
+      
+    }
     List<String> menuCodeList = new List();
     widget.workPlan.menus.forEach((m) {
       menuCodeList.add(m.code);
     });
-    super.initState();
     Future.wait([
       WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
       LatestWorkLogDao.getLogByCodes(menuCodeList)
