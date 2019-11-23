@@ -58,14 +58,14 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     logs.forEach((l) {
       DateTime dt = new DateTime.fromMicrosecondsSinceEpoch(
           l.date.microsecondsSinceEpoch);
-      // if (map.containsKey(dt)) {
-      //   List<String> list = map[dt];
-      //   list.add(l.menuNameJa);
-      // } else {
-      //   List<String> list = new List();
-      //   list.add(l.menuNameJa);
-      map.putIfAbsent(dt, () => [l]);
-      // }
+      if (map.containsKey(dt)) {
+        List<WorkLog> list = map[dt];
+        list.add(l);
+      } else {
+        List<WorkLog> list = new List();
+        list.add(l);
+        map.putIfAbsent(dt, () => list);
+      }
     });
     return map;
   }
@@ -238,7 +238,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                    title: Text(event.logs[0].menuNameJa),
+                    title: Text(event.menuNameJa),
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
