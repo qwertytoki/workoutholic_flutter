@@ -109,7 +109,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
-  void _onDaySelected(DateTime day, List<WorkLog> event) {
+  void _onDaySelected(DateTime day, List event) {
     setState(() {
       _selectedDay = day;
       _selectedEvents = event;
