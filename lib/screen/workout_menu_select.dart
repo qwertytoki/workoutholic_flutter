@@ -305,7 +305,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           isDone = false;
         }
       }
-      // TODO 今はいいけどlogの直近データ取る対応済んだらここの実装買えないと行けない
       bool isExist = false;
       _existLogs.forEach((l) {
         if (l.menuCode == workLog.menuCode) {
