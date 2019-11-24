@@ -39,8 +39,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       _selectedDay = new DateTime(widget.date.year, widget.date.month, widget.date.day);
     }
     _events = {};
-    _selectedEvents = _events[_selectedDay] ?? [];
-    _visibleEvents = _events;
+    _selectedEvents = [];
+    _visibleEvents = {};
 
     // Future戻してあげる
     Future.wait([
