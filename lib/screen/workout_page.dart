@@ -227,9 +227,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       height: 16.0,
       child: Center(
         child: Text(
-          // これindexOutOfBoundsエラー起きそう
-          // '${events.length}',
-          '${events[0].logs.length}',
+          '${events.length}',
           style: TextStyle().copyWith(
             color: Colors.white,
             fontSize: 12.0,
