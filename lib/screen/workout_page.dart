@@ -52,6 +52,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         _selectedEvents = _events[_selectedDay] ?? [];
         _visibleEvents = _events;
         _plans = values[1];
+        _onDaySelected(_selectedDay,_visibleEvents);
       });
     });
 
