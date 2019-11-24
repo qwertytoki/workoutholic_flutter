@@ -331,10 +331,12 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   }
 
   _addToLatestLog(List<WorkLog> insertList, List<WorkLog> updateList) {
+    List<WorkLog> logList = new List();
+    logList.addAll(insertList);
+    logList.addAll(updateList);
     List<LatestWorkLog> latestInsert = new List();
     List<LatestWorkLog> latestUpdate = new List();
-    updateList.addAll(insertList);
-    updateList.forEach((log) {
+    logList.forEach((log) {
       bool isNew = true;
       LatestWorkLog newLatestLog = LatestWorkLog.translateFromLog(log);
       for (LatestWorkLog preLatestLog in _latestWorkLogs) {
