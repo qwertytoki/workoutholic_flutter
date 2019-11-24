@@ -6,8 +6,9 @@ import 'package:workoutholic/dto/user.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
+  final DateTime date;
   @override
-  HomePage({@required this.user});
+  HomePage({@required this.user, this.date});
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: PageView(
         children: <Widget>[
-          new WorkoutPage(user: user),
+          new WorkoutPage(user: user, date: widget.date),
           new TransitionPage(user: user),
           new ProfilePage(user: user),
         ],

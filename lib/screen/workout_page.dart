@@ -12,7 +12,8 @@ import 'package:workoutholic/dao/work_plan_dao.dart';
 
 class WorkoutPage extends StatefulWidget {
   final User user;
-  WorkoutPage({@required this.user});
+  final DateTime date;
+  WorkoutPage({@required this.user,this.date});
   @override
   _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
@@ -31,8 +32,13 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   @override
   void initState() {
     super.initState();
-    DateTime now = DateTime.now();
-    _selectedDay = new DateTime(now.year, now.month, now.day);
+    if(widget.date ==null){
+      DateTime now = DateTime.now();
+      _selectedDay = new DateTime(now.year, now.month, now.day);
+    }else{
+      _selectedDay = new DateTime(widget.date.year, widget.date.month, widget.date.day);
+    }
+    
     _events = {};
     _selectedEvents = _events[_selectedDay] ?? [];
     _visibleEvents = _events;
