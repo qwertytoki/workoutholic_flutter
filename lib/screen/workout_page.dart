@@ -98,12 +98,24 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WorkoutPlanSelectPage(
-                    user: widget.user, date: _selectedDay)),
-          );
+          print(_events[_selectedDay]);
+          if (_events.containsKey(_selectedDay)) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WorkoutMenuSelect(
+                      user: widget.user,
+                      workPlan: _getPlan(_events[_selectedDay][0].planCode),
+                      date: _selectedDay)),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WorkoutPlanSelectPage(
+                      user: widget.user, date: _selectedDay)),
+            );
+          }
         },
         child: Icon(Icons.add),
       ),
