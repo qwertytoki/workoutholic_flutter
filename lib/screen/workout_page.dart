@@ -13,7 +13,7 @@ import 'package:workoutholic/dao/work_plan_dao.dart';
 class WorkoutPage extends StatefulWidget {
   final User user;
   final DateTime date;
-  WorkoutPage({@required this.user,this.date});
+  WorkoutPage({@required this.user, this.date});
   @override
   _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
@@ -32,21 +32,21 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   @override
   void initState() {
     super.initState();
-    if(widget.date ==null){
+    if (widget.date == null) {
       DateTime now = DateTime.now();
       _selectedDay = new DateTime(now.year, now.month, now.day);
-    }else{
-      _selectedDay = new DateTime(widget.date.year, widget.date.month, widget.date.day);
+    } else {
+      _selectedDay =
+          new DateTime(widget.date.year, widget.date.month, widget.date.day);
     }
     _events = {};
     _selectedEvents = [];
     _visibleEvents = {};
 
     // Future戻してあげる
-    Future.wait([
-      _getWorkLog(_selectedDay), 
-      WorkPlanDao.getPlans(widget.user.uid)
-    ]).then((values) {
+    Future.wait(
+            [_getWorkLog(_selectedDay), WorkPlanDao.getPlans(widget.user.uid)])
+        .then((values) {
       setState(() {
         _events = values[0];
         _selectedEvents = _events[_selectedDay] ?? [];
@@ -98,19 +98,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          moveToSetSelect();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WorkoutPlanSelectPage(
+                    user: widget.user, date: _selectedDay)),
+          );
         },
         child: Icon(Icons.add),
       ),
-    );
-  }
-
-  void moveToSetSelect() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              WorkoutPlanSelectPage(user: widget.user, date: _selectedDay)),
     );
   }
 
@@ -262,9 +258,10 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           .toList(),
     );
   }
-  WorkPlan _getPlan(String planCode){
-    for(WorkPlan plan in _plans){
-      if(planCode == plan.code){
+
+  WorkPlan _getPlan(String planCode) {
+    for (WorkPlan plan in _plans) {
+      if (planCode == plan.code) {
         return plan;
       }
     }
