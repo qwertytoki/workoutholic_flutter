@@ -34,7 +34,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     super.initState();
     DateTime now = DateTime.now();
     _selectedDay = new DateTime(now.year, now.month, now.day);
-    // TODO https://github.com/qwertytoki/workoutholic_flutter/issues/41
+    // TODO 入力後、直前に入力した日付にフォーカスを当てたい
+    // https://github.com/qwertytoki/workoutholic_flutter/issues/41
     // if (widget.date == null) {
     //   DateTime now = DateTime.now();
     //   _selectedDay = new DateTime(now.year, now.month, now.day);
@@ -46,7 +47,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _selectedEvents = [];
     _visibleEvents = {};
 
-    // Future戻してあげる
     Future.wait(
             [_getWorkLog(_selectedDay), WorkPlanDao.getPlans(widget.user.uid)])
         .then((values) {
@@ -279,7 +279,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         return plan;
       }
     }
-    // TODO エラーハンドリング
-    return null;
+    throw new Exception("Plan is not exist. please check/ PlanCode:" + planCode);
   }
 }
