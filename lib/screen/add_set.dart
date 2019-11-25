@@ -12,7 +12,7 @@ class _AddSetPageState extends State<AddSetPage> {
     final TextEditingController setNameController = TextEditingController();
     Scaffold scaffold = new Scaffold(
       appBar: AppBar(
-        title: Text("Create New Set"),
+        title: Text("新しいプランを作成"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -21,7 +21,7 @@ class _AddSetPageState extends State<AddSetPage> {
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: new InputDecoration(
-                hintText: "Type your set name.",
+                hintText: "プラン名",
                 // labelText: Texts.get(TextKey.AP_NUMBER_LABEL),
               ),
               controller: setNameController,
@@ -38,7 +38,7 @@ class _AddSetPageState extends State<AddSetPage> {
                     child: new Builder(
                       builder: (BuildContext context) {
                         return OutlineButton(
-                          child: Text(""),
+                          child: Text("完了"),
                           onPressed: () => _saveSet(),
                         );
                       },
