@@ -22,7 +22,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
           title: Text("トレーニングを選択"),
           actions: <Widget>[
             FlatButton(
-                child: Text('Add',
+                child: Text('編集',
                     style: TextStyle(fontSize: 17.0, color: Colors.white)),
                 onPressed: () => Navigator.push(
                       context,

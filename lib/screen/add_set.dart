@@ -38,7 +38,7 @@ class _AddSetPageState extends State<AddSetPage> {
                     child: new Builder(
                       builder: (BuildContext context) {
                         return OutlineButton(
-                          child: Text("Add"),
+                          child: Text(""),
                           onPressed: () => _saveSet(),
                         );
                       },
