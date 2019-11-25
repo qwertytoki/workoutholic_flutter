@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:workoutholic/dto/workout_plan.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_plan_dao.dart';
-import 'package:workoutholic/screen/add_set.dart';
+import 'package:workoutholic/screen/work_plan_create.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/widget/circular_load.dart';
@@ -27,7 +25,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AddSetPage(),
+                        builder: (context) => WorkPlanCreatePage(),
                       ),
                     ))
           ],
@@ -96,7 +94,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AddSetPage(),
+                        builder: (context) => WorkPlanCreatePage(),
                       ),
                     ));
           }

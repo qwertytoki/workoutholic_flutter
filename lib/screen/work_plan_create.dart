@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddSetPage extends StatefulWidget {
+class WorkPlanCreatePage extends StatefulWidget {
   // final WorkoutPlan workey key, @required this.workoutPlanoutSet;
   // WorkoutInputPage({K}) : super(key: key);
   @override
-  _AddSetPageState createState() => _AddSetPageState();
+  _WorkPlanCreatePageState createState() => _WorkPlanCreatePageState();
 }
 
-class _AddSetPageState extends State<AddSetPage> {
+class _WorkPlanCreatePageState extends State<WorkPlanCreatePage> {
   Widget build(BuildContext context) {
     final TextEditingController setNameController = TextEditingController();
     Scaffold scaffold = new Scaffold(
