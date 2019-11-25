@@ -98,14 +98,13 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print(_events[_selectedDay]);
-          if (_events.containsKey(_selectedDay)) {
+          if (_selectedEvents.length > 0) {
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => WorkoutMenuSelect(
                       user: widget.user,
-                      workPlan: _getPlan(_events[_selectedDay][0].planCode),
+                      workPlan: _getPlan(_selectedEvents[0].planCode),
                       date: _selectedDay)),
             );
           } else {
