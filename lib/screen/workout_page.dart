@@ -32,13 +32,16 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   @override
   void initState() {
     super.initState();
-    if (widget.date == null) {
-      DateTime now = DateTime.now();
-      _selectedDay = new DateTime(now.year, now.month, now.day);
-    } else {
-      _selectedDay =
-          new DateTime(widget.date.year, widget.date.month, widget.date.day);
-    }
+    DateTime now = DateTime.now();
+    _selectedDay = new DateTime(now.year, now.month, now.day);
+    // TODO https://github.com/qwertytoki/workoutholic_flutter/issues/41
+    // if (widget.date == null) {
+    //   DateTime now = DateTime.now();
+    //   _selectedDay = new DateTime(now.year, now.month, now.day);
+    // } else {
+    //   _selectedDay =
+    //       new DateTime(widget.date.year, widget.date.month, widget.date.day);
+    // }
     _events = {};
     _selectedEvents = [];
     _visibleEvents = {};
