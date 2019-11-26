@@ -7,7 +7,7 @@ class WorkPlanCreatePage extends StatelessWidget {
   final DateTime date;
   @override
   WorkPlanCreatePage({@required this.user, @required this.date});
-  
+
   // _WorkPlanCreatePageState createState() => _WorkPlanCreatePageState();
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +28,13 @@ class WorkPlanCreatePage extends StatelessWidget {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-        ));
+            padding: EdgeInsets.all(16.0),
+            child: Column(children: <Widget>[
+              TextFormField(
+                decoration: new InputDecoration(hintText: "プラン名"),
+              )
+              ListView()
+            ])));
   }
 }
 
