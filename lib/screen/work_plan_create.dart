@@ -29,9 +29,6 @@ class WorkPlanCreatePage extends StatelessWidget {
           ],
         ),
         body: ListView(children: <Widget>[
-          // Expanded(
-          //   child: Text("hoge"),
-          // ),
           Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -43,9 +40,12 @@ class WorkPlanCreatePage extends StatelessWidget {
                     height: 8.0,
                   ),
                   ListTile(
-                    title: Text("メニューを追加", textAlign: TextAlign.center),
-                    onTap:()=> _addMenu()
-                  )
+                      title: Text("メニューを追加", textAlign: TextAlign.center),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WorkoutPlanSelectPage(
+                                  user: this.user, date: this.date))))
                 ],
               )),
         ]));
@@ -53,12 +53,10 @@ class WorkPlanCreatePage extends StatelessWidget {
 }
 
 _saveLogs() {
-  print("save!");
+  // planテーブルに登録
 }
 
-_addMenu() {
-  print("save!");
-}
+
 
 // class _WorkPlanCreatePageState extends State<WorkPlanCreatePage> {
 //   Widget build(BuildContext context) {

@@ -118,7 +118,8 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomePage(user: widget.user,date:widget.date)));
+                      builder: (context) =>
+                          HomePage(user: widget.user, date: widget.date)));
             })
       ],
     );
