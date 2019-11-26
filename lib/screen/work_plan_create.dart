@@ -42,23 +42,14 @@ class WorkPlanCreatePage extends StatelessWidget {
                   SizedBox(
                     height: 16.0,
                   ),
-                  
-                  // Expanded(
-                  //   child: Builder(
-                  //     builder: (BuildContext context) {
-                  //       return OutlineButton(
-                  //         child: Text("完了"),
-                  //         onPressed: () => _saveSet(),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
-                  // Expanded(
-                  //   child: OutlineButton(
-                  //     child: Text("完了"),
-                  //     onPressed: () => _saveSet(),
-                  //   ),
-                  // )
+                  ListTile(
+                    title: Text("メニューを追加", textAlign: TextAlign.center),
+                //TODO メニューを追加
+                onTap: () => print("hoge")),
+                  OutlineButton(
+                    child: Text("メニューを追加"),
+                    onPressed: () => _saveSet(),
+                  ),
                 ],
               )),
         ]));
