@@ -25,8 +25,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            WorkPlanCreatePage(this.user, this.date),
+                        builder: (context) => WorkPlanCreatePage(
+                            user: this.user, date: this.date),
                       ),
                     ))
           ],
@@ -95,7 +95,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WorkPlanCreatePage(),
+                        builder: (context) => WorkPlanCreatePage(
+                            user: this.user, date: this.date),
                       ),
                     ));
           }
