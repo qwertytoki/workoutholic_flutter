@@ -27,14 +27,27 @@ class WorkPlanCreatePage extends StatelessWidget {
                 })
           ],
         ),
-        body: Padding(
+        body:
+            // Padding(
+            //     padding: EdgeInsets.all(16.0),
+            //     child: Column(children: <Widget>[
+            //       TextFormField(
+            //         decoration: new InputDecoration(hintText: "プラン名"),
+            //       ),
+            ListView(children: <Widget>[
+          SizedBox(
+            height: 16.0,
+          ),
+          Padding(
             padding: EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              TextFormField(
-                decoration: new InputDecoration(hintText: "プラン名"),
-              )
-              ListView()
-            ])));
+            child: TextFormField(
+              decoration: new InputDecoration(hintText: "プラン名"),
+            )
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
+        ]));
   }
 }
 
