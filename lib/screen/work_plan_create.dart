@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
+import 'package:workoutholic/screen/work_plan_add_menus.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
 import 'package:workoutholic/dto/work_menu.dart';
+import 'package:workoutholic/screen/work_plan_add_menus.dart';
 
 class WorkPlanCreatePage extends StatelessWidget {
   final User user;
@@ -44,7 +46,7 @@ class WorkPlanCreatePage extends StatelessWidget {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => WorkoutPlanSelectPage(
+                              builder: (context) => WorkPlanAddMenusPage(
                                   user: this.user, date: this.date))))
                 ],
               )),
@@ -55,8 +57,6 @@ class WorkPlanCreatePage extends StatelessWidget {
 _saveLogs() {
   // planテーブルに登録
 }
-
-
 
 // class _WorkPlanCreatePageState extends State<WorkPlanCreatePage> {
 //   Widget build(BuildContext context) {
