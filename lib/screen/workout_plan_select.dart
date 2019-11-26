@@ -25,7 +25,8 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WorkPlanCreatePage(),
+                        builder: (context) =>
+                            WorkPlanCreatePage(this.user, this.date),
                       ),
                     ))
           ],
@@ -50,7 +51,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     List<ListForSetSelect> displayList = new List();
     workPlans.forEach((plan) {
       displayList?.add(plan);
-      plan.menus.forEach((menu){
+      plan.menus.forEach((menu) {
         menu.workPlan = plan;
         displayList.add(menu);
       });

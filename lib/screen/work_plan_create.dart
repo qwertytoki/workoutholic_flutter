@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:workoutholic/dto/user.dart';
+import 'package:workoutholic/screen/workout_plan_select.dart';
 
 class WorkPlanCreatePage extends StatelessWidget {
+  final User user;
+  final DateTime date;
   @override
-  WorkPlanCreatePage();
+  WorkPlanCreatePage({@required this.user, @required this.date});
+  
   // _WorkPlanCreatePageState createState() => _WorkPlanCreatePageState();
-  Widget build(BuildContext context){
-    return Scaffold(appBar: AppBar(title :Text("新しいプランを作成"),
-    actions: <Widget>[
-        FlatButton(
-            child: Text('完了',
-                style: TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: () {
-              _saveLogs();
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => HomePage(user: widget.user,date:widget.date)));
-            })
-      ],
-    ),
-    body:Padding(padding: const EdgeInsets.all(16.0),)
-    );
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("新しいプランを作成"),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('完了',
+                    style: TextStyle(fontSize: 17.0, color: Colors.white)),
+                onPressed: () {
+                  _saveLogs();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkoutPlanSelectPage(
+                              user: this.user, date: this.date)));
+                })
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+        ));
   }
 }
-_saveLogs(){
+
+_saveLogs() {
   print("save!");
 }
 
