@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
+import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkPlanCreatePage extends StatelessWidget {
   final User user;
   final DateTime date;
+  final List<WorkMenu> menus;
   @override
-  WorkPlanCreatePage({@required this.user, @required this.date});
+  WorkPlanCreatePage({@required this.user, @required this.date, this.menus});
 
-  // _WorkPlanCreatePageState createState() => _WorkPlanCreatePageState();
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -28,21 +29,47 @@ class WorkPlanCreatePage extends StatelessWidget {
           ],
         ),
         body: ListView(children: <Widget>[
+          // Expanded(
+          //   child: Text("hoge"),
+          // ),
           Padding(
               padding: EdgeInsets.all(16.0),
-              child: TextFormField(
-                decoration: new InputDecoration(hintText: "プラン名"),
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: new InputDecoration(hintText: "プラン名"),
+                  ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  
+                  // Expanded(
+                  //   child: Builder(
+                  //     builder: (BuildContext context) {
+                  //       return OutlineButton(
+                  //         child: Text("完了"),
+                  //         onPressed: () => _saveSet(),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: OutlineButton(
+                  //     child: Text("完了"),
+                  //     onPressed: () => _saveSet(),
+                  //   ),
+                  // )
+                ],
               )),
-          SizedBox(
-            height: 16.0,
-          ),
-          
-
         ]));
   }
 }
 
 _saveLogs() {
+  print("save!");
+}
+
+_saveSet() {
   print("save!");
 }
 
