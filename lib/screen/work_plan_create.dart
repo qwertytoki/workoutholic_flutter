@@ -40,16 +40,12 @@ class WorkPlanCreatePage extends StatelessWidget {
                     decoration: new InputDecoration(hintText: "プラン名"),
                   ),
                   SizedBox(
-                    height: 16.0,
+                    height: 8.0,
                   ),
                   ListTile(
                     title: Text("メニューを追加", textAlign: TextAlign.center),
-                //TODO メニューを追加
-                onTap: () => print("hoge")),
-                  OutlineButton(
-                    child: Text("メニューを追加"),
-                    onPressed: () => _saveSet(),
-                  ),
+                    onTap:()=> _addMenu()
+                  )
                 ],
               )),
         ]));
@@ -60,7 +56,7 @@ _saveLogs() {
   print("save!");
 }
 
-_saveSet() {
+_addMenu() {
   print("save!");
 }
 
