@@ -1,5 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workoutholic/dto/work_menu.dart';
+import 'dart:async';
 
 class WorkMenuDao {
   static List<WorkMenu> genarateMockData() {
@@ -32,8 +34,7 @@ class WorkMenuDao {
     });
    return resultMenus;
   }
-  // static Stream<QuerySnapshot> getMenus2(){
-  //   return Firestore.instance
-  //   .collection('workMenu')
-  // }
+  static Future<QuerySnapshot> getAllMenus() async {
+    return Firestore.instance.collection("workMenu").getDocuments();
+  }
 }

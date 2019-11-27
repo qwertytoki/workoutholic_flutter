@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dto/work_menu.dart';
+import 'package:workoutholic/dao/work_menu_dao.dart';
+import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
@@ -39,7 +41,13 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return ListTile(
+    return FutureBuilder(
+      future: WorkMenuDao.getAllMenus(),
+      builder: ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: 
+      )
+       ListTile(
         title: Text("完了", textAlign: TextAlign.center),
         onTap: () => Navigator.of(context).pop());
   }
