@@ -137,7 +137,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
-        itemBuilder: (context, int index) {
+        itemBuilder: (context, index) {
           final item = _displayList[index];
           final bool alreadySaved = _done.contains(item);
           if (item is WorkMenu) {
