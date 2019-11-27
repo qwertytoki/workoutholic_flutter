@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_menu_dao.dart';
-import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
