@@ -30,18 +30,18 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text("追加するメニューを選択"),
+      leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
     );
   }
 
   Widget _buildBody(BuildContext context) {
     return ListTile(
         title: Text("完了", textAlign: TextAlign.center),
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    WorkPlanCreatePage(user: widget.user, date: widget.date),
-              ),
-            ));
+        onTap: () => Navigator.of(context).pop());
   }
 }

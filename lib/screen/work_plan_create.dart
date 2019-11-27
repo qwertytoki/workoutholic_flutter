@@ -22,11 +22,7 @@ class WorkPlanCreatePage extends StatelessWidget {
                     style: TextStyle(fontSize: 17.0, color: Colors.white)),
                 onPressed: () {
                   _saveLogs();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WorkoutPlanSelectPage(
-                              user: this.user, date: this.date)));
+                  Navigator.pop(context);
                 })
           ],
         ),
