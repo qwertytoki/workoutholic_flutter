@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/screen/work_plan_add_menus.dart';
-import 'package:workoutholic/screen/workout_plan_select.dart';
 import 'package:workoutholic/dto/work_menu.dart';
-import 'package:workoutholic/screen/work_plan_add_menus.dart';
 
 class WorkPlanCreatePage extends StatelessWidget {
   final User user;
