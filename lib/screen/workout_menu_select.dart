@@ -4,7 +4,6 @@ import 'package:workoutholic/dto/latest_work_log.dart';
 import 'package:workoutholic/dao/latest_work_log_dao.dart';
 import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
-import 'package:workoutholic/widget/circular_load.dart';
 import 'package:workoutholic/dto/work_log.dart';
 import 'package:workoutholic/dao/work_log_dao.dart';
 import 'package:workoutholic/const/list_for_set_select.dart';
@@ -127,17 +126,14 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   Widget _buildBody(BuildContext context) {
     return FutureBuilder(
-      future: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
+      // future: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
       builder: (context, snapshot) {
-        return _buildList(context, snapshot);
+        return _buildList(context);
       },
     );
   }
 
-  Widget _buildList(BuildContext context, AsyncSnapshot snapshot) {
-    if (!snapshot.hasData) {
-      return CircularLoad();
-    }
+  Widget _buildList(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _displayList.length,
