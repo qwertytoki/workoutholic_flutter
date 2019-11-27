@@ -211,7 +211,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
           } else {
             return ListTile(
                 title: Text("メニューを追加", textAlign: TextAlign.center),
-                //TODO メニューを追加
                 onTap: () => print("hoge"));
           }
         });

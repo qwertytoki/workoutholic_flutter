@@ -34,7 +34,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     super.initState();
     DateTime now = DateTime.now();
     _selectedDay = new DateTime(now.year, now.month, now.day);
-    // TODO 入力後、直前に入力した日付にフォーカスを当てたい
     // https://github.com/qwertytoki/workoutholic_flutter/issues/41
     // if (widget.date == null) {
     //   DateTime now = DateTime.now();
@@ -67,7 +66,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   Future<Map<DateTime, List<WorkLog>>> _getWorkLog(DateTime date) async {
-    // TODO 何Kg何Repあげれたのかも今後表示したい。(今回は対応しない。)
 
     Map<DateTime, List<WorkLog>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
