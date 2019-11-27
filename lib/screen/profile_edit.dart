@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dao/user_dao.dart';
 
-class ProfileEdit extends StatelessWidget {
+class ProfileEdit extends StatefulWidget {
   final User user;
+
   @override
   ProfileEdit({@required this.user});
-  final _formKey = GlobalKey<FormState>();
+  _ProfileEditState createState() => _ProfileEditState();
+}
+
+class _ProfileEditState extends State<ProfileEdit> {
   TextEditingController nameController;
   TextEditingController goalController;
-
+  final _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
-    nameController = TextEditingController(text: user.displayName);
-    goalController = TextEditingController(text: user.description);
+    nameController = TextEditingController(text: widget.user.displayName);
+    goalController = TextEditingController(text: widget.user.description);
     return Scaffold(
       appBar: AppBar(
         title: Text("プロフィールの編集"),
@@ -77,9 +81,9 @@ class ProfileEdit extends StatelessWidget {
 
   void _saveProfile(BuildContext context) async {
     if (_formKey.currentState.validate()) {
-      user.displayName = this.nameController.text;
-      user.description = this.goalController.text;
-      UserDao.updateUser(user);
+      widget.user.displayName = this.nameController.text;
+      widget.user.description = this.goalController.text;
+      UserDao.updateUser(widget.user);
       Navigator.of(context).pop();
     }
   }
