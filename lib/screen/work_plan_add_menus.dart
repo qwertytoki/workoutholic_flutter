@@ -47,9 +47,17 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
               padding: const EdgeInsets.all(16.0),
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
+                final bool alreadySaved = true;
                 final datas = snapshot.data.documents;
                 WorkMenu menu = WorkMenu.of(datas[index]);
-                return ListTile(title: Text(menu.nameJa));
+                return ListTile(
+                  leading: Icon(
+                    alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
+                    color: alreadySaved ? Colors.blue : null,
+                
+              ),
+                  title: Text(menu.nameJa)
+                  );
               });
         });
     // ListTile(
