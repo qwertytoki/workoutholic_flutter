@@ -45,7 +45,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
       builder: (context, snapshot) {
         return ListView.builder(
             padding: const EdgeInsets.all(16.0),
-            itemCount: snapshot.data.documents.length + 1,
+            itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
               final bool alreadySaved = true;
               final datas = snapshot.data.documents;
@@ -60,6 +60,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
                     ),
                     title: Text(menu.nameJa));
               } else {
+                //dead code
                 return FlatButton(
                     child: Text("完了", textAlign: TextAlign.center),
                     onPressed: () => Navigator.of(context).pop());
