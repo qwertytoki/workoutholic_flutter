@@ -6,19 +6,26 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
   final DateTime date;
-  final List<WorkMenu> menus;
+  List<WorkMenu> displayMenus = new List();
 
   @override
-  WorkPlanAddMenusPage({@required this.user, @required this.date, this.menus});
+  WorkPlanAddMenusPage(
+      {@required this.user, @required this.date, this.displayMenus});
   _WorkPlanAddMenusState createState() => _WorkPlanAddMenusState();
 }
 
 class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<WorkMenu> _addList = new List();
+  List<WorkMenu> _allMenus = new List();
   @override
   void initState() {
     super.initState();
+    WorkMenuDao.getAllMenus().then((menus) {
+      setState(() {
+        _allMenus = menus;
+      });
+    });
   }
 
   Widget build(BuildContext context) {
