@@ -41,27 +41,31 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
 
   Widget _buildBody(BuildContext context) {
     return FutureBuilder(
-        future: WorkMenuDao.getAllMenus(),
-        builder: (context, snapshot) {
-          return ListView.builder(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) {
-                final bool alreadySaved = true;
-                final datas = snapshot.data.documents;
+      future: WorkMenuDao.getAllMenus(),
+      builder: (context, snapshot) {
+        return ListView.builder(
+            padding: const EdgeInsets.all(16.0),
+            itemCount: snapshot.data.documents.length + 1,
+            itemBuilder: (context, index) {
+              final bool alreadySaved = true;
+              final datas = snapshot.data.documents;
+              if (index < datas.length) {
                 WorkMenu menu = WorkMenu.of(datas[index]);
                 return ListTile(
-                  leading: Icon(
-                    alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
-                    color: alreadySaved ? Colors.blue : null,
-                
-              ),
-                  title: Text(menu.nameJa)
-                  );
-              });
-        });
-    // ListTile(
-    //     title: Text("完了", textAlign: TextAlign.center),
-    //     onTap: () => Navigator.of(context).pop());
+                    leading: Icon(
+                      alreadySaved
+                          ? Icons.check_circle
+                          : Icons.check_circle_outline,
+                      color: alreadySaved ? Colors.blue : null,
+                    ),
+                    title: Text(menu.nameJa));
+              } else {
+                return FlatButton(
+                    child: Text("完了", textAlign: TextAlign.center),
+                    onPressed: () => Navigator.of(context).pop());
+              }
+            });
+      },
+    );
   }
 }
