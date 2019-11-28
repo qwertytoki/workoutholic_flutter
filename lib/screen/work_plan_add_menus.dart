@@ -15,6 +15,7 @@ class WorkPlanAddMenusPage extends StatefulWidget {
 
 class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final List<WorkMenu> _addList = new List();
   @override
   void initState() {
     super.initState();
@@ -47,24 +48,26 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
             padding: const EdgeInsets.all(16.0),
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
-              final bool alreadySaved = true;
               final datas = snapshot.data.documents;
-              if (index < datas.length) {
-                WorkMenu menu = WorkMenu.of(datas[index]);
-                return ListTile(
-                    leading: Icon(
-                      alreadySaved
-                          ? Icons.check_circle
-                          : Icons.check_circle_outline,
-                      color: alreadySaved ? Colors.blue : null,
-                    ),
-                    title: Text(menu.nameJa));
-              } else {
-                //dead code
-                return FlatButton(
-                    child: Text("完了", textAlign: TextAlign.center),
-                    onPressed: () => Navigator.of(context).pop());
-              }
+              WorkMenu menu = WorkMenu.of(datas[index]);
+              final bool alreadySaved = _addList.contains(menu);
+              return ListTile(
+                  title: Text(menu.nameJa),
+                  leading: Icon(
+                    alreadySaved
+                        ? Icons.check_circle
+                        : Icons.check_circle_outline,
+                    color: alreadySaved ? Colors.blue : null,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      if (alreadySaved) {
+                        _addList.remove(menu);
+                      } else {
+                        _addList.add(menu);
+                      }
+                    });
+                  });
             });
       },
     );
