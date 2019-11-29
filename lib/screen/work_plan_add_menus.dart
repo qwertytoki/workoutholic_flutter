@@ -6,20 +6,23 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
   final DateTime date;
-  final List<WorkMenu> displayMenus;
+  final List<WorkMenu> selectedMenus;
 
   @override
   WorkPlanAddMenusPage(
-      {@required this.user, @required this.date, this.displayMenus});
+      {@required this.user, @required this.date, this.selectedMenus});
   _WorkPlanAddMenusState createState() => _WorkPlanAddMenusState();
 }
 
 class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
-  final List<WorkMenu> _addList = new List();
+  Set<WorkMenu> _addList = new Set();
   List<WorkMenu> _allMenus = new List();
   @override
   void initState() {
     super.initState();
+    widget.selectedMenus.forEach((m) {
+      _addList.add(m);
+    });
     WorkMenuDao.getAllMenus().then((menus) {
       setState(() {
         _allMenus = menus;
@@ -28,9 +31,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: _buildAppBar(context),
-        body: _buildBody(context));
+    return Scaffold(appBar: _buildAppBar(context), body: _buildBody(context));
   }
 
   Widget _buildAppBar(BuildContext context) {
@@ -51,7 +52,13 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
         itemCount: _allMenus.length,
         itemBuilder: (context, index) {
           WorkMenu menu = _allMenus[index];
-          final bool alreadySaved = _addList.contains(menu);
+          bool alreadySaved = false;
+          for (WorkMenu m in _addList) {
+            if (m.code == menu.code) {
+              alreadySaved = true;
+            }
+          }
+
           return ListTile(
               title: Text(menu.nameJa),
               leading: Icon(
@@ -59,7 +66,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
                 color: alreadySaved ? Colors.blue : null,
               ),
               onTap: () {
-                setState((){
+                setState(() {
                   if (alreadySaved) {
                     _addList.remove(menu);
                   } else {

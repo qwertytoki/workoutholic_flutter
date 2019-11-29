@@ -14,9 +14,12 @@ class WorkPlanCreatePage extends StatefulWidget {
 }
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
-  List<WorkMenu> _selectedMenus = new List();
+  List<WorkMenu> _selectedMenus;
   Widget build(BuildContext context) {
     _selectedMenus = widget.paramMenus;
+    if(_selectedMenus == null){
+      _selectedMenus = new List();
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text("新しいプランを作成"),
@@ -49,7 +52,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                                   builder: (context) => WorkPlanAddMenusPage(
                                       user: widget.user,
                                       date: widget.date,
-                                      displayMenus: _selectedMenus))).then((menus) {
+                                      selectedMenus: _selectedMenus))).then((menus) {
                             setState(() {
                               _selectedMenus = menus;
                             });
