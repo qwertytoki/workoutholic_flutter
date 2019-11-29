@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
+import 'package:workoutholic/dto/work_plan.dart';
+import 'package:workoutholic/dao/work_plan_dao.dart';
 import 'package:workoutholic/screen/work_plan_add_menus.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 
@@ -68,6 +70,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
   }
 
   _saveLogs() {
-    // planテーブルに登録
+    WorkPlan plan = WorkPlan.create
+    WorkPlanDao.savePlan(_selectedMenus);
   }
 }
