@@ -4,32 +4,36 @@ import 'dart:async';
 
 class WorkPlanDao {
   static Stream<QuerySnapshot> getPlansStream(String userId) {
-    return  Firestore.instance
-    .collection('workPlan')
-    .where('user_id',isEqualTo: userId)
-    .snapshots();
+    return Firestore.instance
+        .collection('workPlan')
+        .where('user_id', isEqualTo: userId)
+        .snapshots();
   }
-  static Future<WorkPlan> getPlanByCode(String planCode,String userId)async{
+
+  static Future<WorkPlan> getPlanByCode(String planCode, String userId) async {
     QuerySnapshot snapshot = await Firestore.instance
         .collection('workPlan')
-        .where('user_id',isEqualTo: userId)
-        .where('planCode',isEqualTo: planCode)
+        .where('user_id', isEqualTo: userId)
+        .where('planCode', isEqualTo: planCode)
         .getDocuments();
     WorkPlan plan;
-    snapshot.documents.forEach((s){
+    snapshot.documents.forEach((s) {
       plan = WorkPlan.of(s);
     });
     return plan;
   }
-  static Future<List<WorkPlan>> getPlans(String userId)async{
+
+  static Future<List<WorkPlan>> getPlans(String userId) async {
     QuerySnapshot snapshot = await Firestore.instance
         .collection('workPlan')
-        .where('user_id',isEqualTo: userId)
+        .where('user_id', isEqualTo: userId)
         .getDocuments();
     List<WorkPlan> plans = new List();
-    snapshot.documents.forEach((s){
+    snapshot.documents.forEach((s) {
       plans.add(WorkPlan.of(s));
     });
     return plans;
   }
+
+  static Future<void> insertLogs(WorkPlan plan) async {}
 }
