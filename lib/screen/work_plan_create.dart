@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
-// import 'package:workoutholic/screen/work_plan_add_menus.dart';
+import 'package:workoutholic/screen/work_plan_add_menus.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 
 class WorkPlanCreatePage extends StatefulWidget {
@@ -14,8 +14,9 @@ class WorkPlanCreatePage extends StatefulWidget {
 }
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
-  List<WorkMenu> selectedMenus = widget.paramMenus;
+  List<WorkMenu> _selectedMenus = new List();
   Widget build(BuildContext context) {
+    _selectedMenus = widget.paramMenus;
     return Scaffold(
         appBar: AppBar(
           title: Text("新しいプランを作成"),
@@ -47,9 +48,10 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                               MaterialPageRoute(
                                   builder: (context) => WorkPlanAddMenusPage(
                                       user: widget.user,
-                                      date: widget.date))).then((menus) {
+                                      date: widget.date,
+                                      displayMenus: _selectedMenus))).then((menus) {
                             setState(() {
-                              selectedMenus = menus;
+                              _selectedMenus = menus;
                             });
                           }))
                 ],
