@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/dto/user.dart';
-import 'package:workoutholic/screen/work_plan_add_menus.dart';
+// import 'package:workoutholic/screen/work_plan_add_menus.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 
-class WorkPlanCreatePage extends StatelessWidget {
+class WorkPlanCreatePage extends StatefulWidget {
   final User user;
   final DateTime date;
-  final List<WorkMenu> menus;
+  final List<WorkMenu> paramMenus;
   @override
-  WorkPlanCreatePage({@required this.user, @required this.date, this.menus});
+  WorkPlanCreatePage(
+      {@required this.user, @required this.date, this.paramMenus});
+  _WorkPlanCreateState createState() => _WorkPlanCreateState();
+}
 
+class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
+  List<WorkMenu> selectedMenus = widget.paramMenus;
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -38,16 +43,21 @@ class WorkPlanCreatePage extends StatelessWidget {
                   ListTile(
                       title: Text("メニューを追加", textAlign: TextAlign.center),
                       onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WorkPlanAddMenusPage(
-                                  user: this.user, date: this.date))))
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WorkPlanAddMenusPage(
+                                      user: widget.user,
+                                      date: widget.date))).then((menus) {
+                            setState(() {
+                              selectedMenus = menus;
+                            });
+                          }))
                 ],
               )),
         ]));
   }
-}
 
-_saveLogs() {
-  // planテーブルに登録
+  _saveLogs() {
+    // planテーブルに登録
+  }
 }

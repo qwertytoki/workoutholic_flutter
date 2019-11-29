@@ -41,7 +41,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(_addList);
         },
       ),
     );
@@ -61,7 +61,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
                 color: alreadySaved ? Colors.blue : null,
               ),
               onTap: () {
-                setState(() {
+                setState((){
                   if (alreadySaved) {
                     _addList.remove(menu);
                   } else {
