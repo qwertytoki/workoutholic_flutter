@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workoutholic/screen/workout_page.dart';
-import 'package:workoutholic/screen/transition_page.dart';
 import 'package:workoutholic/screen/profile_page.dart';
 import 'package:workoutholic/dto/user.dart';
 

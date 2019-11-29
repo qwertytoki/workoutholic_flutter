@@ -6,7 +6,7 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
   final DateTime date;
-  List<WorkMenu> displayMenus = new List();
+  final List<WorkMenu> displayMenus;
 
   @override
   WorkPlanAddMenusPage(
