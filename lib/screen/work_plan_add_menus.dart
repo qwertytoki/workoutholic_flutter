@@ -15,7 +15,6 @@ class WorkPlanAddMenusPage extends StatefulWidget {
 }
 
 class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<WorkMenu> _addList = new List();
   List<WorkMenu> _allMenus = new List();
   @override
@@ -30,7 +29,6 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
         appBar: _buildAppBar(context),
         body: _buildBody(context));
   }

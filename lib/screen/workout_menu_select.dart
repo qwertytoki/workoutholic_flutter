@@ -30,7 +30,6 @@ class WorkoutMenuSelect extends StatefulWidget {
 
 class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
   final Set<WorkMenu> _done = Set<WorkMenu>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ListForSetSelect> _displayList = new List();
   List<WorkLog> _existLogs = new List();
   List<LatestWorkLog> _latestWorkLogs = new List();
@@ -90,7 +89,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
