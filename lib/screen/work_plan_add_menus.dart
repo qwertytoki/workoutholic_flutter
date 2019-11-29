@@ -48,35 +48,27 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return FutureBuilder(
-      future: WorkMenuDao.getAllMenus(),
-      builder: (context, snapshot) {
-        return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index) {
-              final datas = snapshot.data.documents;
-              WorkMenu menu = WorkMenu.of(datas[index]);
-              final bool alreadySaved = _addList.contains(menu);
-              return ListTile(
-                  title: Text(menu.nameJa),
-                  leading: Icon(
-                    alreadySaved
-                        ? Icons.check_circle
-                        : Icons.check_circle_outline,
-                    color: alreadySaved ? Colors.blue : null,
-                  ),
-                  onTap: () {
-                    setState(() {
-                      if (alreadySaved) {
-                        _addList.remove(menu);
-                      } else {
-                        _addList.add(menu);
-                      }
-                    });
-                  });
-            });
-      },
-    );
+    return ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: _allMenus.length,
+        itemBuilder: (context, index) {
+          WorkMenu menu = _allMenus[index];
+          final bool alreadySaved = _addList.contains(menu);
+          return ListTile(
+              title: Text(menu.nameJa),
+              leading: Icon(
+                alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
+                color: alreadySaved ? Colors.blue : null,
+              ),
+              onTap: () {
+                setState(() {
+                  if (alreadySaved) {
+                    _addList.remove(menu);
+                  } else {
+                    _addList.add(menu);
+                  }
+                });
+              });
+        });
   }
 }
