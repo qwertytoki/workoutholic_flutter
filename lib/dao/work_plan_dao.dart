@@ -35,5 +35,9 @@ class WorkPlanDao {
     return plans;
   }
 
-  static Future<void> insertLogs(WorkPlan plan) async {}
+  static Future<void> insertPlan(WorkPlan plan) async {
+    Firestore.instance
+      .collection("workPlan")
+      .add(WorkPlan.toMap(plan));
+  }
 }
