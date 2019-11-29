@@ -13,10 +13,10 @@ class WorkPlanCreatePage extends StatefulWidget {
 }
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
-  Set<WorkMenu> _selectedMenus;
+  List<WorkMenu> _selectedMenus;
   Widget build(BuildContext context) {
     if(_selectedMenus == null){
-      _selectedMenus = new Set();
+      _selectedMenus = new List();
     }
     return Scaffold(
         appBar: AppBar(
@@ -31,18 +31,13 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                 })
           ],
         ),
-        body: ListView(children: <Widget>[
-          Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: new InputDecoration(hintText: "プラン名"),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  ListTile(
+        body: 
+        ListView.builder(
+          padding: EdgeInsets.all(16.0),
+          itemCount: _selectedMenus.length+1,
+          itemBuilder: (context,index){
+            if(index>_selectedMenus.length){
+              return ListTile(
                       title: Text("メニューを追加", textAlign: TextAlign.center),
                       onTap: () => Navigator.push(
                               context,
@@ -54,10 +49,42 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                             setState(() {
                               _selectedMenus = menus;
                             });
-                          }))
-                ],
-              )),
-        ]));
+                          }));
+            }
+            WorkMenu menu = _selectedMenus[index];
+            return ListTile(
+              title: Text(menu.nameJa),
+            );
+          },
+        )
+        // ListView(children: <Widget>[
+        //   Padding(
+        //       padding: EdgeInsets.all(16.0),
+        //       child: Column(
+        //         children: <Widget>[
+        //           TextFormField(
+        //             decoration: new InputDecoration(hintText: "プラン名"),
+        //           ),
+        //           SizedBox(
+        //             height: 8.0,
+        //           ),
+        //           ListTile(
+        //               title: Text("メニューを追加", textAlign: TextAlign.center),
+        //               onTap: () => Navigator.push(
+        //                       context,
+        //                       MaterialPageRoute(
+        //                           builder: (context) => WorkPlanAddMenusPage(
+        //                               user: widget.user,
+        //                               date: widget.date,
+        //                               selectedMenus: _selectedMenus))).then((menus) {
+        //                     setState(() {
+        //                       _selectedMenus = menus;
+        //                     });
+        //                   }))
+        //         ],
+        //       )),
+        // ])
+        );
   }
 
   _saveLogs() {
