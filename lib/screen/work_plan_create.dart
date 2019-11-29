@@ -64,35 +64,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
               title: Text(menu.nameJa),
             );
           },
-        )
-        // ListView(children: <Widget>[
-        //   Padding(
-        //       padding: EdgeInsets.all(16.0),
-        //       child: Column(
-        //         children: <Widget>[
-        //           TextFormField(
-        //             decoration: new InputDecoration(hintText: "プラン名"),
-        //           ),
-        //           SizedBox(
-        //             height: 8.0,
-        //           ),
-        //           ListTile(
-        //               title: Text("メニューを追加", textAlign: TextAlign.center),
-        //               onTap: () => Navigator.push(
-        //                       context,
-        //                       MaterialPageRoute(
-        //                           builder: (context) => WorkPlanAddMenusPage(
-        //                               user: widget.user,
-        //                               date: widget.date,
-        //                               selectedMenus: _selectedMenus))).then((menus) {
-        //                     setState(() {
-        //                       _selectedMenus = menus;
-        //                     });
-        //                   }))
-        //         ],
-        //       )),
-        // ])
-        );
+        ));
   }
 
   _saveLogs() {
