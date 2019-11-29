@@ -6,7 +6,7 @@ import 'package:workoutholic/dao/work_menu_dao.dart';
 class WorkPlanAddMenusPage extends StatefulWidget {
   final User user;
   final DateTime date;
-  final List<WorkMenu> selectedMenus;
+  final Set<WorkMenu> selectedMenus;
 
   @override
   WorkPlanAddMenusPage(
@@ -15,13 +15,13 @@ class WorkPlanAddMenusPage extends StatefulWidget {
 }
 
 class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
-  Set<WorkMenu> _addList = new Set();
+  Set<WorkMenu> _addSet = new Set();
   List<WorkMenu> _allMenus = new List();
   @override
   void initState() {
     super.initState();
     widget.selectedMenus.forEach((m) {
-      _addList.add(m);
+      _addSet.add(m);
     });
     WorkMenuDao.getAllMenus().then((menus) {
       setState(() {
@@ -40,7 +40,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
-          Navigator.of(context).pop(_addList);
+          Navigator.of(context).pop(_addSet);
         },
       ),
     );
@@ -53,7 +53,7 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
         itemBuilder: (context, index) {
           WorkMenu menu = _allMenus[index];
           bool alreadySaved = false;
-          for (WorkMenu m in _addList) {
+          for (WorkMenu m in _addSet) {
             if (m.code == menu.code) {
               alreadySaved = true;
             }
@@ -68,9 +68,9 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
               onTap: () {
                 setState(() {
                   if (alreadySaved) {
-                    _addList.remove(menu);
+                    _addSet.remove(menu);
                   } else {
-                    _addList.add(menu);
+                    _addSet.add(menu);
                   }
                 });
               });

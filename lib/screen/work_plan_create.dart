@@ -6,19 +6,17 @@ import 'package:workoutholic/dto/work_menu.dart';
 class WorkPlanCreatePage extends StatefulWidget {
   final User user;
   final DateTime date;
-  final List<WorkMenu> paramMenus;
   @override
   WorkPlanCreatePage(
-      {@required this.user, @required this.date, this.paramMenus});
+      {@required this.user, @required this.date});
   _WorkPlanCreateState createState() => _WorkPlanCreateState();
 }
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
-  List<WorkMenu> _selectedMenus;
+  Set<WorkMenu> _selectedMenus;
   Widget build(BuildContext context) {
-    _selectedMenus = widget.paramMenus;
     if(_selectedMenus == null){
-      _selectedMenus = new List();
+      _selectedMenus = new Set();
     }
     return Scaffold(
         appBar: AppBar(
