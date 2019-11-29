@@ -7,15 +7,14 @@ class WorkPlanCreatePage extends StatefulWidget {
   final User user;
   final DateTime date;
   @override
-  WorkPlanCreatePage(
-      {@required this.user, @required this.date});
+  WorkPlanCreatePage({@required this.user, @required this.date});
   _WorkPlanCreateState createState() => _WorkPlanCreateState();
 }
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
   List<WorkMenu> _selectedMenus;
   Widget build(BuildContext context) {
-    if(_selectedMenus == null){
+    if (_selectedMenus == null) {
       _selectedMenus = new List();
     }
     return Scaffold(
@@ -31,27 +30,36 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                 })
           ],
         ),
-        body: 
-        ListView.builder(
+        body: ListView.builder(
           padding: EdgeInsets.all(16.0),
-          itemCount: _selectedMenus.length+1,
-          itemBuilder: (context,index){
-            if(index>_selectedMenus.length){
+          itemCount: _selectedMenus.length + 2,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(children: <Widget>[
+                TextFormField(
+                  decoration: new InputDecoration(hintText: "プラン名"),
+                ),
+                SizedBox(
+                  height: 16.0,
+                )
+              ]);
+            } else if (index > _selectedMenus.length) {
               return ListTile(
-                      title: Text("メニューを追加", textAlign: TextAlign.center),
-                      onTap: () => Navigator.push(
+                  title: Text("メニューを追加", textAlign: TextAlign.center),
+                  onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => WorkPlanAddMenusPage(
                                       user: widget.user,
                                       date: widget.date,
-                                      selectedMenus: _selectedMenus))).then((menus) {
-                            setState(() {
-                              _selectedMenus = menus;
-                            });
-                          }));
+                                      selectedMenus: _selectedMenus)))
+                          .then((menus) {
+                        setState(() {
+                          _selectedMenus = menus;
+                        });
+                      }));
             }
-            WorkMenu menu = _selectedMenus[index];
+            WorkMenu menu = _selectedMenus[index - 1];
             return ListTile(
               title: Text(menu.nameJa),
             );
