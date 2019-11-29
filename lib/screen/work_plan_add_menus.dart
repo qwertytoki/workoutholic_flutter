@@ -58,7 +58,6 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
               alreadySaved = true;
             }
           }
-
           return ListTile(
               title: Text(menu.nameJa),
               leading: Icon(
@@ -68,7 +67,12 @@ class _WorkPlanAddMenusState extends State<WorkPlanAddMenusPage> {
               onTap: () {
                 setState(() {
                   if (alreadySaved) {
-                    _addList.remove(menu);
+                    for(WorkMenu m in _addList){
+                      if(m.code == menu.code){
+                        _addList.remove(m);
+                        break;
+                      }
+                    }
                   } else {
                     _addList.add(menu);
                   }
