@@ -11,7 +11,6 @@ class WorkPlan implements ListForSetSelect {
     this.nameJa = '',
     this.note = '',
     this.menus = const [],
-    this.isDefault = false,
   });
 
   String id;
@@ -21,7 +20,7 @@ class WorkPlan implements ListForSetSelect {
   String nameJa;
   String note;
   List<WorkMenu> menus;
-  bool isDefault;
+
 
   static WorkPlan of(DocumentSnapshot document) {
     if (!document.exists) {
@@ -50,21 +49,20 @@ class WorkPlan implements ListForSetSelect {
     return this.id == '';
   }
 
-  Map<String, Object> toMapForSet() {
+  static Map<String, Object> toMap(WorkPlan plan) {
     Map<String, Object> data = new Map();
-    data.putIfAbsent('user_id', () => userId);
-    data.putIfAbsent('code', () => code);
-    data.putIfAbsent('name_en', () => nameEn);
-    data.putIfAbsent('name_ja', () => nameJa);
-    data.putIfAbsent('note', () => note);
-    data.putIfAbsent('menus', () => menus);
-    data.putIfAbsent('is_default', () => isDefault);
+    data.putIfAbsent('user_id', () => plan.userId);
+    data.putIfAbsent('code', () => plan.code);
+    data.putIfAbsent('name_en', () => plan.nameEn);
+    data.putIfAbsent('name_ja', () => plan.nameJa);
+    data.putIfAbsent('note', () =>plan. note);
+    data.putIfAbsent('menus', () => plan.menus);
     return data;
   }
 
   // Delete me after using firebase
   static WorkPlan createNewSet(String id, String userId, String code, String nameEn,
-      String nameJa, String note, List<WorkMenu> menus, bool isDefault) {
+      String nameJa, String note, List<WorkMenu> menus) {
     return new WorkPlan(
       id: id,
       userId: userId,
@@ -73,7 +71,6 @@ class WorkPlan implements ListForSetSelect {
       nameJa: nameJa,
       note: note,
       menus: menus,
-      isDefault: isDefault,
     );
   }
 }
