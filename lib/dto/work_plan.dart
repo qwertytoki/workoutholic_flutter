@@ -19,7 +19,7 @@ class WorkPlan implements ListForSetSelect {
   String nameEn;
   String nameJa;
   String note;
-  List<WorkMenu> menus;
+  List menus;
 
 
   static WorkPlan of(DocumentSnapshot document) {
@@ -36,11 +36,10 @@ class WorkPlan implements ListForSetSelect {
         menus: _translateToMenus(document['menus'])
     );
   }
-  static List<WorkMenu> _translateToMenus(List<dynamic> list){
-    List<WorkMenu> menus = new List();
+  static List _translateToMenus(List<dynamic> list){
+    List menus = new List();
     list.forEach((document){
       menus.add(WorkMenu.generateDisplayMenu(document['code'], document['name_en'], document['name_ja']));
-      
     });
     return menus;
   }
