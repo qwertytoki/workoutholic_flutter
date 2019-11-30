@@ -19,7 +19,7 @@ class WorkPlan implements ListForSetSelect {
   String nameEn;
   String nameJa;
   String note;
-  List menus;
+  List<Map<String,String>> menus;
 
 
   static WorkPlan of(DocumentSnapshot document) {
