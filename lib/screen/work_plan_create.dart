@@ -18,7 +18,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
   TextEditingController nameController;
   final _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
-    nameController = TextEditingController(text: widget.user.displayName);
+    nameController = TextEditingController();
     if (_selectedMenus == null) {
       _selectedMenus = new List();
     }
@@ -30,8 +30,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                 child: Text('完了',
                     style: TextStyle(fontSize: 17.0, color: Colors.white)),
                 onPressed: () {
-                  _saveLogs();
-                  Navigator.pop(context);
+                  _savePlan(context);
                 })
           ],
         ),
@@ -40,22 +39,24 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
           itemCount: _selectedMenus.length + 2,
           itemBuilder: (context, index) {
             if (index == 0) {
-              return Column(children: <Widget>[
-                TextFormField(
-                    controller: nameController,
-                    decoration: new InputDecoration(hintText: "プラン名"),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return "1文字以上必要です";
-                      } else if (value.length > 20) {
-                        return "名前が長すぎます";
-                      }
-                      return "";
-                    }),
-                SizedBox(
-                  height: 16.0,
-                )
-              ]);
+              return Form(
+                  key: _formKey,
+                  child: Column(children: <Widget>[
+                    TextFormField(
+                        controller: nameController,
+                        decoration: new InputDecoration(hintText: "プラン名"),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "1文字以上必要です";
+                          } else if (value.length > 20) {
+                            return "名前が長すぎます";
+                          }
+                          return "";
+                        }),
+                    SizedBox(
+                      height: 16.0,
+                    )
+                  ]));
             } else if (index > _selectedMenus.length) {
               return ListTile(
                   title: Text("メニューを追加", textAlign: TextAlign.center),
@@ -80,7 +81,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
         ));
   }
 
-  _saveLogs() {
+  void _savePlan(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       WorkPlan plan = WorkPlan.createNewPlan(
           widget.user.uid,
@@ -90,6 +91,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
           "",
           _selectedMenus);
       WorkPlanDao.insertPlan(plan);
+      Navigator.pop(context);
     }
   }
 }
