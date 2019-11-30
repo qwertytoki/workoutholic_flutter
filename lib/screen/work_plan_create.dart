@@ -51,6 +51,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
                           } else if (value.length > 20) {
                             return "名前が長すぎます";
                           }
+                          return null;
                         }),
                     SizedBox(
                       height: 16.0,
