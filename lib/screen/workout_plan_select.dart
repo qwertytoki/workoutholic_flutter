@@ -69,7 +69,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                 item.nameJa,
                 style: Theme.of(context).textTheme.headline,
               ),
-              subtitle: Text("ベンチプレス、スクワット、デッドリフト..."),
+              subtitle: Text("ベンチプレス、スクワット、デッドリフト"),
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(

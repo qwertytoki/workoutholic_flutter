@@ -61,7 +61,7 @@ class WorkPlan implements ListForSetSelect {
 
   // Delete me after using firebase
   static WorkPlan createNewPlan(String userId, String code, String nameEn,
-      String nameJa, String note, List menus) {
+      String nameJa, String note, List<Map<String,String>> menus) {
     return new WorkPlan(
       userId: userId,
       code: code,
