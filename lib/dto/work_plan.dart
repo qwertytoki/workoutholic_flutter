@@ -62,7 +62,7 @@ class WorkPlan implements ListForSetSelect {
 
   // Delete me after using firebase
   static WorkPlan createNewPlan(String userId, String code, String nameEn,
-      String nameJa, String note, List<WorkMenu> menus) {
+      String nameJa, String note, List menus) {
     return new WorkPlan(
       userId: userId,
       code: code,
@@ -71,5 +71,16 @@ class WorkPlan implements ListForSetSelect {
       note: note,
       menus: menus,
     );
+  }
+  static List<Map<String,String>> generateMenusFormMenuDto(List<WorkMenu> workMenuList){
+    List<Map<String,String>> menus = new List();
+    workMenuList.forEach((m){
+      Map<String,String> map = {
+            "code":m.code,
+            "name_en":m.nameEn,
+            "name_ja":m.nameJa};
+      menus.add(map);
+    });
+    return menus;
   }
 }
