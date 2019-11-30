@@ -15,7 +15,10 @@ class WorkPlanCreatePage extends StatefulWidget {
 
 class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
   List<WorkMenu> _selectedMenus;
+  TextEditingController nameController;
+  final _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
+    nameController = TextEditingController(text: widget.user.displayName);
     if (_selectedMenus == null) {
       _selectedMenus = new List();
     }
@@ -39,8 +42,16 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
             if (index == 0) {
               return Column(children: <Widget>[
                 TextFormField(
-                  decoration: new InputDecoration(hintText: "プラン名"),
-                ),
+                    controller: nameController,
+                    decoration: new InputDecoration(hintText: "プラン名"),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "1文字以上必要です";
+                      } else if (value.length > 20) {
+                        return "名前が長すぎます";
+                      }
+                      return "";
+                    }),
                 SizedBox(
                   height: 16.0,
                 )
@@ -70,7 +81,15 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
   }
 
   _saveLogs() {
-    WorkPlan plan = WorkPlan.create
-    WorkPlanDao.savePlan(_selectedMenus);
+    if (_formKey.currentState.validate()) {
+      WorkPlan plan = WorkPlan.createNewPlan(
+          widget.user.uid,
+          nameController.text,
+          nameController.text,
+          nameController.text,
+          "",
+          _selectedMenus);
+      WorkPlanDao.insertPlan(plan);
+    }
   }
 }
