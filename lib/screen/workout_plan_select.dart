@@ -47,7 +47,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     snapshot.data.documents.forEach((plan) {
       workPlans.add(WorkPlan.of(plan));
     });
-    ListView.builder(
+    return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: workPlans.length + 1,
         itemBuilder: (context, int index) {
@@ -73,7 +73,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => WorkoutMenuSelect(
-                      user: this.user, workPlan: item, date: this.date)),
+                      user: this.user, workPlan: plan, date: this.date)),
             ),
           );
         });
