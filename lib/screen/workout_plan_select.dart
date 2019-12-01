@@ -86,9 +86,14 @@ class WorkoutPlanSelectPage extends StatelessWidget {
 
   String _generateSubTitle(List<WorkMenu> menus) {
     String subTitle = "";
-    menus.forEach((m) {
-      subTitle += m.nameJa + " ";
-    });
+    for (WorkMenu menu in menus) {
+      if (subTitle.length >= 20) {
+        subTitle += "...";
+        break;
+      } else {
+        subTitle += menu.nameJa + " ";
+      }
+    }
     return subTitle;
   }
 }
