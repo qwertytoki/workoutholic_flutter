@@ -80,7 +80,11 @@ class WorkoutPlanSelectPage extends StatelessWidget {
   }
 
   String _generateSubTitle(List<WorkMenu> menus) {
-    return "hoge, piyo, fuwa";
+    String subTitle = "";
+    menus.forEach((m) {
+      subTitle += m.nameJa + " ";
+    });
+    return subTitle;
   }
   // List<ListForSetSelect> displayList = new List();
   // workPlans.forEach((plan) {
