@@ -19,7 +19,9 @@ class WorkPlan implements ListForSetSelect {
   String nameEn;
   String nameJa;
   String note;
-  List<Map<String,String>> menus;
+  List<WorkMenu> menus;
+  // DBへの登録型は以下なので注意
+  // List<Map<String,String>> menus;
 
 
   static WorkPlan of(DocumentSnapshot document) {
@@ -36,16 +38,12 @@ class WorkPlan implements ListForSetSelect {
         menus: _translateToMenus(document['menus'])
     );
   }
-  static List _translateToMenus(List<dynamic> list){
-    List menus = new List();
+  static List<WorkMenu> _translateToMenus(List<dynamic> list){
+    List<WorkMenu> menus = new List();
     list.forEach((document){
       menus.add(WorkMenu.generateDisplayMenu(document['code'], document['name_en'], document['name_ja']));
     });
     return menus;
-  }
-
-  bool isEmpty() {
-    return this.id == '';
   }
 
   static Map<String, Object> toMap(WorkPlan plan) {
@@ -55,13 +53,13 @@ class WorkPlan implements ListForSetSelect {
     data.putIfAbsent('name_en', () => plan.nameEn);
     data.putIfAbsent('name_ja', () => plan.nameJa);
     data.putIfAbsent('note', () =>plan. note);
-    data.putIfAbsent('menus', () => plan.menus);
+    data.putIfAbsent('menus', () => translateToDBType(plan.menus));
     return data;
   }
 
   // Delete me after using firebase
   static WorkPlan createNewPlan(String userId, String code, String nameEn,
-      String nameJa, String note, List<Map<String,String>> menus) {
+      String nameJa, String note, List<WorkMenu> menus) {
     return new WorkPlan(
       userId: userId,
       code: code,
@@ -71,7 +69,7 @@ class WorkPlan implements ListForSetSelect {
       menus: menus,
     );
   }
-  static List<Map<String,String>> generateMenusFormMenuDto(List<WorkMenu> workMenuList){
+  static List<Map<String,String>> translateToDBType(List<WorkMenu> workMenuList){
     List<Map<String,String>> menus = new List();
     workMenuList.forEach((m){
       Map<String,String> map = {

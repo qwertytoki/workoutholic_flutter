@@ -39,7 +39,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
     super.initState();
     List<String> menuCodeList = new List();
     widget.workPlan.menus.forEach((m) {
-      menuCodeList.add(m["code"]);
+      menuCodeList.add(m.code);
     });
     Future.wait([
       WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
@@ -55,9 +55,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   List<ListForSetSelect> _generateDisplayList() {
     List<WorkMenu> menus = new List();
-    widget.workPlan.menus.forEach((m){
-      menus.add(WorkMenu.generateDisplayMenu(m["code"], m["nameEn"], m["nameJa"]));
-    });
+    menus.addAll(widget.workPlan.menus);
     List<ListForSetSelect> _list = new List();
     menus.forEach((menu) {
       _list.add(menu);

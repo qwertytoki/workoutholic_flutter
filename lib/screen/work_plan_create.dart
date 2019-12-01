@@ -89,8 +89,7 @@ class _WorkPlanCreateState extends State<WorkPlanCreatePage> {
           nameController.text,
           nameController.text,
           "",
-          WorkPlan.generateMenusFormMenuDto(_selectedMenus)
-          );
+          _selectedMenus);
       WorkPlanDao.insertPlan(plan);
       Navigator.pop(context);
     }
