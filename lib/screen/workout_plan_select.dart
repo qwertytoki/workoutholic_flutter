@@ -49,14 +49,14 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     });
 
     List<ListForSetSelect> displayList = new List();
-    workPlans.forEach((plan) {
-      displayList?.add(plan);
-      plan.menus.forEach((menu) {
-        menu.workPlan = plan;
-        displayList.add(menu);
-      });
-      displayList.add(new Separator());
-    });
+    // workPlans.forEach((plan) {
+    //   displayList?.add(plan);
+    //   plan.menus.forEach((menu) {
+    //     menu.workPlan = WorkMenu.generateDisplayMenu(menu["cdoe"], menu["nameEn"], menu["nameJa"]);
+    //     displayList.add(menu);
+    //   });
+    //   displayList.add(new Separator());
+    // });
     displayList.add(new AddNewSet());
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
