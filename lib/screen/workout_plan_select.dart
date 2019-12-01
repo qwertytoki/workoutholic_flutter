@@ -49,66 +49,92 @@ class WorkoutPlanSelectPage extends StatelessWidget {
     });
     ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: workPlans.length+1,
-        itemBuilder: (context,int index){
-          
-        }
-      );
-    
-
-    // List<ListForSetSelect> displayList = new List();
-    // workPlans.forEach((plan) {
-    //   displayList?.add(plan);
-    //   plan.menus.forEach((menu) {
-    //     // menu.workPlan
-    //     displayList.add(menu);
-    //   });
-    //   displayList.add(new Separator());
-    // });
-    // displayList.add(new AddNewSet());
-    // return ListView.builder(
-    //     padding: const EdgeInsets.all(16.0),
-    //     itemCount: displayList.length,
-    //     itemBuilder: (context, int index) {
-    //       final item = displayList[index];
-    //       if (item is WorkPlan) {
-    //         return ListTile(
-    //           title: Text(
-    //             item.nameJa,
-    //             style: Theme.of(context).textTheme.headline,
-    //           ),
-    //           subtitle: 
-    //           onTap: () => Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //                 builder: (context) => WorkoutMenuSelect(
-    //                     user: this.user, workPlan: item, date: this.date)),
-    //           ),
-    //         );
-    //       } else if (item is WorkMenu) {
-    //         return ListTile(
-    //             title: Text(item.nameJa),
-    //             onTap: () => Navigator.push(
-    //                   context,
-    //                   MaterialPageRoute(
-    //                       builder: (context) => WorkoutMenuSelect(
-    //                           user: this.user,
-    //                           workPlan: item.workPlan,
-    //                           date: this.date)),
-    //                 ));
-    //       } else if (item is Separator) {
-    //         return Divider(color: Colors.black38);
-    //       } else {
-    //         return ListTile(
-    //             title: Text("トレーニングプランを新規作成", textAlign: TextAlign.center),
-    //             onTap: () => Navigator.push(
-    //                   context,
-    //                   MaterialPageRoute(
-    //                     builder: (context) => WorkPlanCreatePage(
-    //                         user: this.user, date: this.date),
-    //                   ),
-    //                 ));
-    //       }
-    //     });
+        itemCount: workPlans.length + 1,
+        itemBuilder: (context, int index) {
+          if (index == workPlans.length) {
+            return ListTile(
+                title: Text("トレーニングプランを新規作成", textAlign: TextAlign.center),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WorkPlanCreatePage(
+                            user: this.user, date: this.date),
+                      ),
+                    ));
+          }
+          WorkPlan plan = workPlans[index];
+          return ListTile(
+            title: Text(
+              plan.nameJa,
+              style: Theme.of(context).textTheme.headline,
+            ),
+            subtitle: Text(_generateSubTitle(plan.menus)),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WorkoutMenuSelect(
+                      user: this.user, workPlan: item, date: this.date)),
+            ),
+          );
+        });
   }
+
+  String _generateSubTitle(List<WorkMenu> menus) {
+    return "hoge, piyo, fuwa";
+  }
+  // List<ListForSetSelect> displayList = new List();
+  // workPlans.forEach((plan) {
+  //   displayList?.add(plan);
+  //   plan.menus.forEach((menu) {
+  //     // menu.workPlan
+  //     displayList.add(menu);
+  //   });
+  //   displayList.add(new Separator());
+  // });
+  // displayList.add(new AddNewSet());
+  // return ListView.builder(
+  //     padding: const EdgeInsets.all(16.0),
+  //     itemCount: displayList.length,
+  //     itemBuilder: (context, int index) {
+  //       final item = displayList[index];
+  //       if (item is WorkPlan) {
+  // return ListTile(
+  //   title: Text(
+  //     item.nameJa,
+  //     style: Theme.of(context).textTheme.headline,
+  //   ),
+  //   subtitle:
+  //   onTap: () => Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //         builder: (context) => WorkoutMenuSelect(
+  //             user: this.user, workPlan: item, date: this.date)),
+  //   ),
+  // );
+  //       } else if (item is WorkMenu) {
+  //         return ListTile(
+  //             title: Text(item.nameJa),
+  //             onTap: () => Navigator.push(
+  //                   context,
+  //                   MaterialPageRoute(
+  //                       builder: (context) => WorkoutMenuSelect(
+  //                           user: this.user,
+  //                           workPlan: item.workPlan,
+  //                           date: this.date)),
+  //                 ));
+  //       } else if (item is Separator) {
+  //         return Divider(color: Colors.black38);
+  //       } else {
+  // return ListTile(
+  //     title: Text("トレーニングプランを新規作成", textAlign: TextAlign.center),
+  //     onTap: () => Navigator.push(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) => WorkPlanCreatePage(
+  //                 user: this.user, date: this.date),
+  //           ),
+  //         ));
+  //       }
+  //     });
+
 }
