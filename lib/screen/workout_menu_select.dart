@@ -125,7 +125,6 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
 
   Widget _buildBody(BuildContext context) {
     return FutureBuilder(
-      // future: WorkLogDao.getLogByUserAndDate(widget.user.uid, widget.date),
       builder: (context, snapshot) {
         return _buildList(context);
       },
