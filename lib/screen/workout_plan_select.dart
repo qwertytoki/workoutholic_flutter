@@ -71,6 +71,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline,
                 ),
                 subtitle: Text(_generateSubTitle(plan.menus)),
+                // isThreeLine: true,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
