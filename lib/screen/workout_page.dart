@@ -66,7 +66,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   Future<Map<DateTime, List<WorkLog>>> _getWorkLog(DateTime date) async {
-
     Map<DateTime, List<WorkLog>> map = new Map();
     List<WorkLog> logs = await WorkLogDao.getLogByMonth(date);
     logs.forEach((l) {
@@ -258,7 +257,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                     title: Text(event.menuNameJa),
-                    subtitle: Text(_generateWorkSummary()),
+                    subtitle: Text(_generateWorkSummary(event)),
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -271,8 +270,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           .toList(),
     );
   }
-  String _generateWorkSummary(){
-    return "aiueo";
+
+  String _generateWorkSummary(WorkLog workLog) {
+    String sum = "";
+    for (Map<String, num> l in workLog.logs) {
+      sum += l["reps"].toString() + "kg" + l["weight"].toString() + " ";
+      if (sum.length > 20) break;
+    }
+    ;
+    return sum;
   }
 
   WorkPlan _getPlan(String planCode) {
@@ -281,6 +287,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         return plan;
       }
     }
-    throw new Exception("Plan is not exist. please check/ PlanCode:" + planCode);
+    throw new Exception(
+        "Plan is not exist. please check/ PlanCode:" + planCode);
   }
 }
