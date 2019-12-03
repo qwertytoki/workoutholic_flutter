@@ -4,7 +4,6 @@ import 'package:workoutholic/dto/work_plan.dart';
 import 'package:workoutholic/dto/work_menu.dart';
 import 'package:workoutholic/dao/work_plan_dao.dart';
 import 'package:workoutholic/screen/work_plan_create.dart';
-import 'package:workoutholic/const/list_for_set_select.dart';
 import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/widget/circular_load.dart';
 
