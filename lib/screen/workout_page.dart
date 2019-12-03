@@ -275,9 +275,11 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     String sum = "";
     for (Map<String, num> l in workLog.logs) {
       sum += l["weight"].toString() + "kg×" + l["reps"].toString() + "  ";
-      if (sum.length > 20) break;
+      if (sum.length > 20){
+        sum += "...";
+        break;
+      } 
     }
-    ;
     return sum;
   }
 
