@@ -258,6 +258,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                     title: Text(event.menuNameJa),
+                    subtitle: Text(_generateWorkSummary()),
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -269,6 +270,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
               ))
           .toList(),
     );
+  }
+  String _generateWorkSummary(){
+    return "aiueo";
   }
 
   WorkPlan _getPlan(String planCode) {
