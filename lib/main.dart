@@ -25,11 +25,13 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _getCurrentUser().then((fbUser) {
-      _getUser(fbUser).then((userVal) {
-        setState(() {
-          user = userVal;
+      if (fbUser != null) {
+        _getUser(fbUser).then((userVal) {
+          setState(() {
+            user = userVal;
+          });
         });
-      });
+      }
     });
   }
 
