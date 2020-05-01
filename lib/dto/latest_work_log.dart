@@ -16,7 +16,7 @@ class LatestWorkLog implements ListForSetSelect {
       this.date,
       this.workType = WorkType.LIFT,
       this.logs = const []});
-
+  // test
   String documentID;
   String userId;
   String planCode;
