@@ -58,10 +58,10 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
             icon: new Icon(Icons.fitness_center),
             title: new Text("ワークアウト"),
           ),
-          // new BottomNavigationBarItem(
-          //   icon: new Icon(Icons.trending_up),
-          //   title: new Text("進捗グラフ"),
-          // ),
+           new BottomNavigationBarItem(
+             icon: new Icon(Icons.trending_up),
+             title: new Text("進捗グラフ"),
+           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.person),
             title: new Text("プロフィール"),
