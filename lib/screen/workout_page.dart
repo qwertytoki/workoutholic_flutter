@@ -221,7 +221,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       locale: 'pl_PL',
       calendarController: _calendarController,
       events: _events,
-      holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -332,23 +331,79 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
+  Widget _buildHolidaysMarker() {
+    return Icon(
+      Icons.add_box,
+      size: 20.0,
+      color: Colors.blueGrey[800],
+    );
+  }
+
+  Widget _buildButtons() {
+    final dateTime = _events.keys.elementAt(_events.length - 2);
+
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Month'),
+              onPressed: () {
+                setState(() {
+                  _calendarController.setCalendarFormat(CalendarFormat.month);
+                });
+              },
+            ),
+            RaisedButton(
+              child: Text('2 weeks'),
+              onPressed: () {
+                setState(() {
+                  _calendarController
+                      .setCalendarFormat(CalendarFormat.twoWeeks);
+                });
+              },
+            ),
+            RaisedButton(
+              child: Text('Week'),
+              onPressed: () {
+                setState(() {
+                  _calendarController.setCalendarFormat(CalendarFormat.week);
+                });
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 8.0),
+        RaisedButton(
+          child: Text(
+              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
+          onPressed: () {
+            _calendarController.setSelectedDay(
+              DateTime(dateTime.year, dateTime.month, dateTime.day),
+              runCallback: true,
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   Widget _buildEventList() {
     return ListView(
       children: _selectedEvents
           .map((event) => Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                    title: Text(event.menuNameJa),
-                    subtitle: Text(_generateWorkSummary(event)),
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WorkoutMenuSelect(
-                                  user: widget.user,
-                                  workPlan: _getPlan(event.planCode),
-                                  date: _selectedDay)),
-                        )),
+                  title: Text(event.toString()),
+                  onTap: () => print('$event tapped!'),
+                ),
               ))
           .toList(),
     );
