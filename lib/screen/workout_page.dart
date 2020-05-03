@@ -103,16 +103,17 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     _calendarController = CalendarController();
     _visibleEvents = {};
 
-    Future.wait(
-            [_getWorkLog(_selectedDay), WorkPlanDao.getPlans(widget.user.uid)])
-        .then((values) {
-      setState(() {
-        _events = values[0];
-        _selectedEvents = _events[_selectedDay] ?? [];
-        _visibleEvents = _events;
-        _plans = values[1];
-      });
-    });
+    // 一旦うごく状態に戻した!
+//    Future.wait(
+//            [_getWorkLog(_selectedDay), WorkPlanDao.getPlans(widget.user.uid)])
+//        .then((values) {
+//      setState(() {
+//        _events = values[0];
+//        _selectedEvents = _events[_selectedDay] ?? [];
+//        _visibleEvents = _events;
+//        _plans = values[1];
+//      });
+//    });
 
     _animationController = AnimationController(
       vsync: this,
@@ -339,57 +340,57 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
-  Widget _buildButtons() {
+//  Widget _buildButtons() {
 //    final dateTime = _events.keys.elementAt(_events.length - 2);
-    final dateTime = _events.keys.elementAt(_events.length);
-
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Month'),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.month);
-                });
-              },
-            ),
-            RaisedButton(
-              child: Text('2 weeks'),
-              onPressed: () {
-                setState(() {
-                  _calendarController
-                      .setCalendarFormat(CalendarFormat.twoWeeks);
-                });
-              },
-            ),
-            RaisedButton(
-              child: Text('Week'),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.week);
-                });
-              },
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        RaisedButton(
-          child: Text(
-              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
-          onPressed: () {
-            _calendarController.setSelectedDay(
-              DateTime(dateTime.year, dateTime.month, dateTime.day),
-              runCallback: true,
-            );
-          },
-        ),
-      ],
-    );
-  }
+////    final dateTime = _events.keys.elementAt(_events.length);
+//
+//    return Column(
+//      children: <Widget>[
+//        Row(
+//          mainAxisSize: MainAxisSize.max,
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          children: <Widget>[
+//            RaisedButton(
+//              child: Text('Month'),
+//              onPressed: () {
+//                setState(() {
+//                  _calendarController.setCalendarFormat(CalendarFormat.month);
+//                });
+//              },
+//            ),
+//            RaisedButton(
+//              child: Text('2 weeks'),
+//              onPressed: () {
+//                setState(() {
+//                  _calendarController
+//                      .setCalendarFormat(CalendarFormat.twoWeeks);
+//                });
+//              },
+//            ),
+//            RaisedButton(
+//              child: Text('Week'),
+//              onPressed: () {
+//                setState(() {
+//                  _calendarController.setCalendarFormat(CalendarFormat.week);
+//                });
+//              },
+//            ),
+//          ],
+//        ),
+//        const SizedBox(height: 8.0),
+//        RaisedButton(
+//          child: Text(
+//              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
+//          onPressed: () {
+//            _calendarController.setSelectedDay(
+//              DateTime(dateTime.year, dateTime.month, dateTime.day),
+//              runCallback: true,
+//            );
+//          },
+//        ),
+//      ],
+//    );
+//  }
 
   Widget _buildEventList() {
     return ListView(
