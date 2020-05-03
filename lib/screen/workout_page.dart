@@ -13,7 +13,9 @@ import 'package:workoutholic/dao/work_plan_dao.dart';
 class WorkoutPage extends StatefulWidget {
   final User user;
   final DateTime date;
+
   WorkoutPage({@required this.user, this.date});
+
   @override
   _MyWorkoutPageState createState() => _MyWorkoutPageState();
 }
@@ -21,6 +23,7 @@ class WorkoutPage extends StatefulWidget {
 class _MyWorkoutPageState extends State<WorkoutPage>
     with TickerProviderStateMixin {
   _MyWorkoutPageState();
+
   DateTime _selectedDay;
 
   Map<DateTime, List> _events;
@@ -34,7 +37,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    _calendarController = CalendarController();
     _selectedDay = new DateTime(now.year, now.month, now.day);
     // https://github.com/qwertytoki/workoutholic_flutter/issues/41
     // if (widget.date == null) {
@@ -44,8 +46,61 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     //   _selectedDay =
     //       new DateTime(widget.date.year, widget.date.month, widget.date.day);
     // }
-    _events = {};
-    _selectedEvents = [];
+    _events = {
+      _selectedDay.subtract(Duration(days: 30)): [
+        'Event A0',
+        'Event B0',
+        'Event C0'
+      ],
+      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
+      _selectedDay.subtract(Duration(days: 20)): [
+        'Event A2',
+        'Event B2',
+        'Event C2',
+        'Event D2'
+      ],
+      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
+      _selectedDay.subtract(Duration(days: 10)): [
+        'Event A4',
+        'Event B4',
+        'Event C4'
+      ],
+      _selectedDay.subtract(Duration(days: 4)): [
+        'Event A5',
+        'Event B5',
+        'Event C5'
+      ],
+      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
+      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
+      _selectedDay.add(Duration(days: 1)): [
+        'Event A8',
+        'Event B8',
+        'Event C8',
+        'Event D8'
+      ],
+      _selectedDay.add(Duration(days: 3)):
+          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
+      _selectedDay.add(Duration(days: 7)): [
+        'Event A10',
+        'Event B10',
+        'Event C10'
+      ],
+      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
+      _selectedDay.add(Duration(days: 17)): [
+        'Event A12',
+        'Event B12',
+        'Event C12',
+        'Event D12'
+      ],
+      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
+      _selectedDay.add(Duration(days: 26)): [
+        'Event A14',
+        'Event B14',
+        'Event C14'
+      ],
+    };
+    _selectedEvents = _events[_selectedDay] ?? [];
+    _calendarController = CalendarController();
     _visibleEvents = {};
 
     Future.wait(
@@ -63,7 +118,6 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-
     _animationController.forward();
   }
 
@@ -71,6 +125,36 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   void dispose() {
     _calendarController.dispose();
     super.dispose();
+  }
+
+  void _onDaySelected(DateTime day, List events) {
+    print('CALLBACK: _onDaySelected');
+    setState(() {
+      _selectedEvents = events;
+    });
+  }
+
+  void _onVisibleDaysChanged(
+      DateTime first, DateTime last, CalendarFormat format) {
+    _getWorkLog(first).then((monthlyLogsMap) {
+      setState(() {
+        _events.addAll(monthlyLogsMap);
+        _selectedEvents = _events[_selectedDay] ?? [];
+        _visibleEvents = _events;
+        _visibleEvents = Map.fromEntries(
+          _events.entries.where(
+            (entry) =>
+                entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
+                entry.key.isBefore(last.add(const Duration(days: 1))),
+          ),
+        );
+      });
+    });
+  }
+
+  void _onCalendarCreated(
+      DateTime first, DateTime last, CalendarFormat format) {
+    print('CALLBACK: _onCalendarCreated');
   }
 
   Future<Map<DateTime, List<WorkLog>>> _getWorkLog(DateTime date) async {
@@ -99,6 +183,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             _buildTableCalendarWithBuilders(),
+            const SizedBox(height: 8.0),
+            _buildButtons(),
             const SizedBox(height: 8.0),
             Expanded(child: _buildEventList()),
           ],
@@ -129,36 +215,13 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     );
   }
 
-  void _onDaySelected(DateTime day, List event) {
-    setState(() {
-      _selectedDay = day;
-      _selectedEvents = event;
-    });
-  }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-    _getWorkLog(first).then((monthlyLogsMap) {
-      setState(() {
-        _events.addAll(monthlyLogsMap);
-        _selectedEvents = _events[_selectedDay] ?? [];
-        _visibleEvents = _events;
-        _visibleEvents = Map.fromEntries(
-          _events.entries.where(
-            (entry) =>
-                entry.key.isAfter(first.subtract(const Duration(days: 1))) &&
-                entry.key.isBefore(last.add(const Duration(days: 1))),
-          ),
-        );
-      });
-    });
-  }
-
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
-      locale: 'en_US',
-      events: _visibleEvents,
+      locale: 'pl_PL',
+      calendarController: _calendarController,
+      events: _events,
+      holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -168,7 +231,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         CalendarFormat.week: '',
       },
       calendarStyle: CalendarStyle(
-        outsideDaysVisible: true,
+        outsideDaysVisible: false,
         weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
         holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
       ),
@@ -182,7 +245,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       builders: CalendarBuilders(
         selectedDayBuilder: (context, date, _) {
           return FadeTransition(
-            opacity: Tween(begin: 0.0, end: 1.0).animate(_controller),
+            opacity: Tween(begin: 0.0, end: 1.0).animate(_animationController),
             child: Container(
               margin: const EdgeInsets.all(4.0),
               padding: const EdgeInsets.only(top: 5.0, left: 6.0),
@@ -212,7 +275,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
 
-          if (events != null) {
+          if (events.isNotEmpty) {
             children.add(
               Positioned(
                 right: 1,
@@ -221,14 +284,26 @@ class _MyWorkoutPageState extends State<WorkoutPage>
               ),
             );
           }
+
+          if (holidays.isNotEmpty) {
+            children.add(
+              Positioned(
+                right: -2,
+                top: -2,
+                child: _buildHolidaysMarker(),
+              ),
+            );
+          }
+
           return children;
         },
       ),
       onDaySelected: (date, events) {
         _onDaySelected(date, events);
-        _controller.forward(from: 0.0);
+        _animationController.forward(from: 0.0);
       },
       onVisibleDaysChanged: _onVisibleDaysChanged,
+      onCalendarCreated: _onCalendarCreated,
     );
   }
 
@@ -237,9 +312,9 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Utils.isSameDay(date, _selectedDay)
+        color: _calendarController.isSelected(date)
             ? Colors.brown[500]
-            : Utils.isSameDay(date, DateTime.now())
+            : _calendarController.isToday(date)
                 ? Colors.brown[300]
                 : Colors.blue[400],
       ),
@@ -283,10 +358,10 @@ class _MyWorkoutPageState extends State<WorkoutPage>
     String sum = "";
     for (Map<String, num> l in workLog.logs) {
       sum += l["weight"].toString() + "kg×" + l["reps"].toString() + "  ";
-      if (sum.length > 40){
+      if (sum.length > 40) {
         sum += "...";
         break;
-      } 
+      }
     }
     return sum;
   }
