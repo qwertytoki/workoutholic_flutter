@@ -42,10 +42,15 @@ class _MyHomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     User user = widget.user;
+    DateTime date = widget.date;
+    if(date == null){
+      date = DateTime.now();
+    }
+
     return Scaffold(
       body: PageView(
         children: <Widget>[
-          new WorkoutPage(user: user, date: widget.date),
+          new WorkoutPage(user: user, date: date),
           // new TransitionPage(user: user),
           new ProfilePage(user: user),
         ],

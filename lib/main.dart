@@ -2,6 +2,7 @@
 //  Licensed under Apache License v2.0
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutholic/screen/home_page.dart';
 import 'package:workoutholic/screen/login_page.dart';
@@ -9,7 +10,7 @@ import 'package:workoutholic/dto/user.dart';
 import 'package:workoutholic/dao/user_dao.dart';
 
 void main() {
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatefulWidget {

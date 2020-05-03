@@ -183,8 +183,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             _buildTableCalendarWithBuilders(),
-            const SizedBox(height: 8.0),
-            _buildButtons(),
+//            const SizedBox(height: 8.0),
+//            _buildButtons(),
             const SizedBox(height: 8.0),
             Expanded(child: _buildEventList()),
           ],
@@ -218,7 +218,7 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
-      locale: 'pl_PL',
+      locale: 'en_SG',
       calendarController: _calendarController,
       events: _events,
       initialCalendarFormat: CalendarFormat.month,
@@ -340,7 +340,8 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   }
 
   Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
+//    final dateTime = _events.keys.elementAt(_events.length - 2);
+    final dateTime = _events.keys.elementAt(_events.length);
 
     return Column(
       children: <Widget>[
