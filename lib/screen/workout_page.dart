@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:date_utils/date_utils.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workoutholic/screen/workout_plan_select.dart';
 import 'package:workoutholic/screen/workout_menu_select.dart';
@@ -26,13 +26,15 @@ class _MyWorkoutPageState extends State<WorkoutPage>
   Map<DateTime, List> _events;
   Map<DateTime, List> _visibleEvents;
   List _selectedEvents;
-  AnimationController _controller;
+  AnimationController _animationController;
+  CalendarController _calendarController;
   List<WorkPlan> _plans = new List();
 
   @override
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
+    _calendarController = CalendarController();
     _selectedDay = new DateTime(now.year, now.month, now.day);
     // https://github.com/qwertytoki/workoutholic_flutter/issues/41
     // if (widget.date == null) {
@@ -57,12 +59,18 @@ class _MyWorkoutPageState extends State<WorkoutPage>
       });
     });
 
-    _controller = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
 
-    _controller.forward();
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
   }
 
   Future<Map<DateTime, List<WorkLog>>> _getWorkLog(DateTime date) async {
