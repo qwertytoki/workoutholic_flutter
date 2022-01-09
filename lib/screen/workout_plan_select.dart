@@ -67,7 +67,7 @@ class WorkoutPlanSelectPage extends StatelessWidget {
               ListTile(
                 title: Text(
                   plan.nameJa,
-                  style: Theme.of(context).textTheme.headline,
+                  // style: Theme.of(context).textTheme.headline,
                 ),
                 subtitle: Text(_generateSubTitle(plan.menus)),
                 // isThreeLine: true,
