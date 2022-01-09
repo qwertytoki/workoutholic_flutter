@@ -142,7 +142,7 @@ class _WorkoutMenuSelectState extends State<WorkoutMenuSelect> {
             return ListTile(
               title: Text(
                 item.nameJa,
-                style: Theme.of(context).textTheme.headline,
+                // style: Theme.of(context).textTheme.headline,
               ),
               trailing: Icon(
                 alreadySaved ? Icons.check_circle : Icons.check_circle_outline,
